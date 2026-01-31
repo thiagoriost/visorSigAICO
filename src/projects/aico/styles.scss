@@ -1,0 +1,142 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* === FUENTES GLOBALES === */
+/* Importa la fuente local Gill Sans MT */
+@use 'assets/fonts/gill_sans_mt/stylesheet.scss';
+
+/* === NG PRIME === */
+/* FROM: https://primeng.org/installation#styles */
+
+@use 'primeicons/primeicons.css';
+
+/*
+  PrimeFlex is a lightweight responsive CSS utility library to accompany Prime
+  FROM: https://primeflex.org/installation
+*/
+@use 'primeflex/primeflex.css';
+
+/*
+
+  styles Quill Editor
+*/
+
+@use 'assets/styles/quillEditor.scss';
+
+/**
+ * Iconos del visor
+ */
+@use 'assets/fonts/visor-icons-v1.0/style.css';
+
+:root {
+  --placeholder-color: #94a3b8;
+  --placeholder-color-focus: #64748b;
+  --placeholder-color-error: #f87171;
+  --placeholder-font-size: 13px;
+  --placeholder-transition: all 0.3s ease;
+}
+
+.input-group {
+  .p-inputtext {
+    &::placeholder {
+      color: var(--placeholder-color);
+      font-size: var(--placeholder-font-size);
+      transition: var(--placeholder-transition);
+    }
+
+    &:focus::placeholder {
+      color: var(--placeholder-color-focus);
+    }
+
+    &.ng-invalid.ng-dirty::placeholder {
+      color: var(--placeholder-color-error);
+    }
+  }
+}
+
+.p-dialog {
+  max-height: 1000000% !important;
+}
+
+/* Añade esto a tus estilos globales */
+@media only screen and (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    touch-action: manipulation;
+  }
+}
+
+/* Configuración global de fuente */
+/* * {
+  font-family: 'Gill Sans MT', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+} */
+
+html,
+body {
+  font-family: 'Rubik', 'Lato', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: normal;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body
+  > app-root
+  > app-main
+  > div
+  > div.main-content
+  > app-splitter
+  > div
+  > div.splitter-panel.left-panel
+  > div
+  > app-left-panel
+  > div
+  > div
+  > app-content-main-table
+  > div
+  > div.pt-2
+  > p-scrollpanel
+  > div
+  > div.p-scrollpanel-content-container
+  > div
+  > p-tree
+  > div
+  > div
+  > ul {
+  font-size: 12px !important;
+}
+body
+  > app-root
+  > app-main
+  > div
+  > div.top-banner.m-1
+  > div
+  > app-buscar-direccion
+  > div
+  > div
+  > p-autocomplete
+  > div
+  > input {
+  border-right: unset;
+}
+
+// #pn_id_1 {
+//   overflow: scroll;
+//   height: 300px;
+// }
+
+// #pn_id_5 > div {
+//   overflow: scroll;
+//   height: 300px;
+// }
+
+p {
+  overflow: visible;
+}

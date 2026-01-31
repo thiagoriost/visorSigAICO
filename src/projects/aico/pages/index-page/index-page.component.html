@@ -1,0 +1,33 @@
+<!-- component.html -->
+<app-layout-d>
+  <div class="app-container bg-primary-700">
+    <!-- Banner Superior -->
+    <div class="">
+
+      <div class="topBanner" slot-header>
+        <img
+          src="assets/images/VisorGeograficoAICO_Header.png"
+          alt="Logo Izquierdo"
+          class="banner-image" />
+
+      </div>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="main-content">
+      <div rightPanel class="right-panel-content">
+        <app-map></app-map>
+      </div>
+
+    </div>
+
+    <!-- Controles flotantes del mapa y escala -->
+
+    <div class="coord-scale">
+      <app-barra-escala [scaleType]="'scaleline'"></app-barra-escala>
+      <app-view-coords></app-view-coords>
+    </div>
+
+
+  </div>
+</app-layout-d>

@@ -68,13 +68,16 @@ A continuación se muestran algunos de los comandos más comunes para trabajar c
 
 - **Verificación de estilos de codigo**
   ```bash
-  ng 
-  npx ng lint aico
+  ng lint
+  eje:
+  ng lint --project=aico
   ```
 - **Pruebas unitarias**
   ```bash
-  ng test
-  npx ng test aico --watch=false
+  ng 
+  
+  eje:
+  npm test -- --project=aico
   ```
 
 ## Manejo de Variables de Entorno
@@ -371,13 +374,15 @@ Para ejecutar una app específica:
 
 ```bash
 ng serve <nombre-proyecto>
+ng serve aico --proxy-config proxy.conf.json
+ng serve opiac --proxy-config proxy.conf.json
+ng serve aiso --proxy-config proxy.conf.json
 ```
 
 Para compilar en modo producción:
 
 ```bash
 ng build <nombre-proyecto> --configuration production
-ng serve aico --proxy-config proxy.conf.json
 ```
 
 ## Concepto de Widget

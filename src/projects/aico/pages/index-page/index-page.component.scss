@@ -1,0 +1,1144 @@
+/* Estilos para el Top Banner */
+.topBanner {
+  align-items: center;
+  background: var(--p-primary-100);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 0px;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  padding: 1px 2px;
+  position: relative;
+
+  // Estilos para la imagen del banner optimizada para cualquier pantalla
+  .banner-image {
+    width: 100%; // Usar todo el ancho disponible
+    max-width: none; // Eliminar restricción de ancho máximo
+    height: auto;
+    object-fit: fill; // Mantiene proporción sin recortar
+    object-position: center;
+    display: block;
+    transition: opacity 0.3s ease;
+    min-width: 100%; // Asegurar que use todo el ancho
+
+    // Para pantallas muy anchas, permitir que la imagen use todo el espacio
+    @media (min-width: 1920px) {
+      width: 100%;
+      max-width: 100%;
+      object-fit: cover;
+    }
+
+    // Pantallas ultra anchas
+    @media (min-width: 2560px) {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    // Responsive para pantallas medianas y pequeñas
+    @media (max-width: 1200px) {
+      width: 95%;
+      max-width: 95%;
+    }
+
+    @media (max-width: 768px) {
+      width: 90%;
+      max-width: 90%;
+    }
+
+    @media (max-width: 480px) {
+      width: 85%;
+      max-width: 85%;
+    }
+  }
+
+  // Estilos para banner con múltiples secciones (comentado porque ahora es una sola imagen)
+  /*
+  .banner-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+
+    &.left-section {
+      flex: 0 0 25%;
+      min-width: 150px;
+      padding-left: 20px;
+
+    }
+
+    &.center-section {
+      flex: 1;
+      min-width: 300px;
+      padding-left: 10px;
+      padding-right: 20px;
+    }
+
+    &.right-section {
+      flex: 0 0 40%;
+      min-width: 150px;
+    }
+
+    .banner-image {
+      width: 100%;
+      height: auto;
+      max-height: 100px;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+  */
+}
+
+/* Comportamiento responsive del banner optimizado */
+@media screen and (max-width: 1200px) {
+  .topBanner {
+    height: 55px;
+    padding: 6px 14px;
+
+    .banner-image {
+      max-height: 45px;
+    }
+  }
+}
+
+/* Pantallas de escritorio estándar (1200px - 1920px) */
+@media screen and (min-width: 1200px) and (max-width: 1919px) {
+  .topBanner {
+    height: 80px;
+    padding: 0px 0px;
+
+    .banner-image {
+      max-height: 90px;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+/* Resoluciones específicas como 1924x1243 y similares */
+@media screen and (min-width: 1900px) and (max-width: 1999px) {
+  .topBanner {
+    height: 80px;
+    padding: 10px 18px;
+
+    .banner-image {
+      max-height: 70px;
+      width: 100%;
+      max-width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .topBanner {
+    height: 50px;
+    padding: 5px 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+
+    .banner-image {
+      max-height: 40px;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .topBanner {
+    height: 45px;
+    padding: 4px 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+
+    .banner-image {
+      max-height: 35px;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .topBanner {
+    height: 40px;
+    padding: 3px 8px;
+
+    .banner-image {
+      max-height: 30px;
+    }
+  }
+}
+
+/* Pantallas muy grandes - 1920px y superiores */
+@media screen and (min-width: 1920px) {
+  .topBanner {
+    height: 85px; // Aumentar altura para pantallas grandes
+    padding: 8px 16px;
+
+    .banner-image {
+      max-height: 75px; // Permitir imagen más grande
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+/* Pantallas 4K y ultrawide - 2560px y superiores */
+@media screen and (min-width: 2560px) {
+  .topBanner {
+    height: 100px; // Altura aún mayor para 4K
+    padding: 10px 20px;
+
+    .banner-image {
+      max-height: 90px;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+/* Pantallas 8K y ultra grandes - 3840px y superiores */
+@media screen and (min-width: 3840px) {
+  .topBanner {
+    height: 120px;
+    padding: 15px 30px;
+
+    .banner-image {
+      max-height: 105px;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Optimizaciones adicionales para el banner */
+.topBanner {
+  // Mejorar rendimiento en dispositivos móviles
+  will-change: height;
+
+  .banner-image {
+    // Optimización de carga de imágenes
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+
+    // Asegurar que la imagen mantenga su ratio de aspecto
+    aspect-ratio: auto;
+
+    // Para pantallas grandes, asegurar expansión completa
+    @media (min-width: 1920px) {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    // Prevenir layout shift durante la carga
+    &:not([src]) {
+      background-color: var(--p-primary-200);
+      opacity: 0.3;
+    }
+
+    // Estado de carga
+    &[src=''],
+    &:not([complete]) {
+      /* background: linear-gradient(90deg,
+        var(--p-primary-200) 25%,
+        var(--p-primary-100) 50%,
+        var(--p-primary-200) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite; */
+    }
+  }
+}
+
+// Animación de carga tipo skeleton
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Soporte para pantallas de alta densidad (Retina) */
+@media (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .topBanner .banner-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+  }
+}
+
+/* Pantallas ultra anchas y aspect ratio específicos */
+@media screen and (min-aspect-ratio: 16/9) and (min-width: 1920px) {
+  .topBanner {
+    height: 90px;
+    padding: 12px 20px;
+
+    .banner-image {
+      width: 100%;
+      max-width: 100%;
+      max-height: 78px;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
+
+/* Pantallas muy anchas como 21:9 */
+@media screen and (min-aspect-ratio: 21/9) {
+  .topBanner {
+    height: 95px;
+    padding: 15px 25px;
+
+    .banner-image {
+      width: 100%;
+      max-width: 100%;
+      max-height: 80px;
+    }
+  }
+}
+
+/* Modo de contraste alto para accesibilidad */
+@media (prefers-contrast: high) {
+  .topBanner {
+    border: 2px solid var(--p-primary-700);
+
+    .banner-image {
+      filter: contrast(1.2);
+    }
+  }
+}
+
+/* Reducir movimiento para usuarios sensibles */
+@media (prefers-reduced-motion: reduce) {
+  .topBanner .banner-image {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+.top-banner {
+  height: 3rem;
+  // background-image: url('../../../../assets/images/bannerIndigenaF3.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  // padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  .search-container {
+    background: rgb(255 255 255 / 21%);
+    padding: 10px 10px;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    width: auto;
+    max-width: 100%;
+  }
+}
+
+.top-banner {
+  // background-image: url('../../../../assets/images/bannerIndigenaF3.png');
+  background-size: 70%;
+  background-repeat: no-repeat;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.bottom-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 0 20px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.left-panel-content {
+  padding: 0px 5px 0px 10px;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-color: var(--p-primary-700) var(--p-primary-500);
+}
+
+.right-panel-content {
+  width: 100%;
+  height: 100%;
+}
+
+/* Ajustes para el splitter */
+app-splitter {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Estilos para el splitter vertical */
+.top-section,
+.bottom-section {
+  padding: 0.5rem;
+  height: 100%;
+  overflow: auto;
+}
+
+.top-section {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.bottom-section {
+  padding-top: 0.5rem;
+}
+
+/* Ajustes para el panel izquierdo */
+/* .left-panel-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+} */
+
+/* Mejoras para el handle del splitter vertical */
+.vertical-splitter-handle {
+  z-index: 1;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+  width: calc(100% + 2rem);
+}
+
+.legend-content {
+  max-height: calc(100% - 40px);
+  overflow-y: auto;
+  padding-right: 0.5rem;
+
+  /* Estilo de scroll personalizado */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+}
+
+/* Media Queries para dispositivos móviles */
+
+@media only screen and (max-width: 768px) {
+  .top-banner {
+    height: 65px; /* Altura reducida para móviles */
+    background-size: auto 100%; /* Ajuste de la imagen de fondo */
+    background-position: center center;
+    // padding: 5px;
+    // background-image: url('../../../../assets/images/bannerIndigena.png');
+    background-repeat: no-repeat;
+    // background-size: contain !important; /* o 'cover' según prefieras */
+    // background-position: center top;
+    // min-height: 150px;
+    padding: 0px !important; /* Espacio interno para el contenido */
+
+    .search-container {
+      // width: 100%;
+      // padding: 5px 10px;
+      // border-radius: 10px 10px 0 0;
+      padding: 0px;
+    }
+  }
+
+  .bottom-banner {
+    display: none; /* Oculta el banner inferior en móviles */
+  }
+
+  /* Ajustes para el splitter en móviles */
+  app-splitter {
+    .left-panel {
+      flex: 0 0 40% !important; /* Panel más pequeño en móviles */
+      min-width: 0 !important;
+    }
+
+    .splitter-divider {
+      width: 5px; /* Divisor más delgado */
+    }
+  }
+}
+
+/* Media Queries para tablets */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .top-banner {
+    height: 100px;
+  }
+}
+
+/* Añade estos estilos */
+.main-content-wrapper {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.desktop-layout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.mobile-layout {
+  width: 100%;
+  height: 100%;
+
+  .right-panel-content {
+    width: 100%;
+    height: calc(100vh - 80px); /* Ajusta según la altura de tu banner */
+  }
+}
+
+/* Asegúrate que el mapa se redimensione correctamente */
+.right-panel-content {
+  transition: all 0.3s ease;
+
+  app-map {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+/* Media Queries mejoradas */
+@media only screen and (max-width: 768px) {
+  .main-content-wrapper {
+    flex-direction: column;
+  }
+
+  .mobile-layout {
+    /* Asegura que el mapa ocupe todo el espacio disponible */
+    flex: 1;
+    min-height: 0; /* Importante para flexbox en algunos navegadores */
+  }
+}
+
+/* Añade una transición suave para cambios de tamaño */
+app-map {
+  transition: opacity 0.3s ease;
+
+  &.resizing {
+    opacity: 0.8;
+  }
+}
+
+:host ::ng-deep {
+  .p-radiobutton-checked .p-radiobutton-box {
+    border-color: var(--p-primary-700);
+    background: var(--p-primary-700);
+  }
+
+  .p-radiobutton-checked .p-radiobutton-box:hover {
+    border-color: var(--p-primary-500);
+    background: var(--p-primary-500);
+  }
+
+  .p-button-success {
+    background: var(--p-primary-400);
+    border: 1px solid var(--p-button-success-border-color);
+    color: var(--p-primary-500);
+  }
+  .p-button-success:hover {
+    background: var(--p-primary-700) !important;
+    color: var(--p-primary-500) !important;
+  }
+
+  .p-datatable-thead > tr > th {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+    border: solid 1px var(--p-primary-700) !important;
+  }
+
+  .p-datatable-tbody > tr {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+  }
+
+  .p-paginator {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+  }
+
+  .p-paginator-page.p-paginator-page-selected {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+  }
+  .p-paginator-page,
+  .p-paginator-next,
+  .p-paginator-last,
+  .p-paginator-first,
+  .p-paginator-prev {
+    color: var(--p-primary-700) !important;
+  }
+
+  .p-select-option {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+  }
+
+  .p-select {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+    border: solid 1px var(--p-primary-400);
+  }
+
+  .p-ripple {
+    background: var(--p-primary-700) !important;
+    color: var(--p-primary-500) !important;
+    border: none;
+  }
+  .p-ripple:hover {
+    background: var(--p-primary-400) !important;
+    color: var(--p-primary-500) !important;
+  }
+
+  .p-inputtext {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+  }
+
+  .text-right {
+    // background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+    margin-right: 5px;
+  }
+
+  .p-iconfield .p-inputtext:not(:last-child) {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+  }
+
+  .p-datatable-tbody > tr.p-datatable-row-selected {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+  }
+
+  .p-carousel-vertical .p-carousel-item-list {
+    height: 0% !important;
+  }
+
+  .p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus {
+    background-color: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+  }
+
+  .p-tree-node-content {
+    padding: 0% !important;
+  }
+  .p-tree {
+    padding: 0% !important;
+  }
+  .p-button-secondary {
+    background: var(--p-primary-700) !important;
+    color: var(--p-primary-500) !important;
+  }
+  .p-button-secondary:hover {
+    background: var(--p-primary-600) !important;
+    color: var(--p-primary-500) !important;
+  }
+  .p-tab {
+    color: var(--p-primary-300);
+  }
+  .p-tabpanels {
+    // background-color: var(--p-primary-500) !important;
+    background-color: transparent !important;
+    color: var(--p-primary-700) !important;
+  }
+
+  .p-tab-active {
+    color: var(--p-primary-700) !important;
+    background-color: var(--p-primary-500) !important;
+  }
+
+  .p-tablist-tab-list {
+    // background-color: var(--p-primary-400) !important;
+    background-color: transparent !important;
+    color: var(--p-primary-200) !important;
+  }
+  .p-select-label {
+    background-color: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+    border: solid 1px var(--p-primary-400);
+  }
+  .p-select-label:hover {
+    // background-color: var(--p-primary-500) !important;
+    // color: var(--p-primary-700) !important;
+    border: solid 1px var(--p-primary-700);
+  }
+  .p-select-sm .p-select-label {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700);
+  }
+  .p-select-dropdown {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700);
+    border-right: solid 1px var(--p-primary-400);
+    border-top: solid 1px var(--p-primary-400);
+    border-bottom: solid 1px var(--p-primary-400);
+  }
+  .p-select-dropdown:hover {
+    background: var(--p-primary-700) !important;
+    color: var(--p-primary-500);
+    border: solid 1px var(--p-primary-400);
+  }
+
+  .p-select-overlay {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+  }
+
+  .p-select-option {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+  }
+
+  .p-select-label.p-placeholder {
+    color: var(--p-primary-700);
+  }
+  .p-select-empty-message {
+    color: black;
+  }
+
+  .p-tooltip {
+    &.p-tooltip-left {
+      .p-tooltip-arrow {
+        border-left-color: rgba(255, 255, 255, 0.95);
+      }
+    }
+
+    .p-tooltip-text {
+      background: rgba(255, 255, 255, 0.95);
+      color: #2c3e50;
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.15),
+        0 5px 10px rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      line-height: 1.4;
+      max-width: 200px;
+      text-align: center;
+
+      // Animación de entrada
+      animation: tooltipFadeIn 0.3s ease-out;
+    }
+  }
+
+  .p-inputtext {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700);
+    border: solid 1px var(--p-primary-400);
+  }
+  .p-inputtext:hover {
+    border: solid 1px var(--p-primary-700);
+  }
+
+  .p-fileupload-advanced {
+    background: var(--p-primary-500) !important;
+    color: var(--p-primary-700) !important;
+  }
+
+  .p-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: var(--p-primary-500) !important;
+    color: var(--p-primary-700);
+
+    .p-card-title {
+      color: var(--p-primary-700);
+    }
+
+    .p-dropdown,
+    .p-inputtextarea {
+      width: 100%;
+      background-color: var(--p-primary-500);
+      color: var(--p-primary-700);
+      border-color: var(--p-primary-700);
+
+      &:hover {
+        border-color: var(--p-primary-400);
+      }
+    }
+
+    .p-button {
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  .p-button-label {
+    color: var(--p-primary-500);
+    // background-color: var(--p-primary-500)
+  }
+
+  /* .p-button-secondary {
+    background-color: var(--p-primary-600);
+    border: 1px solid var(--p-primary-700);
+  } */
+
+  .p-textarea {
+    background-color: var(--p-primary-500);
+    color: var(--p-primary-700);
+  }
+
+  .p-card-body {
+    padding: 1rem;
+  }
+
+  .field > label {
+    margin-bottom: 0px;
+  }
+
+  .p-divider-horizontal {
+    padding: 5px;
+  }
+}
+
+:host ::ng-deep .p-inputnumber input::placeholder {
+  color: var(--p-primary-500);
+  font-style: var(--placeholder-style, italic);
+  font-size: var(--placeholder-size, 0.9rem);
+  opacity: var(--placeholder-opacity, 0.8);
+}
+
+:host ::ng-deep .p-inputnumber input:focus::placeholder {
+  color: var(--p-primary-500);
+  opacity: var(--placeholder-focus-opacity, 0.6);
+}
+
+.consulta-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 5px 5px 20px 5px;
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+
+    label {
+      font-weight: 500;
+      color: var(--p-primary-700);
+    }
+  }
+
+  .operadores-container {
+    background-color: var(--surface-500);
+    // padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid var(--surface-300);
+  }
+
+  ::ng-deep {
+    .p-dropdown-panel {
+      .p-dropdown-items {
+        .p-dropdown-item {
+          &.p-highlight {
+            background-color: var(--p-primary-500) !important;
+            color: var(--p-primary-700);
+          }
+
+          &:hover {
+            background-color: var(--p-primary-500) !important;
+          }
+        }
+      }
+    }
+
+    .p-dialog-title {
+      color: var(--p-primary-700) !important;
+    }
+  }
+}
+
+.floating-attribute-table {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 1001;
+  width: 890px;
+  max-width: 100%;
+  max-height: 70vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  // Estilos para cuando está colapsado
+  &.collapsed {
+    height: 40px !important;
+    min-height: 40px !important;
+
+    ::ng-deep {
+      .attribute-table-content {
+        display: none;
+      }
+
+      .attribute-table-header {
+        border-bottom: none;
+      }
+    }
+  }
+
+  // Estilos responsivos
+  @media (max-width: 768px) {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    width: auto;
+    max-width: none;
+    max-height: 60vh;
+  }
+
+  // Handle de redimensionamiento
+  &.resizable {
+    resize: both;
+    min-width: 300px;
+    min-height: 200px;
+
+    @media (max-width: 768px) {
+      resize: vertical;
+      min-width: auto;
+      width: calc(100% - 20px);
+    }
+  }
+}
+
+// Estilos para el componente de tabla de atributos
+:host ::ng-deep {
+  .p-datatable-table-container {
+    overflow: scroll;
+    height: 300px;
+  }
+
+  .p-scrollpanel-content {
+    padding-inline: unset;
+    padding-block: unset;
+  }
+  .p-button-icon-only.p-button-rounded {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+  }
+  .p-dialog {
+    background-color: var(--p-primary-500);
+    border-radius: 5px;
+    border: none;
+  }
+
+  .p-floatlabel:has(input.p-filled) label,
+  .p-floatlabel:has(textarea.p-filled) label,
+  .p-floatlabel:has(.p-inputwrapper-filled) label {
+    color: var(--p-primary-700);
+    font-size: 17px;
+  }
+  p-tag {
+    background-color: var(--p-primary-700) !important;
+  }
+  app-attribute-table {
+    display: block;
+    height: 100%;
+
+    .attribute-table-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: scroll;
+    }
+
+    .attribute-table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background: var(--p-primary-700);
+      border-bottom: 1px solid #e2e8f0;
+      cursor: move;
+
+      h3 {
+        margin: 0;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+
+        button {
+          background: none;
+          border: none;
+          padding: 0.25rem;
+          border-radius: 4px;
+          cursor: pointer;
+          color: #64748b;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background: #f1f5f9;
+            color: #475569;
+          }
+
+          i {
+            font-size: 0.875rem;
+          }
+        }
+      }
+    }
+
+    .attribute-table-content {
+      flex: 1;
+      overflow: auto;
+      padding: 0;
+
+      // Estilos de scroll personalizado
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+    }
+
+    // Estilos para cuando está colapsado
+    &.collapsed {
+      .attribute-table-content {
+        display: none;
+      }
+
+      .attribute-table-header {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+// Animación de entrada
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.floating-attribute-table {
+  animation: slideInFromRight 0.3s ease-out;
+}
+
+// Mejora para el mapa cuando hay tabla flotante
+.right-panel-content {
+  position: relative;
+
+  app-map {
+    transition: filter 0.3s ease;
+  }
+
+  // Efecto sutil en el mapa cuando la tabla está abierta
+  &:has(.floating-attribute-table) {
+    app-map {
+      filter: brightness(0.98);
+    }
+  }
+}
+
+// Estilos para el modo móvil
+@media (max-width: 768px) {
+  .floating-attribute-table {
+    position: fixed;
+    top: 80px;
+    right: 10px;
+    left: 10px;
+    bottom: auto;
+    width: auto;
+    max-height: 50vh;
+    z-index: 1001;
+
+    &.fullscreen-mobile {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      border-radius: 0;
+      z-index: 1002;
+    }
+  }
+}
+
+// Mejora de accesibilidad
+.floating-attribute-table:focus-within {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+// Transiciones suaves para todas las propiedades
+.floating-attribute-table,
+.floating-attribute-table * {
+  transition: all 0.2s ease;
+}
+
+.coord-scale {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 24px;
+  // transform: translateX(-50%);
+  z-index: 1000;
+  margin-bottom: 5px;
+}

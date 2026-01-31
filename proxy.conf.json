@@ -1,0 +1,73 @@
+[
+  {
+    "context": ["/mparcgis"],
+    "target": "https://geoportal.dane.gov.co",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": { "^/mparcgis": "" },
+    "logLevel": "debug"
+  },
+  {
+    "context": ["/geoserver"],
+    "target": "https://geoserver.cntindigena.org:9443",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": { "^/geoserver": "/geoserver" },
+    "logLevel": "debug"
+  },
+  {
+    "context": ["/igac-geoserver"],
+    "target": "https://dev-visorindigenas.igac.gov.co",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": { "^/igac-geoserver": "" },
+    "logLevel": "debug"
+  },
+  {
+    "context": ["/igac-ancestral-geoserver"],
+    "target": "http://dev-sigansestral.igac.gov.co:8080",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/igac-ancestral-geoserver": "" },
+    "logLevel": "debug"
+  },
+  {
+    "context": ["/sicop-proxy/**"],
+    "target": "http://sicop.mininterior.gov.co",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/sicop-proxy": "" },
+    "logLevel": "debug"
+  },
+  {
+    "context": ["/simosofws-proxy/**"],
+    "target": "https://simosofws.cntindigena.org",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": { "^/simosofws-proxy": "" },
+    "logLevel": "debug"
+  },
+  {
+    "context": ["/api/*"],
+    "target": "http://localhost:3000",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  {
+    "context": ["/geo-clip/*"],
+    "target": "http://localhost:9080",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/geo-clip": "/geo-clip" },
+    "logLevel": "debug"
+  },
+  {
+    "context": ["/simaws-proxy/**"],
+    "target": "https://simaws.cntindigena.org",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": { "^/simaws-proxy": "" },
+    "logLevel": "debug"
+  }
+]
