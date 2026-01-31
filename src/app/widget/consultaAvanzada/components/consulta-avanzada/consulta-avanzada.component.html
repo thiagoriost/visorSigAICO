@@ -1,0 +1,13 @@
+<p-toast></p-toast>
+<app-consulta-capas
+  (capaActualizada)="onCapaActualizada($event)"
+  (atributoActualizado)="onAtributoActualizado($event)"
+  (valorActualizado)="onValorActualizado($event)" />
+<app-calculadora
+  [atributo]="selectedAttribute"
+  [valor]="selectedValue"
+  [isRoundedButton]="isRoundedButton"
+  [isRaisedButton]="isRaisedButton" />
+<app-botones-consulta
+  (ejecutarConsulta)="onEjecutarConsulta()"
+  (limpiarCampos)="onLimpiarCampos()" />

@@ -1,0 +1,26 @@
+<div
+  class="flex flex-wrap justify-content-evenly align-items-center w-full action-bar py-2 gap-3">
+  <p-button
+    [icon]="isPrimaryFunction ? 'pi pi-eye-slash' : 'pi pi-eye'"
+    [pTooltip]="isPrimaryFunction ? 'Apagar las capas' : 'Prender las capas'"
+    tooltipPosition="top"
+    severity="primary"
+    [styleClass]="'p-button-text p-button-plain ' + buttonIconsColor"
+    [raised]="false"
+    [disabled]="disabledEraser"
+    (onClick)="turnOnOrOffAllLayers(!isPrimaryFunction)"
+    [size]="sizeButton">
+  </p-button>
+  <p-divider type="solid" layout="vertical" class="hidden md:flex"></p-divider>
+  <p-button
+    icon="pi pi-eraser"
+    pTooltip="Desseleccionar las capas"
+    tooltipPosition="top"
+    severity="primary"
+    [styleClass]="'p-button-text p-button-plain ' + buttonIconsColor"
+    [raised]="false"
+    (onClick)="deleteAllLayers()"
+    [disabled]="disabledEraser"
+    [size]="sizeButton">
+  </p-button>
+</div>

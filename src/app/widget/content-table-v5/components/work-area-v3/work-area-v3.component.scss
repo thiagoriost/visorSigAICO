@@ -1,0 +1,11 @@
+/* barra superior: buscador y botón */
+#header {
+  flex-shrink: 0; /** evita que se encoja el componente*/
+  height: 50px;
+}
+
+/* lista con scroll interno */
+#scrollable-list {
+  height: calc(100% - 50px); /* altura del header */
+  padding-right: 0.5rem;
+}

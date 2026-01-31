@@ -1,0 +1,66 @@
+:host {
+  .generator-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 480px;
+    margin: 0 auto;
+
+    label {
+      font-weight: bold;
+      color: #265d3e;
+    }
+
+    /* Textarea con monospace y borde ligero */
+    textarea[pTextarea] {
+      width: 100%;
+      font-family: monospace;
+      background-color: #fafafa;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 0.5rem;
+    }
+
+    /* Botón Generar */
+    button.p-button {
+      align-self: flex-start;
+      background-color: #265d3e;
+      color: #ffffff;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #1f4e32;
+      }
+    }
+
+    /* Mensaje de error */
+    .error-message {
+      color: #c63737;
+      font-size: 0.875rem;
+    }
+
+    /* Separación antes de la botonera generada */
+    app-botonera-vertical {
+      margin-top: 1rem;
+    }
+  }
+}
+
+:host {
+  .generator-container {
+    /* ... tus estilos previos ... */
+
+    /* Resalta el textarea en rojo si hay error */
+    textarea[pTextarea].invalid {
+      border: 2px solid #c63737 !important;
+      transition: border-color 0.2s;
+    }
+
+    /* Mensaje de error */
+    .error-message {
+      color: #c63737;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+  }
+}

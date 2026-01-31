@@ -1,0 +1,18 @@
+<div class="flex flex-wrap align-items-center gap-2">
+  <!-- Dropdown de escalas -->
+  @if (showDropdown){
+  <div class="mr-2" id="tour-scale-options">
+    <div class="escala-container">
+      <app-dropdown-escala></app-dropdown-escala>
+    </div>
+  </div>
+  }
+
+
+  <!-- Línea de escala siempre en el DOM -->
+  @if (showEscalas) {
+  <div>
+    <app-escala [scaleType]="scaleType"></app-escala>
+  </div>
+  }
+</div>

@@ -1,0 +1,39 @@
+<div class="generator-container flex flex-column gap-3">
+  <label for="jsonInput">Pega aquí tu JSON de configuración:</label>
+
+  <textarea
+    pTextarea
+    id="jsonInput"
+    [formControl]="jsonControl"
+    rows="13"
+    [autoResize]="false"
+    placeholder="Pega aquí tu JSON…"
+    [class.invalid]="!!errorMsg"
+  ></textarea>
+
+  <!-- Selector de tamaño para los botones -->
+  <div class="flex flex-column gap-2">
+    <label for="sizeSelector">Tamaño de los botones:</label>
+    <p-select 
+      id="sizeSelector" 
+      [(ngModel)]="size" 
+      [options]="sizeOptions"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Selecciona un tamaño"
+    ></p-select>
+  </div>
+
+  <!-- Botón al final del formulario -->
+  <button pButton type="button" (click)="generate()">Generar</button>
+  
+  <div *ngIf="errorMsg" class="error-message">{{ errorMsg }}</div>
+
+  <!-- Aquí se muestra la botonera generada -->
+  <app-botonera-vertical
+    *ngIf="botones.length"
+    [botones]="botones"
+    [size]="size"
+    (seleccion)="onSeleccion($event)"
+  ></app-botonera-vertical>
+</div>

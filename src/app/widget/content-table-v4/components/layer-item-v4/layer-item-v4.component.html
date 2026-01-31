@@ -1,0 +1,75 @@
+@if (layer) {
+  <div class="p-0 m-0">
+    @if (!layer.leaf) {
+      <div class="flex align-items-center justify-content-start w-full h-auto">
+        <p
+          class="font-bold m-0 ml-1 content_table__layer_title"
+          [ngClass]="[textColor ?? '', fontSizeParentLayer]">
+          {{ layer.titulo }}
+        </p>
+      </div>
+    } @else {
+      <div class="grid m-0 p-0">
+        <div class="col-2 mt-1" id="tour-layer-tree-item">
+          <p-toggleswitch
+            [trueValue]="true"
+            [falseValue]="false"
+            [(ngModel)]="isActivated"
+            (onChange)="updateActivatedValue(layer, isActivated)" />
+        </div>
+        <div
+          class="col-8 flex align-items-center h-full break-word align-content-center justify-content-center">
+          <p
+            class="text-base leading-none m-0 content_table__layer_title"
+            id="title"
+            [ngClass]="[textColor ?? '', fontSizeLeafLayer]">
+            {{ layer.titulo }}
+          </p>
+        </div>
+
+        <div
+          class="col-2 flex align-items-center h-full break-word align-content-center justify-content-end p-0 pr-1">
+          <p-button
+            icon="pi pi-ellipsis-h"
+            [rounded]="true"
+            [text]="true"
+            [severity]="severityButton"
+            (onClick)="op.toggle($event)">
+            <p-popover #op>
+              <div>
+                <p-button
+                  icon="pi pi-file-o"
+                  label="Ver metadato"
+                  [severity]="layer.urlMetadato ? 'success' : 'secondary'"
+                  [disabled]="layer.urlMetadato ? false : true"
+                  (onClick)="onShowMetadata(layer)" />
+              </div>
+            </p-popover>
+          </p-button>
+        </div>
+        @if (isActivated) {
+          <!--Transparencia-->
+          <div class="col-12">
+            <div class="grid p-0 m-0">
+              <div class="col">
+                <p
+                  class="m-0"
+                  [ngClass]="[textColor ?? '', fontSizeTransparencyText]">
+                  Transparencia:
+                </p>
+              </div>
+              <div class="col mt-2">
+                <p-slider
+                  [min]="0"
+                  [max]="90"
+                  [step]="1"
+                  [(ngModel)]="transparencyLevel"
+                  (onChange)="onChangeSliderValue(layer, transparencyLevel)" />
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+}

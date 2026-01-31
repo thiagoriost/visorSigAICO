@@ -1,0 +1,72 @@
+<div class="p-fluid card">
+
+  <p-message severity="info"><strong>Nota:</strong>La primera capa será considerada como la capa base para la
+    intersección.</p-message>
+
+  <p-toast></p-toast>
+
+  <app-loading-data-mask-with-overlay *ngIf="loaderContenidoEsVisible" [isContained]="true"
+    title="Procesando intersección..."></app-loading-data-mask-with-overlay>
+
+  <form [formGroup]="interseccionForm" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label for="layer1">Seleccione una 1ra capa (base):</label>
+      <app-workarea-dropdown-select [checkmark]="true" [dataKey]="'id'" [placeholder]="'Seleccione una capa base'"
+        [optionLabel]="'titulo'" [emptyMessage]="'No hay capas cargadas'" formControlName="layerBase"
+        [filtroServicio]="'wfs'"></app-workarea-dropdown-select>
+      <small *ngIf="getErrorCampo('layerBase')" class="text-red-500 block mt-1">
+        {{ getErrorCampo('layerBase') }}
+      </small>
+    </div>
+
+    <div class="field">
+      <label for="layer2">Seleccione una 2da capa (destino):</label>
+      <app-workarea-dropdown-select [checkmark]="true" [dataKey]="'id'" [placeholder]="'Seleccione una capa destino'"
+        [optionLabel]="'titulo'" [emptyMessage]="'No hay capas cargadas'" formControlName="layerDestino"
+        [filtroServicio]="'wfs'"></app-workarea-dropdown-select>
+      <small *ngIf="getErrorCampo('layerDestino')" class="text-red-500 block mt-1">
+        {{ getErrorCampo('layerDestino') }}
+      </small>
+    </div>
+
+    <div class="field my-5">
+      <input pInputText id="outputName" autocomplete="off" formControlName="outputLayerName"
+        class="border-round-sm w-full" placeholder="Nombre de la capa de salida:" [ngClass]="{
+          'ng-invalid ng-dirty': interseccionForm.get('outputLayerName')?.invalid && interseccionForm.get('outputLayerName')?.touched
+        }" />
+
+      <small *ngIf="getErrorCampo('outputLayerName')" class="text-red-500 block mt-1">
+        {{ getErrorCampo('outputLayerName') }}
+      </small>
+    </div>
+
+
+
+    <div class="field">
+      <div class="flex gap-2">
+        <p-button label="Seleccionar área" icon="pi pi-vector-square" (onClick)="startBoxSelection()"
+          [disabled]="interseccionForm.get('areaSeleccion')?.value" [rounded]="true" [raised]="true"
+          severity="secondary"></p-button>
+
+        <p-button label="Borrar selección" icon="pi pi-times" (onClick)="clearSelection()"
+          [disabled]="!interseccionForm.get('areaSeleccion')?.value" [rounded]="true" [raised]="true"
+          severity="secondary"></p-button>
+      </div>
+
+      <small *ngIf="getErrorCampo('areaSeleccion')" class="text-red-500 block mt-1">
+        {{ getErrorCampo('areaSeleccion') }}
+      </small>
+    </div>
+
+    <!-- Campo “Generar Intersección” -->
+    <div class="field">
+      <p-button label="Generar Intersección" icon="pi pi-check" type="submit" [rounded]="true" [raised]="true"
+        class="p-mt-2"></p-button>
+    </div>
+  </form>
+
+  <div>
+    <p-message severity="info" size="large" icon="pi pi-info-circle"
+      text="La intersección generada es temporal y no se guardará en la vista del proyecto." />
+  </div>
+</div>

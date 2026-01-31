@@ -1,0 +1,144 @@
+/* =========================================================
+   TOKENS / VARIABLES
+   ========================================================= */
+
+$rail-bg: var(--p-primary-400);
+
+/*
+Sombra flotante que usas en todo lo GM:
+(no hay utilidad PrimeFlex para box-shadow custom)
+*/
+$rail-shadow: 0 2px 10px rgba(0,0,0,.25);
+
+/*
+Borde redondeado:
+tu preset define xs = 5px en primitive.borderRadius.xs,
+que generamos como --p-border-radius-xs.
+*/
+$rail-radius: var(--p-border-radius-xs);
+
+/* padding 0 sí lo podemos hacer con PrimeFlex (p-0),
+   pero como ya lo hacemos en HTML con gap-0 y no hay padding por defecto,
+   igualmente lo dejamos explícito en CSS para blindar. */
+$rail-padding: 0px;
+
+/*
+Medidas estructurales que no son utilidades estándar:
+*/
+$rail-width: 46px;
+$segment-height: 46px;
+
+/*
+Separador entre segmentos.
+Queremos línea blanca semitransparente en el fondo verde.
+*/
+$separator-color: rgba(255,255,255,.85);
+
+
+/* =========================================================
+   CONTENEDOR DEL RAIL
+   ========================================================= */
+
+.gm-rail {
+  width: $rail-width;
+  background: $rail-bg;
+  border-radius: $rail-radius;
+  padding: $rail-padding;
+  box-shadow: $rail-shadow;
+}
+
+/* versión compacta en pantallas pequeñas */
+.gm-rail--compact {
+  transform: scale(.95);
+  transform-origin: top left;
+  /* PrimeFlex no tiene clase para scale custom con origin,
+     así que esto se queda en CSS.
+  */
+}
+
+
+/* =========================================================
+   SEGMENTO (cada app-map-nav-buttons)
+   ========================================================= */
+
+.gm-rail__segment {
+  position: relative;
+  height: $segment-height;
+}
+
+/* Línea separadora entre segmentos (excepto el último) */
+.gm-rail__segment:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 0;
+  height: 2px;
+  background: $separator-color;
+  opacity: .9;
+  border-radius: 1px;
+  /* Esto no lo da PrimeFlex, así que queda en CSS */
+}
+
+
+/* =========================================================
+   OVERRIDES INTERNOS DEL WIDGET <app-map-nav-buttons>
+   =========================================================
+*/
+
+/* Contenedor root interno del widget */
+:host ::ng-deep app-map-nav-buttons > div {
+  /* Quitamos padding/fondo/sombra/rounded propio del widget
+     y lo adaptamos al rail */
+
+  padding: 0;                   
+  background: transparent !important;      
+  box-shadow: none !important;
+
+  border-radius: 0 !important;
+
+  /* Forzamos que ese contenedor se estire al ancho del rail */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+:host ::ng-deep app-map-nav-buttons .p-button {
+  width: 100%;
+  height: 100%;
+  border: none ;
+  background: transparent ;
+  box-shadow: none ;
+
+  /* color del icono/texto */
+  color: var(--p-button-text-color, #FFFFFF) !important;
+
+  /* borde interior:
+    podemos reutilizar el token xs (5px) para coherencia visual
+    igual que hicimos en la otra botonera
+  */
+  border-radius: var(--p-border-radius-xs) ;
+}
+
+:host ::ng-deep app-map-nav-buttons .p-button:hover,
+:host ::ng-deep app-map-nav-buttons .p-button:focus {
+  background: rgba(255,255,255,.08) !important;
+}
+
+:host ::ng-deep app-map-nav-buttons .p-button.p-highlight {
+  background: rgba(255,255,255,.10) !important;
+  color: #FFFFFF !important;
+  border-radius: var(--p-border-radius-xs) !important;
+}
+
+/* Deshabilitado */
+:host ::ng-deep app-map-nav-buttons .p-button.p-disabled {
+  opacity: .5 !important;
+}
+
+:host ::ng-deep app-map-nav-buttons .p-button .p-button-icon {
+  font-size: 18px;
+  margin: 0;
+  line-height: 1;
+}

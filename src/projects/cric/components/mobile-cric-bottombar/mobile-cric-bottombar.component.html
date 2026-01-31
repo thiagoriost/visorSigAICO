@@ -1,0 +1,33 @@
+ <div class="fixed bottom-0 w-full max-w-26rem mb-0 left-50 z-1"
+    style="transform:translateX(-50%);">     
+    <div class="flex w-full">
+        <div class="flex-auto">
+            <div>
+                <app-barra-escala scaleType="scalebar" class="p-1"></app-barra-escala>        
+            </div>            
+            <div>
+                <app-buscar-direccion [isVisibleIconSearch]="true"> </app-buscar-direccion>  
+            </div>
+        </div>
+        <div class="w-5rem">
+          <div class="flex">
+              <div><p-speeddial [model]="items" direction="up" [tooltipOptions]="{ tooltipPosition: 'left' }" class="z-2" /></div>  
+              <div class="flex flex-column align-content-end justify-content-end z-6">            
+                <app-mini-map-v2 
+                    headerClass ="bg-minimap-header"
+                    [baseMap]="baseMiniMap"                    
+                    [mapPosition]="'bottom-right'"
+                    [buttonPosition]="'bottom-right'"
+                    [buttonSize]="'small'"
+                    width = '300px'
+                    bodyClass="border-solid border-top-none border-primary-500"
+                    [headerButtonSeverity]="undefined"
+                    [buttonRounded]=true
+                    [severity]="undefined"
+                    buttonSize='small'
+                ></app-mini-map-v2>
+              </div>
+          </div>
+        </div>
+    </div>      
+ </div>

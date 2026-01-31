@@ -1,0 +1,19 @@
+/* Apagar transición del ícono del botón PrimeNG */
+:host ::ng-deep .p-button .p-button-icon {
+  transition: none !important;
+}
+
+/* Rotación del ícono cuando el botón tiene la clase */
+:host ::ng-deep .p-button.gm-rotate .p-button-icon {
+  transform: rotate(180deg);
+}
+
+/* Manija de resize: PrimeFlex cubre z-3; mantenemos lo específico aquí */
+.gm-resize-handle {
+  transition: background-color .15s ease;
+}
+
+/* Utilidad para asegurar box-sizing en el panel */
+.box-border {
+  box-sizing: border-box;
+}

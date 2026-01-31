@@ -1,0 +1,39 @@
+<!-- Botones -->
+<div class="flex flex-row gap-2 p-mb-4">
+  <div>
+    <button
+      pButton
+      type="button"
+      [label]="mostrarEnvioCorreo ? 'Ocultar Envío de Correo' : 'Mostrar Envío de Correo'"
+      aria-label="Toggle envío de correo"
+      (click)="toggleEnvioCorreo()"
+      [severity]="mostrarEnvioCorreo ? 'secondary' : 'primary'"
+      [rounded]="true" 
+      [raised]="true"
+    ></button>
+  </div>
+
+  <div>
+    <button
+      pButton
+      type="button"
+      [label]="mostrarDescargaManual ? 'Ocultar Descarga de Manual' : 'Mostrar Descarga de Manual'"
+      aria-label="Toggle descarga de manual"
+      (click)="toggleDescargaManual()"
+      [severity]="mostrarDescargaManual ? 'secondary' : 'primary'"
+      [rounded]="true" 
+      [raised]="true"
+    ></button>
+  </div>
+</div>
+
+<!-- Margen superior visual -->
+<div style="margin-top: 2rem;">
+  @if (mostrarDescargaManual) {
+    <app-descarga-manual class="p-mb-6"></app-descarga-manual>
+  }
+
+  @if (mostrarEnvioCorreo) {
+    <app-envio-correo class="p-mb-6"></app-envio-correo>
+  }
+</div>

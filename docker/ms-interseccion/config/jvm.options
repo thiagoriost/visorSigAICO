@@ -1,0 +1,7 @@
+# Codificacion
+-Dfile.encoding=UTF-8
+
+# Configuracion de memoria y rendimiento
+-Xms500M
+-Xmx1G
+-Xss256k

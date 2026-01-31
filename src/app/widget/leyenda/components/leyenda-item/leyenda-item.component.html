@@ -1,0 +1,18 @@
+<div class="leyenda-container w-full text-center">
+  <h5
+    class="font-bold text-sm mb-2 break-word capitalize text-base content_table__layer_title">
+    {{ capa.layerDefinition.titulo || 'Sin título' }}
+  </h5>
+
+  @if (capa.leyendaUrl) {
+    <p-image
+      [src]="capa.leyendaUrl"
+      [alt]="capa.layerDefinition.titulo || 'Imagen de la capa'">
+    </p-image>
+  } @else {
+    <div class="text-sm text-color-secondary italic text-center">
+      Leyenda no disponible
+    </div>
+  }
+
+</div>

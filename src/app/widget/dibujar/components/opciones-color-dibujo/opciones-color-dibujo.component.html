@@ -1,0 +1,191 @@
+<div class="p-grid p-align-center p-justify-center">
+
+  <!-- Sección de Previsualización -->
+  <div class="flex flex-row align-items-center mb-3">
+    <label class="font-bold mr-2" for="preview">Previsualización: </label>
+    <svg width="100" height="100">
+      <circle
+        cx="50" cy="50" r="40"
+        [attr.fill]="fillColorWithTransparency"
+        [attr.stroke]="strokeColor"
+        [attr.stroke-width]="strokeWidth" />
+    </svg>
+  </div>
+
+  <!-- Preselección de combinaciones de colores -->
+  <div class="p-col-12">
+    <span class="font-bold text-lg mb-2">
+      Combinaciones preseleccionadas:
+    </span>
+
+    <div class="flex flex-wrap gap-2 justify-content-center">
+      @for (combination of colorCombinations; track combination) {
+        <div class="w-4rem h-4rem">
+          <button
+            type="button"
+            pButton
+            [ngStyle]="{ background: combination.fillColor, color: combination.strokeColor }"
+            (click)="selectPredefinedCombination(combination)"
+            [rounded]="true"
+            [raised]="true"
+            class="w-full h-full">
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Color de relleno -->
+  <div class="p-col-12">
+    <div class="p-field w-full py-3">
+      <span class="font-bold text-lg mb-2">Color de relleno:</span>
+
+      <p-colorPicker
+        [(ngModel)]="fillColor"
+        id="fill-color"
+        class="w-full py-1 border-round"
+        (onChange)="onFillColorChange($event)"
+        appendTo="body">
+      </p-colorPicker>
+
+      @if (mostrarCodigoHex) {
+        <span class="text-lg font-bold text-800">{{ fillColor }}</span>
+      }
+    </div>
+  </div>
+
+  <!-- Transparencia -->
+  <div class="p-col-12">
+    <div class="p-field w-full py-3">
+      <span class="font-bold text-lg mb-2">
+        Transparencia del color de relleno:
+      </span>
+
+      <div class="flex justify-content-between align-items-center mb-2">
+        <span class="text-sm text-600">Transparente</span>
+        <span class="text-sm text-600">Opaco</span>
+      </div>
+
+      <p-slider
+        [(ngModel)]="transparency"
+        [min]="0"
+        [max]="100"
+        [step]="1"
+        class="w-full"
+        (ngModelChange)="onTransparencyChange($event)">
+      </p-slider>
+
+      <div class="mt-2 text-right">
+        <span class="text-lg font-bold text-800">{{ transparency }}%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Color del contorno -->
+  <div class="p-col-12">
+    <div class="p-field w-full py-3">
+      <span class="font-bold text-lg mb-2">Color del contorno:</span>
+
+      <p-colorPicker
+        [(ngModel)]="strokeColor"
+        id="stroke-color"
+        (onChange)="onStrokeColorChange($event)"
+        class="w-full py-1 border-round"
+        appendTo="body">
+      </p-colorPicker>
+
+      @if (mostrarCodigoHex) {
+        <span class="text-lg font-bold text-800">{{ strokeColor }}</span>
+      }
+    </div>
+  </div>
+
+  <!-- Grosor del contorno -->
+  <div class="p-col-12">
+    <div class="p-field w-full py-3">
+      <span class="font-bold text-lg">Grosor del contorno:</span>
+
+      <p-slider
+        [(ngModel)]="strokeWidth"
+        [min]="1"
+        [max]="10"
+        [step]="1"
+        class="w-full mb-20"
+        (ngModelChange)="onStrokeWidthChange($event)">
+      </p-slider>
+
+      <div class="mt-2 text-right">
+        <span class="text-lg font-bold text-800">{{ strokeWidth }} px</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resultados -->
+  <div class="result-container p-col-12">
+    <div class="p-col-12 p-md-6 space-y-4">
+
+      @if (mostrarSwitchArea) {
+        <div class="flex items-center justify-between border-b pb-2">
+          <span class="font-bold text-lg mr-2">Mostrar medición de área</span>
+          <p-toggleswitch [(ngModel)]="mostrarArea"></p-toggleswitch>
+        </div>
+      }
+
+      @if (mostrarSwitchArea && mostrarArea) {
+        <div class="mb-4">
+          <div class="flex justify-center">
+            <div class="card w-full max-w-xs">
+              <span class="font-bold text-lg mb-2 block">Unidad de Área:</span>
+              <p-select
+                [options]="medicionArea"
+                [(ngModel)]="selectedArea"
+                optionLabel="name"
+                placeholder="Seleccionar unidad de área"
+                class="p-fluid"
+                appendTo="body" />
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (mostrarSwitchDistancia) {
+        <div class="flex items-center justify-between border-b pb-2">
+          <span class="font-bold text-lg mr-2">Mostrar medición de distancia</span>
+          <p-toggleswitch [(ngModel)]="mostrarDistancia"></p-toggleswitch>
+        </div>
+      }
+
+      @if (mostrarSwitchDistancia && mostrarDistancia) {
+        <div class="flex justify-center">
+          <div class="card w-full max-w-xs">
+            <span class="font-bold text-lg mb-2 block">Unidad de Longitud:</span>
+            <p-select
+              [options]="medicionLongitud"
+              [(ngModel)]="selectedLongitud"
+              optionLabel="name"
+              placeholder="Seleccionar unidad de longitud"
+              class="p-fluid"
+              appendTo="body" />
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+
+  <!-- Botones -->
+  <div class="flex flex-wrap gap-6">
+    <p-button label="Deshacer" [rounded]="true" [raised]="true"
+      (click)="deshacerDibujo()" [disabled]="!puedeDeshacer()">
+    </p-button>
+
+    <p-button label="Recuperar" [rounded]="true" [raised]="true"
+      (click)="recuperarDibujo()" [disabled]="!puedeRecuperar()">
+    </p-button>
+
+    <p-button label="Borrar" [rounded]="true" [raised]="true"
+      (click)="eliminarDibujo()">
+    </p-button>
+  </div>
+
+</div>

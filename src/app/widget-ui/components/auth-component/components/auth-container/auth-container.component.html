@@ -1,0 +1,27 @@
+<div class="flex justify-content-center align-items-center h-full w-full">
+  @if (isAuthenticated$ | async) {
+    @if (isMobileVersion) {
+      <p-button
+        [icon]="config.iconUser ? config.iconUser : 'pi pi-user'"
+        [rounded]="true"
+        (click)="overlay.toggle($event)"></p-button>
+      <p-popover
+        #overlay
+        [dismissable]="true"
+        position="left">
+        <div class="flex flex-column gap-2">
+          <app-auth-user-profile [config]="config" [demo]="isDemoVersion"></app-auth-user-profile>
+        </div>
+      </p-popover>
+    } @else {
+      <app-auth-user-profile [config]="config" [demo]="isDemoVersion"></app-auth-user-profile>
+    }
+  } @else {
+    <app-auth-login
+      [demo]="isDemoVersion"
+      [config]="config"
+      [isMobileVersion]="isMobileVersion"
+      class="flex w-11 align-items-center justify-content-center">
+    </app-auth-login>
+  }
+</div>

@@ -1,0 +1,51 @@
+<div>
+  <div class="flex flex-column align-items-center">
+    <!-- Botones centrados -->
+    <div class="flex justify-content-center gap-2">
+      <p-button
+        id="tour-turn-on-all-layers"
+        icon="ICON-VISOR-OPIAC_CAPA-ABIERTA"
+        [rounded]="true"
+        pTooltip="Prender todas las capas"
+        (onClick)="onTurnOnLayers()"
+        [disabled]="layerList.length === 0">
+      </p-button>
+
+      <p-button
+        id="tour-turn-off-all-layers"
+        icon="ICON-VISOR-OPIAC_CAPA-CERRADA"
+        [rounded]="true"
+        [raised]="true"
+        severity="primary"
+        pTooltip="Apagar todas las capas"
+        (onClick)="onTurnOffLayers()"
+        [disabled]="layerList.length === 0">
+      </p-button>
+    </div>
+
+    <!-- Lista de capas -->
+    <div class="ml-1 mr-1 mb-1 mt-3 w-full">
+      @if (layerList.length !== 0) {
+        @for (item of layerList; track $index) {
+          <div>
+            <app-work-layer-item
+              [layer]="item"
+              pDraggable
+              pDroppable
+              (onDragStart)="dragStart(item)"
+              (onDragEnd)="dragEnd()"
+              (onDrop)="onDrop($index)">
+            </app-work-layer-item>
+          </div>
+          <p-divider
+            class="border-primary border-top-1 mt-2"
+            type="solid"></p-divider>
+        }
+      } @else {
+        <div class="ml-3">
+          <p>Seleccione una capa para agregarla al área de trabajo</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div
+  class="gm-rail inline-flex flex-column align-stretch gap-0"
+  [class.gm-rail--compact]="isSmallScreen"
+>
+  <!-- Cada segmento del rail -->
+  <app-map-nav-buttons
+    class="gm-rail__segment flex align-items-center justify-content-center"
+    [configMapNavButtonsInitial]="configZoomIn">
+  </app-map-nav-buttons>
+
+  <app-map-nav-buttons
+    class="gm-rail__segment flex align-items-center justify-content-center"
+    [configMapNavButtonsInitial]="configZoomOut">
+  </app-map-nav-buttons>
+
+  <app-map-nav-buttons
+    class="gm-rail__segment flex align-items-center justify-content-center"
+    [configMapNavButtonsInitial]="configPan">
+  </app-map-nav-buttons>
+
+  <app-map-nav-buttons
+    class="gm-rail__segment flex align-items-center justify-content-center"
+    [configMapNavButtonsInitial]="configResetView">
+  </app-map-nav-buttons>
+</div>

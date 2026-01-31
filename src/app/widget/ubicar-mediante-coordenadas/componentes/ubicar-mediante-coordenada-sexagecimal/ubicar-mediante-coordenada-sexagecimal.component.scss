@@ -1,0 +1,6 @@
+/**
+*Se ajusta el tamanio del input-number para que no se desborden de la grilla
+*/
+::ng-deep .input-number input {
+    width: 30%;
+}

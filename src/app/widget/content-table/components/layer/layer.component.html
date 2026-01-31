@@ -1,0 +1,72 @@
+@if (layer) {
+  <div class="w-full pl-1 pr-1 pt-1 pb-1 shadow-2" [style]="{ cursor: 'move' }">
+    <p
+      class="m-0 content_table__layer_title"
+      [ngClass]="{ 'font-bold': isTitleBold }">
+      {{ getTitleOfLayer(layer) }}
+    </p>
+
+    <div class="flex justify-content-end flex-wrap gap-3 mb-2 ml-2">
+      <p-button
+        icon="pi pi-sliders-h"
+        severity="success"
+        [pTooltip]="'Generar transparencia'"
+        tooltipPosition="top"
+        severity="primary"
+        [disabled]="!layer.isVisible"
+        (onClick)="op.toggle($event)">
+        <p-popover #op>
+          <div>
+            <div class="text-center">
+              <p class="m-0"><b>Transparencia</b></p>
+              <p class="m-0">{{ transparencyValue }}</p>
+            </div>
+
+            <p-slider
+              [(ngModel)]="transparencyValue"
+              styleClass="w-14rem"
+              [step]="5"
+              [min]="0"
+              [max]="90"
+              (onChange)="
+                onChangeSliderValue(layer.layerDefinition, transparencyValue)
+              " />
+          </div>
+        </p-popover>
+      </p-button>
+      <p-button
+        icon="{{ layer.isVisible ? 'pi pi-eye-slash' : 'pi pi-eye' }}"
+        severity="primary"
+        [pTooltip]="layer.isVisible ? 'Apagar la capa' : 'Prender la capa'"
+        tooltipPosition="top"
+        (onClick)="
+          layer.isVisible
+            ? onTurnOffLayer(layer.layerDefinition)
+            : onTurnOnLayer(layer.layerDefinition)
+        " />
+      <!--
+        <p-button
+          icon="pi pi-table"
+          severity="success"
+          [pTooltip]="'Tabla de atributos'"
+          tooltipPosition="top"
+          [disabled]="true"
+          (onClick)="onAttributesTable()" />
+          -->
+      <p-button
+        icon="pi pi-file-o"
+        severity="primary"
+        [pTooltip]="'Visualizar metadatos'"
+        tooltipPosition="top"
+        [disabled]="layer.layerDefinition.urlMetadato ? false : true"
+        (onClick)="onShowMetadata(layer.layerDefinition)" />
+      <p-button
+        icon="{{ isLoading ? 'pi pi-spin pi-spinner' : 'pi pi-times' }}"
+        severity="primary"
+        [pTooltip]="'Eliminar la capa'"
+        tooltipPosition="top"
+        [disabled]="isLoading"
+        (onClick)="onDeleteLayer(layer.layerDefinition)" />
+    </div>
+  </div>
+}

@@ -1,0 +1,56 @@
+/* === Fonts para Quill Editor (p-editor) === */
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="arial"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="arial"]::before {
+  content: "Arial";
+  font-family: Arial, sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="courier"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="courier"]::before {
+  content: "Courier";
+  font-family: "Courier New", monospace;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="helvetica"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="helvetica"]::before {
+  content: "Helvetica";
+  font-family: Helvetica, sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="tahoma"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="tahoma"]::before {
+  content: "Tahoma";
+  font-family: Tahoma, sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="times-new-roman"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="times-new-roman"]::before {
+  content: "Times New Roman";
+  font-family: "Times New Roman", serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="verdana"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="verdana"]::before {
+  content: "Verdana";
+  font-family: Verdana, sans-serif;
+}
+
+/* Ocultar la barra de herramientas que agrega PrimeNG por defecto */
+::ng-deep .p-editor-toolbar {
+  display: none !important;
+}
+
+/* Asegurar que tu barra personalizada (Quill) se mantenga */
+::ng-deep .p-editor-container .ql-toolbar {
+  display: block !important;
+}
+
+/* Mejorar comportamiento visual de los dropdowns */
+:root {
+  .p-dropdown-label,
+  .p-dropdown-item {
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+  }
+}

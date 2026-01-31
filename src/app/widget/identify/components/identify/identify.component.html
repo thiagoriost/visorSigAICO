@@ -1,0 +1,49 @@
+<div class="identify_container">
+  <p-toast position="top-right" />
+  @if (isWMSService) {
+    <p-message class="text-justify" severity="info">{{ WMSMessage }}</p-message>
+  }
+
+  <div class="pl-1 pr-1 pb-1 mt-3">
+    <div class="flex flex-column justify-content-center aling-items-center">
+      <p-select
+        class="border-round-sm w-full"
+        [dataKey]="'id'"
+        [checkmark]="true"
+        variant="filled"
+        [options]="layerList"
+        optionLabel="titulo"
+        (onChange)="onChangeDropdown($event)"
+        placeholder="Seleccione una capa"
+        [ngClass]="{
+          'ng-invalid ng-dirty': errorMessage,
+        }"
+        appendTo="body" />
+
+      @if (errorMessage) {
+        <small class="text-red-500 block mt-1 font-bold">
+          {{ errorMessage }}
+        </small>
+      }
+    </div>
+    <!--Mostrar el componente de resultado-->
+    @if (includeResult) {
+      @if (result && result.geometry) {
+        <div class="mt-2">
+          <p class="font-bold">Resultado identificar</p>
+          <p class="m-0 content_table__layer_title">
+            <b>Capa: </b> {{ result.layerName }}
+          </p>
+          <app-result [result]="result.geometry" />
+        </div>
+      }
+      <div class="flex justify-content-end aling-items-center mt-2 mr-3">
+        <p-button
+          [raised]="true"
+          [rounded]="true"
+          label="LIMPIAR"
+          (click)="onCleanGeometry()"></p-button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<!-- Contenedor relativo del mapa -->
+<div class="relative h-full w-full overflow-visible">
+
+  <!-- Línea de escala centrada abajo -->
+  <div class="absolute bottom-0 left-0 w-full flex justify-content-center  pointer-events-auto z-2">
+    <app-coordinate-scale-line></app-coordinate-scale-line>
+  </div>
+
+<!-- Mini mapa -->
+<app-mini-map
+  class="absolute bottom-0 right-0 m-5 pointer-events-auto z-2"
+  [width]="isSmallScreen ? '180px' : '269px'"
+  [height]="isSmallScreen ? '130px' : '193px'"
+  [baseMap]="selectedBaseMap"
+  [mapPosition]="'left-top'"
+  [buttonRounded]="false"
+  [buttonIcon]="'pi pi-map'"
+  [buttonSize]="isSmallScreen ? 'small' : 'large'"
+  [background]="'bg-primary-500'"
+  [mapContainerClass]="'border-2 border-primary-500 boxPosition miniMapa'"
+  [isPanEnabled]="true">
+</app-mini-map>
+
+</div>

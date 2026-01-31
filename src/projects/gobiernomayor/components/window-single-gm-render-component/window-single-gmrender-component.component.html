@@ -1,0 +1,31 @@
+@if (existeWidgetAbierto$ | async) {
+
+  @if (!isMobile) {
+    <div>
+      <app-floating-window
+        [titulo]="tituloVentana"
+        [widgetFloatingWindowConfig]="effectiveConfig"
+        (closeWindowEvent)="cerrarWidget()"
+        [tamanoCabecera]="tamanoCabecera"
+      >
+        <app-single-component-render></app-single-component-render>
+
+        <div
+          class="absolute top-0 right-0 bottom-0 left-0 pointer-events-none border-2 border-round-2xl text-primary"
+          style="border-color: currentColor;"
+        ></div>
+      </app-floating-window>
+    </div>
+  } @else {
+    <div>
+      <app-mobile-floating-window
+        [titulo]="tituloVentana"
+        [widgetFloatingWindowConfig]="effectiveConfig"
+        (closeWindowEvent)="cerrarWidget()"
+      >
+        <app-single-component-render></app-single-component-render>
+      </app-mobile-floating-window>
+    </div>
+  }
+
+}

@@ -1,0 +1,98 @@
+<div class="flex h-screen flex-row relative ">
+  <!-- Menú lateral -->
+  <div class="flex flex-column justify-content-between w-20 surface-700 h-full overflow-hidden relative z-2">
+
+    <!-- Sección superior -->
+    <div class="flex flex-column align-items-center gap-3 pt-7 w-full">
+
+      <!-- Botonera principal -->
+      <p-button icon="pi icon-aiso-capas" pTooltip="Tabla de contenido" (click)="toggleButton('Tabladecontenidoaiso')"
+        [ngClass]="{'menu-btn': true, 'menu-btn-active': activeButton === 'Tabladecontenidoaiso'}"></p-button>
+
+      <p-button icon="pi pi-clone" pTooltip="Mapa base" (click)="toggleButton('BaseMap')"
+        [ngClass]="{'menu-btn': true, 'menu-btn-active': activeButton === 'BaseMap'}"></p-button>
+
+      <p-button icon="pi icon-aiso-identificar" pTooltip="Identificar" (click)="toggleButton('Identify')"
+        [ngClass]="{'menu-btn': true, 'menu-btn-active': activeButton === 'Identify'}"></p-button>
+
+      <p-button icon="pi icon-aiso-salida_grafica" pTooltip="Salida gráfica" (click)="toggleButton('ExportarMapa4')"
+        [ngClass]="{'menu-btn': true, 'menu-btn-active': activeButton === 'ExportarMapa4'}"></p-button>
+
+
+      <!-- Componente MapNavButtons -->
+      <app-map-nav-buttons background="transparent" [configMapNavButtonsInitial]="configMapNavButtonsInitial"
+        class="flex flex-column align-items-center gap-3 w-full"></app-map-nav-buttons>
+    </div>
+
+    <!-- Sección inferior -->
+    <div class="flex flex-column align-items-center gap-3 pb-4 w-full">
+      @if(isMobile === false){
+      <p-image src="projects/aiso/assets/images/sig_aiso_baston_de_mando.png" alt="Bastón de mando"
+        imageClass="w-12 h-12"></p-image>
+      }
+
+
+      <p-button icon="pi icon-aiso-ayuda" pTooltip="Ayuda" (click)="toggleButton('Ayuda')"
+        [ngClass]="{'menu-btn': true, 'menu-btn-active': activeButton === 'Ayuda'}"></p-button>
+    </div>
+
+  </div>
+</div>
+<!-- Panel dinámico (widgets) encima de todo -->
+@if (activePanel && !(isMobile && showIdentifyWindow)){
+<div
+  class="fixed panel top-0 surface-0 overflow-hidden transition-all duration-300 ease-in-out z-4 flex flex-column z-4"
+  [ngStyle]="{
+    width: isMobile ? 'calc(100vw - 50px)' : '350px',
+    left: isMobile ? '50px' : '50px',
+    height: '100vh'
+  }">
+  <!-- Imagen superior -->
+  <div class="flex justify-content-center w-full flex-none">
+    <p-image src="projects/aiso/assets/images/sig_aiso_sig_aiso_n.png" alt="Panel fondo"
+      imageClass="w-full max-w-19rem h-auto"></p-image>
+  </div>
+
+  <!-- Título -->
+  @if (panelTitle) {
+  <h2 class="m-0 px-3 py-2 flex-none">
+    {{ panelTitle }}
+  </h2>
+  }
+
+
+  <!-- Contenido con scroll -->
+  <div class="flex-auto overflow-y-auto p-2">
+    @if (widgetName){
+    <ng-container>
+      <app-widget-render [widgetName]="widgetName" class="w-full h-full block"
+        [attr.data-key]="widgetName"></app-widget-render>
+    </ng-container>
+    }
+
+  </div>
+</div>
+}
+
+
+<!-- Barra de búsqueda (fuera del panel dinámico) -->
+@if (!isMobile){
+<app-buscar-direccion [placeholder]=" 'Buscar dirección...'" class="buscar-direccion-desktop"
+  [prependIcon]="'pi pi-search'" [dropdown]="'false'" [isVisibleIconSearch]="false"></app-buscar-direccion>
+}
+
+
+<!-- Ventana flotante para Identificar (solo móvil) -->
+@if (showIdentifyWindow && isMobile){
+<app-mobile-floating-window [titulo]="'Identificar'" [widgetFloatingWindowConfig]="identifyFloatingConfig"
+  (closeWindowEvent)="cerrarVentana()" back>
+  <app-widget-render [widgetName]="'Identify'"></app-widget-render>
+</app-mobile-floating-window>
+}
+
+
+<!-- Barra de búsqueda (atras del panel dinámico) -->
+@if (isMobile){
+<app-buscar-direccion [placeholder]=" 'Buscar dirección...'" class="buscar-direccion-mobile"
+  [prependIcon]="'pi pi-search'" [dropdown]="'false'" [isVisibleIconSearch]="false"></app-buscar-direccion>
+}

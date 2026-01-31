@@ -1,0 +1,70 @@
+<div>
+  <!-- Tipo de Coordenada y Sistema de Referencia-->
+  @if (isTransformingCoordinates) {
+    <div class="p-2">
+      <app-transform-coodinates
+        (coordinateEmitter)="
+          onChangeTransformedCoordinate($event)
+        "></app-transform-coodinates>
+    </div>
+  } @else {
+    <div class="p-0">
+      <p-tabs value="0"> <p-tablist>
+              <p-tab value="0">Geográfica</p-tab>
+              <p-tab value="1">Plana</p-tab>
+          </p-tablist>
+          <p-tabpanels>
+              <p-tabpanel value="0">
+                  <app-ubicar-mediante-coordenada-geografica
+                      (coordinateEmitter)="onLocateGeographicCoordinate($event)" />
+              </p-tabpanel>
+              <p-tabpanel value="1">
+                  <app-ubicar-mediante-coordenada-plana
+                      (coordinateEmitter)="onLocateFlatCoordinate($event)" />
+              </p-tabpanel>
+          </p-tabpanels>
+      </p-tabs>
+    </div>
+  }
+
+  <!-- Botones de acción -->
+  <div class="grid m-0 p-0">
+    <p-divider
+      type="solid"
+      class="border-1 border-primary border-top-1"></p-divider>
+    <div class="col p-0">
+      <div
+        class="flex flex-row flex-wrap justify-content-end align-items-center gap-2">
+        <p-button
+          [rounded]="true"
+          [raised]="true"
+          severity="secondary"
+          label="LIMPIAR"
+          [disabled]="!coordenada"
+          (click)="eliminarPuntoMarcado()"
+          pTooltip="Eliminar la coordenada ubicada"></p-button>
+        @if (coordenada) {
+          <p-button
+            [rounded]="true"
+            [raised]="true"
+            severity="secondary"
+            label="ACERCAR"
+            (click)="acercarPunto()"></p-button>
+        }
+        @if (!solicitarCoordenadas) {
+          <p-button
+            [rounded]="true"
+            [raised]="true"
+            severity="secondary"
+            [label]="isTransformingCoordinates ? 'VOLVER' : 'TRANSFORMAR'"
+            (click)="transformingCoordinates()"
+            [pTooltip]="
+              isTransformingCoordinates
+                ? 'Cambiar al modo de ubicar coordenadas'
+                : 'Cambiar al modo de transformar coordenadas'
+            "></p-button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

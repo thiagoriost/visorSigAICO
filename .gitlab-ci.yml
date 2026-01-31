@@ -1,0 +1,65 @@
+stages:
+  - ci.build
+  - ci.lint
+  - build
+  - run
+
+before_script:
+  #- chown -R gitlab-runner:gitlab-runner /home/gitlab-runner/builds/
+
+ci.build:
+  stage: ci.build
+  tags: 
+    - $DEV_RUNNER
+  script:
+    - docker system prune -af 
+    - docker build --no-cache -f Dockerfile.ci -t visor-comunidades-ci . 
+    - echo "Docker image build successfully for test"
+  only:
+    refs:
+      - merge_requests
+
+ci.lint:
+  stage: ci.lint
+  tags: 
+    - $DEV_RUNNER
+  script:
+    - docker run --rm visor-comunidades-ci npm run lint
+  only:
+    refs:
+      - merge_requests      
+
+build:
+  stage: build
+  tags: 
+    - $DEV_RUNNER
+  environment:
+    name: development
+  script:
+    - git reset --hard
+    - echo "Iniciando build para Cambios Fisicos..."
+    - cp $DEV_DOCKER_COMPOSE ./docker-compose.yml
+    - echo "Copia docker-compose file"
+    - docker compose --file docker-compose.yml build --no-cache 
+    - echo "Docker image build successfully"
+  only:
+    refs:
+      - develop
+
+deploy:
+  stage: run
+  tags: 
+    - $DEV_RUNNER
+  script:
+    - docker system prune -af
+    - echo "Starting deployment process for Academi-Pro..."  # Log para indicar el inicio de la etapa de despliegue
+    - cp $DEV_DOCKER_COMPOSE ./docker-compose.yml
+    - docker compose down
+    - sleep 15
+    - docker ps -a # Verificar que todos los contenedores se encuentren detenidos
+    - docker compose up -d
+    - docker ps -a
+  only:
+    refs:
+      - develop
+

@@ -1,0 +1,28 @@
+<div class="fixed bottom-0 w-full flex justify-content-center pointer-events-none mb-4 z-1 flex align-items-center justify-content-center">
+  <div class="pointer-events-auto">
+      <div
+        class="inline-flex flex-row border-round-xl p-2 flex-nowrap max-w-50rem h-4rem bottom-0 justify-content-center align-items-center mb-1">
+
+        <div class="flex flex-column align-items-left justify-content-left font-bold text-sm">    
+          <app-barra-escala scaleType="scalebar" class="p-1"></app-barra-escala>    
+          <div class="bg-white">
+            <app-view-coords></app-view-coords>
+          </div>
+        </div>
+
+        <div class="flex  align-items-center justify-content-center font-bold m-1 mt-4 border-round">
+          <app-buscar-direccion [isVisibleIconSearch]="true"> </app-buscar-direccion>  
+        </div>
+
+        <div class="flex  align-items-center justify-content-center font-bold m-1 mt-4 border-round">
+          <p-button icon="pi cric-imprimir" [rounded]="true"  (onClick)="onToggleImprimir()" pTooltip="Imprimir">
+          </p-button>
+        </div>
+
+        <div class="flex  align-items-center justify-content-center font-bold m-1 mt-4 border-round">
+          <p-button icon="pi cric-identificar" [rounded]="true"  (onClick)="onToggleIdentificar()" pTooltip="Identificar">
+          </p-button>
+        </div>   
+      </div>    
+  </div>
+</div>

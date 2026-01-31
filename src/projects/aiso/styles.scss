@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* === NG PRIME === */
+/* FROM: https://primeng.org/installation#styles */
+
+@use 'primeicons/primeicons.css';
+
+/*
+  PrimeFlex is a lightweight responsive CSS utility library to accompany Prime
+  FROM: https://primeflex.org/installation
+*/
+@use 'primeflex/primeflex.css';
+
+/*
+  styles Quill Editor
+*/
+
+@use 'assets/styles/quillEditor.scss';
+
+/**
+ * Iconos del visor
+ */
+@use 'assets/fonts/iconos-aiso-v1.0-2/style.css';
+
+/*
+  PrimeNG Styles aiso
+*/
+
+@use 'projects/aiso/assets/styles.scss';
+@use 'assets/styles/content-table.scss';

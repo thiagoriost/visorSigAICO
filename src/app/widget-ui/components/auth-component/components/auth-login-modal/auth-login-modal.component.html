@@ -1,0 +1,82 @@
+<p-dialog 
+    [(visible)]="visible" 
+    [modal]="true" 
+    (onHide)="onHide()" 
+    [dismissableMask]="true" 
+    [closeOnEscape]="false"
+        
+    [showHeader]="false" 
+    [style]="{ 'border-radius': '18px', 'padding': '0', 'width': '420px' }"
+    contentStyleClass="p-5">
+
+    <form [formGroup]="formGroup" (ngSubmit)="submit()" class="w-full flex flex-column align-items-center">
+
+        <!-- Logo -->
+        <div class="flex justify-content-center mb-2" *ngIf="config.modalLogoUrl">
+            <p-image 
+                [src]="config.modalLogoUrl" 
+                alt="Logo" 
+                width="260">
+            </p-image>
+        </div>
+
+        <!-- Usuario -->
+        <div class="field w-full mb-3">
+            <label for="email" class="font-semibold" [ngClass]="config.textColor">Usuario</label>
+
+            <input pInputText 
+                id="email" 
+                formControlName="email" 
+                type="email" 
+                placeholder="Ingrese el usuario"
+                variant="filled" 
+                class="w-full border-none border-bottom-2 surface-border border-round-0 p-2" 
+                [ngClass]="{
+                'ng-invalid ng-dirty': formGroup.get('email')?.invalid && formGroup.get('email')?.touched
+            }" />
+
+            <div *ngIf="formGroup.get('email')?.invalid && formGroup.get('email')?.touched" class="text-red-500 block mt-1">
+                Ingrese un correo válido
+            </div>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="field w-full mb-6">
+            <label for="password" class="font-semibold " [ngClass]="config.textColor">Contraseña</label>
+
+            <input pInputText 
+                id="password" 
+                formControlName="password" 
+                variant="filled"
+                type="password" 
+                placeholder="Ingrese la clave"
+                class="w-full border-none border-bottom-2 surface-border border-round-0 p-2" 
+                [ngClass]="{
+                'ng-invalid ng-dirty': formGroup.get('password')?.invalid && formGroup.get('password')?.touched
+            }" />
+
+            <small *ngIf="formGroup.get('password')?.invalid && formGroup.get('password')?.touched" class="text-red-500 block mt-1">
+                Ingrese clave válida
+            </small>
+
+        </div>
+
+        <!-- Botón -->
+        <div class="w-full h-12">
+            <p-button 
+            [label]="config.modalButtonText ?? 'INGRESAR'" 
+            type="submit"
+            [styleClass]="
+                'w-full py-2 ' +
+                (config.modalButtonBorder || '')
+            "
+            [severity]="config.modalButtonColor ?? 'primary'"
+            [loading]="loading"
+            [disabled]="loading"
+            ></p-button>
+
+        </div>
+
+    </form>
+
+</p-dialog>

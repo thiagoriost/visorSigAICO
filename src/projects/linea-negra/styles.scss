@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* === NG PRIME === */
+/* FROM: https://primeng.org/installation#styles */
+
+/*
+  styles Quill Editor
+*/
+
+@use 'assets/styles/quillEditor.scss';
+
+/*
+  PrimeNG Styles cric
+*/
+
+@use 'projects/linea-negra/assets/styles.scss';
+
+@use 'projects/linea-negra/assets/fonts/linea-negra-icons-v1.0/style.css';
+@use 'assets/styles/content-table.scss';
+@use '@sjmc11/tourguidejs/dist/css/tour.min.css';
+
+@import 'primeicons/primeicons.css';
+/*
+  PrimeFlex is a lightweight responsive CSS utility library to accompany Prime
+  FROM: https://primeflex.org/installation 
+*/
+@import 'primeflex/primeflex.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}

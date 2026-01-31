@@ -1,0 +1,194 @@
+<!-- Vista del formulario: visible solo si no se ha enviado con éxito -->
+@if (!enviadoExitosamente) {
+  <form
+    #comentarioForm="ngForm"
+    (ngSubmit)="enviarFormulario()"
+  >
+    <div class="formgrid grid">
+      <!-- Nombre -->
+      <div class="field col-12 md:col-6">
+        <label for="nombre">Nombre <span class="text-red-500">*</span></label>
+        <input
+          id="nombre"
+          name="nombre"
+          type="text"
+          [(ngModel)]="formData.nombre"
+          required
+          #nombreCtrl="ngModel"
+          pInputText
+          class="w-full"
+        />
+        @if (nombreCtrl.invalid && nombreCtrl.touched) {
+          <small class="text-red-500">
+            Nombre es obligatorio
+          </small>
+        }
+      </div>
+
+      <!-- Email -->
+      <div class="field col-12 md:col-6">
+        <label for="email">Correo Electrónico <span class="text-red-500">*</span></label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          [(ngModel)]="formData.email"
+          required
+          email
+          #emailCtrl="ngModel"
+          pInputText
+          class="w-full"
+        />
+        @if (emailCtrl.invalid && emailCtrl.touched) {
+          <small class="text-red-500">
+            @if (emailCtrl.errors?.['required']) {
+              Correo es obligatorio
+            }
+            @if (emailCtrl.errors?.['email']) {
+              Formato de correo no válido
+            }
+          </small>
+        }
+      </div>
+
+      <!-- Asunto -->
+      <div class="field col-12">
+        <label for="asunto">Asunto <span class="text-red-500">*</span></label>
+        <input
+          id="asunto"
+          name="asunto"
+          type="text"
+          [(ngModel)]="formData.asunto"
+          required
+          #asuntoCtrl="ngModel"
+          pInputText
+          class="w-full"
+        />
+        @if (asuntoCtrl.invalid && asuntoCtrl.touched) {
+          <small class="text-red-500">
+            Asunto es obligatorio
+          </small>
+        }
+      </div>
+
+      <!-- Comentarios -->
+      <p-editor
+        [(ngModel)]="formData.comentarios"
+        name="comentarios"
+        required
+        #comentariosCtrl="ngModel"
+        [style]="{ height: '200px' }"
+        [styleClass]="'w-full'"
+      >
+        <ng-template #header>
+          <span class="ql-formats">
+            <select class="ql-font">
+              <option selected></option>
+              <option value="arial">Arial</option>
+              <option value="courier">Courier</option>
+              <option value="helvetica">Helvetica</option>
+              <option value="tahoma">Tahoma</option>
+              <option value="times-new-roman">Times New Roman</option>
+              <option value="verdana">Verdana</option>
+            </select>
+          </span>
+
+          <span class="ql-formats">
+            <button type="button" class="ql-bold" aria-label="Negrita"></button>
+            <button type="button" class="ql-italic" aria-label="Cursiva"></button>
+            <button type="button" class="ql-underline" aria-label="Subrayado"></button>
+          </span>
+
+          <span class="ql-formats">
+            <select class="ql-align">
+              <option selected></option>
+              <option value="center"></option>
+              <option value="right"></option>
+            </select>
+          </span>
+
+          <span class="ql-formats">
+            <button type="button" class="ql-link" aria-label="Insertar enlace"></button>
+          </span>
+
+          <span class="ql-formats">
+            <button type="button" class="ql-list" value="ordered" aria-label="Lista ordenada"></button>
+            <button type="button" class="ql-list" value="bullet" aria-label="Lista con viñetas"></button>
+          </span>
+        </ng-template>
+      </p-editor>
+
+      @if (comentariosCtrl.invalid && comentariosCtrl.touched) {
+        <small class="text-red-500">
+          Comentarios son obligatorios
+        </small>
+      }
+    </div>
+
+    <!-- Botones -->
+    <div class="flex flex-row gap-3 justify-content-start mt-4">
+      <button
+        type="submit"
+        pButton
+        label="Enviar"
+        aria-label="Enviar formulario"
+        severity="primary"
+        size="small"
+        [rounded]="true"
+        [raised]="true"
+      ></button>
+
+      <button
+        type="button"
+        pButton
+        label="Limpiar"
+        aria-label="Limpiar formulario"
+        severity="secondary"
+        size="small"
+        (click)="limpiarFormulario()"
+        [rounded]="true"
+        [raised]="true"
+      ></button>
+    </div>
+
+    <!-- Mensaje de error -->
+    @if (mensajeError) {
+      <p-message
+        severity="error"
+        [text]="mensajeError"
+        [style]="{ 'margin-top': '1rem' }"
+      ></p-message>
+    }
+  </form>
+}
+
+<!-- Vista de éxito -->
+@if (enviadoExitosamente) {
+  <div
+    class="flex flex-column align-items-center justify-content-center text-center p-5"
+  >
+    <p-button
+      icon="pi pi-check"
+      class="p-button-rounded p-button-success mb-4"
+      [style]="{
+        'font-size': '80px',
+        'width': '80px',
+        'height': '80px',
+        'pointer-events': 'none'
+      }"
+    ></p-button>
+
+    <h2 class="text-2xl font-semibold mb-2">¡Mensaje enviado!</h2>
+
+    <p class="text-lg mb-4" style="max-width: 400px;">
+      Gracias por tu mensaje. Nuestro equipo lo ha recibido correctamente y te responderá a la brevedad.
+    </p>
+
+    <p-button
+      label="Enviar otro mensaje"
+      icon="pi pi-refresh"
+      class="p-button-outlined p-button-success mt-3"
+      (click)="volverAMostrarFormulario()"
+    ></p-button>
+  </div>
+}

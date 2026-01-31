@@ -1,0 +1,6 @@
+#scrollable-list {
+  max-height: calc(
+    100% - 160px
+  ); /*Corresponde al tamanio de el input y a botonera superior*/
+  padding: 0 0.5rem;
+}

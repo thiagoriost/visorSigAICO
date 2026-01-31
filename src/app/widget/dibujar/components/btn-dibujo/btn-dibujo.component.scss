@@ -1,0 +1,42 @@
+.dibujo-container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Asegura una distribución fluida */
+  gap: 10px; /* Espaciado entre botones */
+  margin-bottom: 20px; /* Añadir espacio entre filas */
+}
+
+.col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p-button {
+  width: 100%; /* Asegura que los botones ocupen todo el ancho de su columna */
+  max-width: 100%;
+}
+
+/* Media Queries para pantallas más grandes */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas en pantallas medianas */
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr); /* Cuatro columnas en pantallas grandes */
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(6, 1fr); /* Seis columnas en pantallas muy grandes */
+  }
+}

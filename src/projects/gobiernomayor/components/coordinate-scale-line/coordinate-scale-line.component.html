@@ -1,0 +1,65 @@
+<div
+  style="position: fixed; right: 50px; bottom: 10px; z-index: 3; pointer-events: auto;"
+>
+  <div class="flex flex-column align-items-end gap-2 w-max">
+
+    <!-- ===== FILA SUPERIOR ===== -->
+    <!-- Antes: solo 1 barra. Ahora: si es small, aparece también el dropdown a la derecha -->
+    <div class="flex align-items-center gap-2 w-max">
+      <!-- Barra de escala (siempre) -->
+      <div class="w-max">
+        <app-barra-escala
+          scaleType="scalebar"
+          [showDropdown]="false"
+          [showEscalas]="true">
+        </app-barra-escala>
+      </div>
+
+      <!-- Barra de escala DROPDOWN (solo en small) -->
+      @if (isSmallScreen) {
+        <div class="relative w-max">
+          <app-barra-escala
+            scaleType="scalebar"
+            [showDropdown]="true"
+            [showEscalas]="false">
+          </app-barra-escala>
+
+          <!-- borde primary -->
+          <div
+            class="pointer-events-none absolute top-0 right-0 bottom-0 left-0 border-1"
+            style="border-color: var(--p-primary-color); z-index: 4;">
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- ===== FILA INFERIOR ===== -->
+    <div class="flex align-items-center gap-2 w-max">
+      <!-- Dropdown original: solo cuando NO es small -->
+      @if (!isSmallScreen) {
+        <div class="relative w-max">
+          <app-barra-escala
+            scaleType="scalebar"
+            [showDropdown]="true"
+            [showEscalas]="false">
+          </app-barra-escala>
+
+          <!-- borde primary -->
+          <div
+            class="pointer-events-none absolute top-0 right-0 bottom-0 left-0 border-1"
+            style="border-color: var(--p-primary-color); z-index: 4;">
+          </div>
+        </div>
+      }
+
+      <!-- Coordenadas (déjalas como prefieras en small: al lado o abajo). Aquí las dejo igual. -->
+      <div
+        class="px-3 py-1 surface-0 border-1 surface-border shadow-1 text-xs font-mono white-space-nowrap"
+        style="line-height: 1.15;"
+      >
+        <app-view-coords></app-view-coords>
+      </div>
+    </div>
+
+  </div>
+</div>

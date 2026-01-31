@@ -1,0 +1,76 @@
+<div class="w-full">
+  @if (layer) {
+    <div
+      class="p-2"
+      [ngClass]="
+        toggleSwitchValue
+          ? 'bg-white border-1 border-transparent border-round-xl shadow-5'
+          : 'layer__no_activated border-round-xl'
+      ">
+      <!--Encabezado -->
+      <div class="flex align-items-center justify-content-between">
+        <!--Toggle switch - Nombre de Capa-->
+        <div class="flex align-items-center gap-2">
+          <p-toggle-switch
+            [(ngModel)]="toggleSwitchValue"
+            [trueValue]="true"
+            [falseValue]="false"
+            (onChange)="addOrDeleteLayer($event.checked)"></p-toggle-switch>
+          <span class="content_table__layer_title" [ngClass]="titleColor">{{
+            layer.titulo
+          }}</span>
+        </div>
+        @if (toggleSwitchValue) {
+          <p-button
+            [pTooltip]="'Más opciones'"
+            [icon]="moreOptionsIcon"
+            [text]="true"
+            [severity]="severityButtonList"
+            (onClick)="onshowOrOcultMoreOptions()"></p-button>
+        }
+      </div>
+
+      <!--Iconos de acciones-->
+      <div
+        *ngIf="isVisibleButtonList"
+        @slideDownSlow
+        class="flex align-items-center justify-content-between px-5 py-1 gap-2 border-1 border-primary border-round-xl mx-1 my-1">
+        <!--BOTON DE MOSTRAR/OCULTAR CAPA-->
+        <p-button
+          [pTooltip]="isVisibleLayer ? 'Ocultar capa' : 'Mostrar capa'"
+          [icon]="isVisibleLayer ? turnOffLayerIcon : turnOnLayerIcon"
+          [text]="true"
+          [severity]="'secondary'"
+          (onClick)="toggleLayer()"
+          [size]="'small'"
+          [severity]="severityButtonList"></p-button>
+        <!--URL METADATOS-->
+        <p-button
+          [pTooltip]="layer.urlMetadato ? 'Ver metadatos' : undefined"
+          [icon]="showMetadataIcon"
+          [text]="true"
+          [severity]="severityButtonList"
+          [size]="'small'"
+          (onClick)="onShowMetadata(layer)"
+          [disabled]="!layer.urlMetadato"></p-button>
+      </div>
+      <div
+        *ngIf="toggleSwitchValue"
+        @slideDownSlow
+        class="grid mt-3 ml-1 mr-1 p-2">
+        <div class="col-12 pb-1">
+          <p-slider
+            [(ngModel)]="sliderValue"
+            [min]="0"
+            [max]="90"
+            [step]="1"
+            class="bg-primary"
+            (onChange)="onChangeSliderValue(layer, $event.value ?? 0)" />
+        </div>
+        <div class="col-12 m-0 p-0">
+          <p class="m-0 text-center" [ngClass]="titleColor">Transparencia</p>
+        </div>
+      </div>
+    </div>
+  }
+</div>

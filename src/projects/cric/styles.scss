@@ -1,0 +1,9 @@
+/* PrimeNG y PrimeIcons */
+@use 'primeicons/primeicons.css';
+@use 'primeflex/primeflex.css';
+/* Estilos locales */
+ @use 'projects/cric/assets/styles.scss';
+ @use 'assets/styles/quillEditor.scss';
+ @use 'assets/fonts/iconos-cric-v1.0-2/style.css';
+/** === IMPORTACION DE ESTILOS PARA LOS TITULOS DE LAS CAPAS EN LAS TABLAS DE CONTENIDO ===*/
+@use 'assets/styles/content-table.scss';

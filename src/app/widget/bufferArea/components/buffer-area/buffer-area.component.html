@@ -1,0 +1,118 @@
+<form [formGroup]="formBufferSelection" class="w-full" (ngSubmit)="onSubmit()" >
+  <!-- Sección 1: Seleccione una Capa -->
+  <div class="field my-5 w-full">    
+      <label for="capa">Capa *</label>
+      <app-workarea-dropdown-select
+        name="capa"
+        class="border-round"
+        [checkmark]="true"
+        [dataKey]="'id'"
+        [placeholder]="'Seleccione una capa'"
+        [optionLabel]="'titulo'"
+        formControlName="layer"
+        appendTo="body"
+        [emptyMessage]="
+          'No se encontraron capas compatibles con los requisitos de esta herramienta.'
+        "
+        [filtroServicio]="filtroServicio"
+      ></app-workarea-dropdown-select>
+    @if(formBufferSelection.get('layer')?.hasError('required') &&
+       (formBufferSelection.get('layer')?.touched)){
+      <small class="text-red-500 block mt-1">
+        Campo obligatorio
+      </small>
+    }
+  </div>
+  <!-- Sección 2: Seleccione Unidad de Distancia -->
+  <div class="field my-5 w-full">
+    <p-floatlabel>
+      <p-select                 
+        name="unit"             
+        class="border-round-sm w-full"
+        optionLabel="name"
+        optionValue="code"
+        [options]="unidadDistancia"      
+        formControlName="unit"
+        appendTo="body"></p-select>
+      <label for="unit">Unidad de medida*</label>
+    </p-floatlabel> 
+    @if(formBufferSelection.get('unit')?.hasError('required') &&
+       (formBufferSelection.get('unit')?.touched)){
+      <small class="text-red-500 block mt-1">
+        Campo obligatorio
+      </small>
+    } 
+  </div>
+
+  <!-- Sección 3: Distancia -->
+  <div class="field my-5 w-full">
+    <p-floatlabel>
+      <p-inputNumber 
+        id="minmaxfraction"
+        name="distancia"
+        class="border-round-sm w-full"
+        formControlName="distance" 
+        inputId="minmaxfraction" 
+        mode="decimal" 
+        [minFractionDigits]="0" 
+        [maxFractionDigits]="0"         
+        [min]="1"     >
+      </p-inputNumber>
+      <label for="distancia">Distancia *</label>
+    </p-floatlabel>
+    @if(formBufferSelection.get('distance')?.hasError('required') &&
+       (formBufferSelection.get('distance')?.touched)){
+      <small class="text-red-500 block mt-1">
+        Campo obligatorio
+      </small>
+    }
+  </div>
+  
+ <!-- Sección 4: Botones -->
+  <div class="flex flex-row ">
+    <!-- Botón Seleccionar Área -->
+    <div class="field mr-2">
+      <p-button 
+        label="Seleccionar Área" 
+        severity="secondary"  
+        [rounded]="true" 
+        [raised]="true"
+        (click)="seleccionarAreaBuffer()"
+        [disabled]="isLoading || formBufferSelection.get('geometriaSeleccionada')?.value">
+      </p-button>
+    </div>
+
+    <!-- Botón Limpiar Selección -->
+    <div class="field">
+      <p-button 
+        label="Limpiar Selección"       
+        severity="secondary" 
+        [rounded]="true" 
+        [raised]="true"
+        (click)="limpiar()"
+        [disabled]="isLoading || !formBufferSelection.get('geometriaSeleccionada')?.value">
+      </p-button>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    @if(formBufferSelection.get('geometriaSeleccionada')?.hasError('required') &&
+       (formBufferSelection.get('geometriaSeleccionada')?.touched)){
+      <small class="text-red-500 block mt-1">
+        Debe seleccionar un área para generar el buffer.
+      </small>
+    }
+  </div>
+
+  <!-- Fila 2: Generar Buffer -->
+  <div>
+    <p-button 
+      label="Generar Buffer" 
+      [rounded]="true" 
+      [raised]="true"
+      type="submit"
+      [loading]="isLoading"
+      [disabled]="isLoading">
+    </p-button>
+  </div>
+</form>

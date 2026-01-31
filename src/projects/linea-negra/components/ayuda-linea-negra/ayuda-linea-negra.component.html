@@ -1,0 +1,12 @@
+<div class="flex flex-column gap-2">
+  <app-descarga-manual></app-descarga-manual>
+  <p-divider></p-divider>
+  <p class="font-bold text-justify m-0">
+    Para iniciar el tour guiado por el Visor, haga clic en el siguiente botón:
+  </p>
+  <p-button
+    [label]="'INICIAR TOUR'"
+    [rounded]="true"
+    [raised]="true"
+    (onClick)="startTour()"></p-button>
+</div>

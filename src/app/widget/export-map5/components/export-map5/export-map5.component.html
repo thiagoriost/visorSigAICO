@@ -1,0 +1,178 @@
+<!-- DIALOGO DE EXPORTACIÓN -->
+<p-dialog
+  [(visible)]="displayDialog"
+  header="Imprimir mapa"
+  [modal]="true"
+  [closable]="false"
+  [resizable]="false"
+  [draggable]="false"
+  [style]="{ width: '100vw', height: '100vh', maxWidth: '100vw', maxHeight: '100vh' }"
+  [contentStyle]="{ padding: '0', display: 'flex', flexDirection: 'column', height: '100%' }"
+  [baseZIndex]="900000"
+  appendTo="body"
+  class="export-dialog"
+>
+  <app-loading-data-mask-with-overlay
+    *ngIf="loading"
+    [isContained]="false"
+    title="Generando PDF..."
+  ></app-loading-data-mask-with-overlay>
+
+  <!-- CONTENIDO -->
+  <div
+    *ngIf="isDialogReady && !loading"
+    #scrollContainer
+    class="p-4 pb-6 overflow-y-auto surface-0"
+    [ngStyle]="{ 'max-height': '90vh' }"
+  >
+    <!-- INFO -->
+    <p-message
+      class="mb-3"
+      severity="info"
+      text="Configure la salida del mapa en la barra lateral de la derecha. A la izquierda verá la previsualización."
+    ></p-message>
+
+    <!-- LAYOUT PRINCIPAL: PREVIEW (izquierda) + OPCIONES (derecha) -->
+    <div class="flex flex-column md:flex-row gap-4">
+      <!-- COLUMNA IZQUIERDA: PREVIEW -->
+      <div class="flex-1 min-w-0">
+        <div
+          class="map-preview-wrapper mb-4 mx-auto surface-card border-1 surface-border border-round-md p-2 flex justify-content-center align-items-center w-full"
+          [ngClass]="{
+            'horizontal-orient': exportForm.get('orientation')!.value === 'horizontal',
+            'vertical-orient': exportForm.get('orientation')!.value === 'vertical'
+          }"
+          (wheel)="$event.stopPropagation()"
+          (mousedown)="$event.stopPropagation()"
+          (touchstart)="$event.stopPropagation()"
+        >
+          <div
+            #previewContainer
+            class="map-preview border-1 border-dashed border-primary-500 border-round-md"
+            [ngClass]="{
+              'horizontal-orient': exportForm.get('orientation')!.value === 'horizontal',
+              'vertical-orient': exportForm.get('orientation')!.value === 'vertical'
+            }"
+          ></div>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: OPCIONES (SIDEBAR) -->
+      <aside
+        class="w-full md:w-26rem lg:w-30rem xl:w-32rem surface-card p-3 border-1 surface-border border-round-xl md:sticky overflow-auto"
+        [ngStyle]="{ top: '1rem', 'max-height': 'calc(90vh - 2rem)' }"
+      >
+        <form [formGroup]="exportForm" (ngSubmit)="onSubmit()" class="p-fluid">
+          <h2 class="text-lg font-medium mb-4 text-primary-500">Opciones del mapa</h2>
+
+          <!-- TÍTULO -->
+          <div class="field mb-5">
+            <p-floatLabel class="block">
+              <input
+                pInputText
+                id="title"
+                formControlName="title"
+                class="border-round-sm w-full"
+                [ngClass]="{ 'ng-invalid ng-dirty': showValidationErrors && titleControl?.invalid }"
+              />
+              <label for="title">Título*</label>
+            </p-floatLabel>
+            <small
+              *ngIf="showValidationErrors && titleControl?.errors"
+              class="text-red-500 block mt-2"
+            >
+              <span *ngIf="titleControl?.errors?.['required']">Campo obligatorio.</span>
+              <span *ngIf="titleControl?.errors?.['maxlength']">Máx. 100 caracteres.</span>
+            </small>
+          </div>
+
+          <!-- AUTOR -->
+          <div class="field mb-5">
+            <p-floatLabel class="block mt-2">
+              <input
+                pInputText
+                id="author"
+                formControlName="author"
+                class="border-round-sm w-full"
+                [ngClass]="{ 'ng-invalid ng-dirty': showValidationErrors && authorControl?.invalid }"
+              />
+              <label for="author">Autor*</label>
+            </p-floatLabel>
+            <small
+              *ngIf="showValidationErrors && authorControl?.errors"
+              class="text-red-500 block mt-2"
+            >
+              <span *ngIf="authorControl?.errors?.['required']">Campo obligatorio.</span>
+              <span *ngIf="authorControl?.errors?.['maxlength']">Máx. 50 caracteres.</span>
+            </small>
+          </div>
+
+          <!-- OPCIONES DE CHECKBOX -->
+          <div class="my-5">
+            <div class="flex align-items-center mb-3">
+              <p-checkbox inputId="grid" formControlName="showGrid" binary="true"></p-checkbox>
+              <label for="grid" class="ml-2">Mostrar grilla</label>
+            </div>
+            <div class="flex align-items-center">
+              <p-checkbox inputId="legend" formControlName="includeLegend" binary="true"></p-checkbox>
+              <label for="legend" class="ml-2">Incluir leyenda</label>
+            </div>
+          </div>
+
+          <!-- DROPDOWN ORIENTACIÓN -->
+          <div class="field mb-4">
+            <label for="orientation" class="mb-2 block">Orientación*</label>
+
+            <!-- ✅ PrimeNG 20+: Dropdown → Select -->
+            <p-select
+              inputId="orientation"
+              formControlName="orientation"
+              [options]="orientationOptions"
+              optionLabel="label"
+              optionValue="value"
+              class="border-round-sm w-full"
+              [ngClass]="{ 'p-invalid': campoInvalido('orientation') }"
+              placeholder="Seleccione orientación"
+            ></p-select>
+
+            <small
+              *ngIf="campoInvalido('orientation')"
+              class="text-red-500 block mt-2"
+            >
+              Seleccione una orientación.
+            </small>
+          </div>
+        </form>
+      </aside>
+    </div>
+  </div>
+
+  <!-- BOTONES FIJOS INFERIORES (únicos) -->
+  <div class="sticky bottom-0 right-0 z-5 py-2 px-4 flex justify-content-end surface-card">
+    <div class="flex gap-3">
+      <p-button
+        label="Guardar PDF"
+        type="submit"
+        [rounded]="true"
+        [raised]="true"
+        [disabled]="loading"
+        (onClick)="onSubmit()"
+      ></p-button>
+
+      <p-button
+        label="Cerrar"
+        severity="secondary"
+        type="button"
+        [rounded]="true"
+        [raised]="true"
+        (onClick)="onCancel()"
+      ></p-button>
+    </div>
+  </div>
+
+  <!-- CONTENEDOR OCULTO PARA EXPORTACIÓN -->
+  <div
+    #exportHiddenMapContainer
+    style="width:800px; height:600px; position:absolute; top:-9999px; left:-9999px;"
+  ></div>
+</p-dialog>

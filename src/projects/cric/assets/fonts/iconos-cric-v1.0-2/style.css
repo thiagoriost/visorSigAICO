@@ -1,0 +1,74 @@
+@font-face {
+  font-family: 'iconos-cric';
+  src:
+    url('fonts/iconos-cric.ttf?wo9x4k') format('truetype'),
+    url('fonts/iconos-cric.woff?wo9x4k') format('woff'),
+    url('fonts/iconos-cric.svg?wo9x4k#iconos-cric') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="cric-"], [class*=" cric-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'iconos-cric' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cric-mano:before {
+  content: "\e90f";
+}
+.cric-capas:before {
+  content: "\e900";
+}
+.cric-prender_capa:before {
+  content: "\e901";
+}
+.cric-apagar_capa:before {
+  content: "\e902";
+}
+.cric-ayuda:before {
+  content: "\e903";
+}
+.cric-buscar:before {
+  content: "\e904";
+}
+.cric-chevron_down:before {
+  content: "\e905";
+}
+.cric-desactivar_capas:before {
+  content: "\e906";
+}
+.cric-Iconos_Vista-total:before {
+  content: "\e907";
+}
+.cric-identificar:before {
+  content: "\e908";
+}
+.cric-imprimir:before {
+  content: "\e909";
+}
+.cric-localizacion:before {
+  content: "\e90a";
+}
+.cric-metadatos:before {
+  content: "\e90b";
+}
+.cric-zone_drag:before {
+  content: "\e90c";
+}
+.cric-zoom_in:before {
+  content: "\e90d";
+}
+.cric-zoom_out:before {
+  content: "\e90e";
+}

@@ -1,0 +1,22 @@
+<!--Widget de identificar-->
+<div>
+  <app-identify [includeResult]="false"></app-identify>
+</div>
+<!--Widget de resultado-->
+
+@if (result && result.geometry) {
+  <div class="mt-2">
+    <p class="font-bold">Resultado</p>
+  </div>
+  <app-result-v2 [result]="result.geometry"></app-result-v2>
+}
+
+<!--Boton de limpiar-->
+<div class="flex justify-content-end aling-items-center mt-2 mr-3">
+  <p-button
+    [raised]="true"
+    [rounded]="true"
+    [disabled]="!result"
+    label="LIMPIAR"
+    (click)="onCloseWidget()"></p-button>
+</div>

@@ -1,0 +1,76 @@
+/* === Tipografías (local) === */
+
+/* EB Garamond (TTF/OTF locales) */
+@font-face {
+  font-family: 'EB Garamond';
+  src: url('/assets/fonts/eb-garamond/EBGaramond-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  src: url('/assets/fonts/eb-garamond/EBGaramond-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  src: url('/assets/fonts/eb-garamond/EBGaramond-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  src: url('/assets/fonts/eb-garamond/EBGaramond-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Variables tipográficas */
+:root {
+  --gm-font-title: "EB Garamond", Garamond, "Times New Roman", serif;
+  --gm-font-body: Arial, "Helvetica Neue", system-ui, -apple-system, sans-serif;
+}
+
+/* Fuente por defecto y reset básico */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--gm-font-body);
+}
+
+/* Títulos (ventanas, headings) -> EB Garamond */
+.gm-title,
+.p-dialog .p-dialog-title {
+  font-family: var(--gm-font-title);
+  font-weight: 600; /* 700 si lo quieres más marcado */
+}
+
+/* ===== Scrollbars (global) ===== */
+/* Firefox (descomenta si lo necesitas) */
+/*
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #397524 #DFE9EB;
+}
+*/
+
+/* Chrome, Edge y Safari */
+*::-webkit-scrollbar { height: 10px; width: 10px; }
+*::-webkit-scrollbar-track { border-radius: 5px; background-color: #dfe9eb; }
+*::-webkit-scrollbar-track:hover,
+*::-webkit-scrollbar-track:active { background-color: #b8c0c2; }
+*::-webkit-scrollbar-thumb { border-radius: 5px; background-color: var(--p-primary-200); }
+*::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:active { background-color: var(--p-primary-300); }
+
+/* Utilidad */
+.break-word {
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}

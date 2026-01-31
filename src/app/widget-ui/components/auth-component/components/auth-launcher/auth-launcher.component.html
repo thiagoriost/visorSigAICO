@@ -1,0 +1,98 @@
+<!-- ======================= -->
+<!-- FORMULARIO DE CONFIG    -->
+<!-- ======================= -->
+<div class="card p-3 mb-3">
+  <h3 class="text-lg font-bold mb-3">Configuración del Auth</h3>
+
+  <form [formGroup]="form" class="grid gap-3">
+
+    <label for="loginButtonText">Color del texto</label>
+    <input id="loginButtonText" class="p-inputtext w-full" formControlName="textColor" placeholder="Color texto" />
+
+    <!-- ======================= -->
+    <!-- BOTÓN DE LOGIN          -->
+    <!-- ======================= -->
+
+
+    <label for="loginButtonText">Texto del botón</label>
+    <input id="loginButtonText" class="p-inputtext w-full" formControlName="loginButtonText" placeholder="Iniciar sesión" />
+
+    <label for="loginButtonColor">Color del botón</label>
+    <input id="loginButtonColor" class="p-inputtext w-full" formControlName="loginButtonColor" placeholder="primary" />
+
+    <label for="loginButtonBorder">Borde del botón (true/false)</label>
+    <input id="loginButtonBorder" class="p-inputtext w-full" formControlName="loginButtonBorder" placeholder="true / false" />
+
+    <label for="loginButtonShadow">Sombra (true/false)</label>
+    <input id="loginButtonShadow" class="p-inputtext w-full" formControlName="loginButtonShadow" placeholder="true / false" />
+
+    <label for="iconUser">Ícono usuario (PrimeIcons)</label>
+    <input id="iconUser" class="p-inputtext w-full" formControlName="iconUser" placeholder="pi pi-user" />
+
+
+    <!-- ======================= -->
+    <!-- MODAL                   -->
+    <!-- ======================= -->
+
+
+    <label for="modalLogoUrl">URL del logo</label>
+    <input id="modalLogoUrl" class="p-inputtext w-full" formControlName="modalLogoUrl" placeholder="https://..." />
+
+    <label for="modalButtonText">Texto del botón</label>
+    <input id="modalButtonText" class="p-inputtext w-full" formControlName="modalButtonText" placeholder="Ingresar" />
+
+    <label for="modalButtonColor">Color del botón</label>
+    <input id="modalButtonColor" class="p-inputtext w-full" formControlName="modalButtonColor" placeholder="primary" />
+
+    <label for="modalButtonBorder">Borde del botón (true/false)</label>
+    <input id="modalButtonBorder" class="p-inputtext w-full" formControlName="modalButtonBorder" placeholder="true / false" />
+
+
+    <!-- ======================= -->
+    <!-- PERFIL                  -->
+    <!-- ======================= -->
+
+
+    <label for="avatarIcon">Ícono del avatar</label>
+    <input id="avatarIcon" class="p-inputtext w-full" formControlName="avatarIcon" placeholder="pi pi-user" />
+
+    <label for="avatarIconColor">Color del ícono avatar</label>
+    <input id="avatarIconColor" class="p-inputtext w-full" formControlName="avatarIconColor" placeholder="#6b7280" />
+
+
+    <!-- ======================= -->
+    <!-- BOTÓN DE SALIDA         -->
+    <!-- ======================= -->
+
+
+    <label for="outputButtonText">Texto salida</label>
+    <input id="outputButtonText" class="p-inputtext w-full" formControlName="outputButtonText" placeholder="Cerrar sesión" />
+
+    <label for="outputButtonColor">Color del botón</label>
+    <input id="outputButtonColor" class="p-inputtext w-full" formControlName="outputButtonColor" placeholder="primary" />
+
+    <label for="outputButtonBorder">Borde del botón (true/false)</label>
+    <input id="outputButtonBorder" class="p-inputtext w-full" formControlName="outputButtonBorder" placeholder="true / false" />
+
+
+  </form>
+
+  <button class="p-button p-component mt-4 w-full" (click)="updateConfig()">
+    Actualizar configuración
+  </button>
+</div>
+
+<app-auth-container [config]="config"> </app-auth-container>
+
+
+<ng-template #mainTpl>
+  <div class="p-2 text-center">
+    <span class="text-sm">Bienvenido a tu perfil</span>
+  </div>
+</ng-template>
+
+<ng-template #footerTpl>
+  <div class="p-2 text-center">
+    <span class="text-sm">Logo Footer</span>
+  </div>
+</ng-template>

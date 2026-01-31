@@ -1,0 +1,22 @@
+
+:host ::ng-deep {
+  /* Etilo para controlar el tamaño de la barra de escala */
+  .p-select {
+    height: 40px ;
+    min-height: 40px ;
+    line-height: 40px;
+  }
+  .p-select-label,
+  .p-select-dropdown {
+    height: 40px ;
+    line-height: 40px ;
+    display: flex;
+    align-items: center;
+  }
+  /* Etilo para controlar el tamaño de los íconos del speeddial */
+  .p-speeddial .p-button .p-icon,
+  .p-speeddial .p-button .pi {
+      font-size: 26.4px;
+      line-height: 1;
+  }
+}

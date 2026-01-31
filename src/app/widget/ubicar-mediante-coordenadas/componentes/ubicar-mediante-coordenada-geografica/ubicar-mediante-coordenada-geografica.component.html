@@ -1,0 +1,195 @@
+<div>
+  <form [formGroup]="coordenadaGeograficaForm" (ngSubmit)="onLocate()">
+    <div class="grid">
+      <div class="col">
+        <div>
+          <p-radioButton
+            formControlName="tipoGrado"
+            [inputId]="'gradosDecimal'"
+            [value]="'decimal'"
+            (onClick)="onChangeRadioButton($event)" />
+          <label for="gradosDecimal" class="ml-2">Grados decimales</label>
+        </div>
+      </div>
+      <div class="col">
+        <div>
+          <p-radioButton
+            formControlName="tipoGrado"
+            [inputId]="'gradosDecimal'"
+            [value]="'sexagecimal'"
+            (onClick)="onChangeRadioButton($event)" />
+          <label for="gradosSexagecimal" class="ml-2"
+            >Grados sexagesimales</label
+          >
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col-12 py-0">
+        @if (tipoGrado === 'decimal') {
+          <div class="grid">
+            <!--TITULO-->
+            <div class="col-12 font-bold px-2 py-0 text-left">
+              <p>Latitud</p>
+            </div>
+            <!--INPUTS-->
+            <div class="col-12">
+              <div class="grid">
+                <div class="col-3 py-0 px-2">
+                  <p-select
+                    class="w-full"
+                    [options]="latitudeHemisphereList"
+                    optionValue="value"
+                    optionLabel="name"
+                    formControlName="hemisferioLatitud"
+                    [readonly]="
+                      openProfile === openingProfiles.DESTINATION_TRANSFORM
+                    "
+                    [ngClass]="{
+                      'ng-invalid ng-dirty': getErrorCampo('hemisferioLatitud'),
+                    }"
+                    size="small"></p-select>
+                  <small
+                    *ngIf="getErrorCampo('hemisferioLatitud') || isErrorOnForm"
+                    class="text-red-500 block mt-1 font-bold">
+                    {{ getErrorCampo('hemisferioLatitud') }}
+                  </small>
+                </div>
+                <div class="col-9 py-0 px-2">
+                  <p-inputNumber
+                    [ngClass]="{
+                      'ng-invalid ng-dirty': getErrorCampo('latitud'),
+                    }"
+                    formControlName="latitud"
+                    mode="decimal"
+                    [min]="0"
+                    [max]="90"
+                    [minFractionDigits]="3"
+                    [maxFractionDigits]="6"
+                    [showButtons]="true"
+                    placeholder="Ejemplo: 4,641"
+                    [readonly]="
+                      openProfile === openingProfiles.DESTINATION_TRANSFORM
+                    "
+                    size="small" />
+                  <small
+                    *ngIf="getErrorCampo('latitud') || isErrorOnForm"
+                    class="text-red-500 block mt-1 font-bold">
+                    {{ getErrorCampo('latitud') }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <!--MENSAJE DE AYUDA-->
+            <div
+              class="col-12 sm:col-12 xs:col-12 md:col-12 m-0 py-0 px-2 text-left">
+              <span class="text-xs"
+                >Ingrese la coordenada geográfica de latitud en grados
+                decimales.
+              </span>
+            </div>
+          </div>
+          <div class="grid py-0 px-0">
+            <!--TITULO-->
+            <div class="col-12 font-bold px-2 py-0 text-left">
+              <p>Longitud</p>
+            </div>
+            <!--INPUTS-->
+            <div class="col-12">
+              <div class="grid">
+                <div class="col-3 py-0 px-2">
+                  <p-select
+                    class="w-full"
+                    [options]="longitudeHemisphereList"
+                    optionValue="value"
+                    optionLabel="name"
+                    formControlName="hemisferioLongitud"
+                    [readonly]="
+                      openProfile === openingProfiles.DESTINATION_TRANSFORM
+                    "
+                    [ngClass]="{
+                      'ng-invalid ng-dirty':
+                        getErrorCampo('hemisferioLongitud'),
+                    }"
+                    size="small"></p-select>
+                  <small
+                    *ngIf="getErrorCampo('hemisferioLongitud') || isErrorOnForm"
+                    class="text-red-500 block mt-1 font-bold">
+                    {{ getErrorCampo('hemisferioLongitud') }}
+                  </small>
+                </div>
+                <div class="col-9 py-0 px-2">
+                  <p-inputNumber
+                    [ngClass]="{
+                      'ng-invalid ng-dirty': getErrorCampo('longitud'),
+                    }"
+                    formControlName="longitud"
+                    mode="decimal"
+                    [min]="0"
+                    [max]="180"
+                    [minFractionDigits]="3"
+                    [maxFractionDigits]="6"
+                    [showButtons]="true"
+                    placeholder="Ejemplo: 74,065688"
+                    [readonly]="
+                      openProfile === openingProfiles.DESTINATION_TRANSFORM
+                    "
+                    size="small" />
+                  <small
+                    *ngIf="getErrorCampo('longitud') || isErrorOnForm"
+                    class="text-red-500 block mt-1 font-bold">
+                    {{ getErrorCampo('longitud') }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <!--MENSAJE DE AYUDA-->
+            <div
+              class="col-12 sm:col-12 xs:col-12 md:col-12 m-0 py-0 px-2 text-left">
+              <span class="text-xs"
+                >Ingrese la coordenada geográfica de longitud en grados
+                decimales.
+              </span>
+            </div>
+          </div>
+          <!-- Botones de acción -->
+          @if (openProfile === openingProfiles.LOCATING) {
+            <div class="flex justify-content-end align-items-center m-0">
+              <p-button
+                type="submit"
+                [rounded]="true"
+                [raised]="true"
+                severity="primary"
+                label="UBICAR"></p-button>
+            </div>
+          } @else if (openProfile === openingProfiles.ORIGIN_TRANSFORM) {
+            <div class="flex justify-content-end align-items-center m-0">
+              <p-button
+                type="submit"
+                [rounded]="true"
+                [raised]="true"
+                severity="primary"
+                label="TRANSFORMAR"></p-button>
+            </div>
+          }
+        } @else if (tipoGrado === 'sexagecimal') {
+          <app-ubicar-mediante-coordenada-sexagecimal
+            [openProfile]="openProfile"
+            (coordinateEmitter)="onEmitSexagecimalCoordinate($event)"
+            [coordinate]="
+              coordenada
+            "></app-ubicar-mediante-coordenada-sexagecimal>
+        } @else {
+          <div>
+            <span class="text-lg font-bold">Seleccione un tipo de grado</span>
+          </div>
+        }
+      </div>
+      <div class="col-12 py-0 px-2 text-left">
+        <span class="text-xs font-italic font-bold"
+          >Coordenadas en el datum MAGNA - SIRGAS (EPSG:4686)</span
+        >
+      </div>
+    </div>
+  </form>
+</div>

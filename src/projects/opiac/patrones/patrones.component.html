@@ -1,0 +1,186 @@
+<div class="bg-white p-5">
+  <h2>Guia de color y usos</h2>
+  <p class="text-primary-500">Referencia <a target="_blank" href="https://primeflex.org/backgroundcolor">PRIMEFLEX Background Color</a></p>
+  <div>  
+    <!-- Fondo color segmento superior 1 -->
+    <div class="mb-2">
+      <div class="p-3 border-round bg-primary-500 text-white border-round-3xl">
+        <strong>bg-primary-500:</strong> Fondo color segmento superior 1
+      </div>
+    </div>
+    <!-- Fondo color segmento superior 2 -->
+    <div class="mb-2" >
+      <div class="p-3 border-round bg-primary-100 text-primary-300 border-round-2xl">
+        <strong>bg-primary-100:</strong> Fondo color segmento superior 2
+      </div>
+    </div>
+    <!-- Fondo color Botones -->
+    <div class="mb-2">
+      <div class="p-3 border-round bg-primary-400 text-white">
+        <strong>bg-primary-400:</strong> Fondo color Botones
+      </div>
+    </div>
+    <!-- Fondo ventanas 1 -->
+    <div class="mb-2">
+      <div class="p-3 border-round surface-500 text-primary-500">
+        <strong>surface-500:</strong> Fondo color ventanas 1
+      </div>
+    </div>
+    <!-- Fondo ventanas 2 -->
+    <div class="mb-2">
+      <div class="p-3 border-round surface-700 text-primary-500">
+        <strong>surface-700:</strong> Fondo color ventanas 2
+      </div>
+    </div>
+    <h2>Botón principal</h2>
+    <p class="text-primary-500">Referencia <a target="_blank" href="https://v18.primeng.org/button">PRIMENG Button</a></p>
+    <div>
+      <div class="flex flex-column gap-3 p-4 surface-0 border-1 border-round surface-border max-w-25rem">
+        <!-- Componente en vivo -->
+        <div>
+          <p-button label="BUSCAR" [rounded]="true" [raised]="true" />   
+          <p-button icon="pi pi-check" [rounded]="true" [raised]="true"  />
+          <p-button icon="pi pi-check" [rounded]="true" [outlined]="true" />
+          <p-button icon="pi pi-check" [rounded]="true" [text]="true" [raised]="true" />
+          <p-button icon="pi pi-check" [rounded]="true" [text]="true" />
+          <p-button label="Save" icon="pi pi-check" />
+        </div>
+        <!-- Código fuente mostrado -->
+        <pre class="bg-surface-100 border-1 border-round surface-border overflow-auto">
+          <code>
+            &lt;p-button label="BUSCAR" [rounded]="true" [raised]="true" /&gt;
+          </code>
+        </pre>
+      </div>
+    </div>
+    <h2>Botón secundario</h2>
+    <p class="text-primary-500">Referencia <a target="_blank" href="https://v18.primeng.org/button">PRIMENG Button</a></p>
+    <div>
+      <div class="flex flex-column gap-3 p-4 surface-0 border-1 border-round surface-border max-w-25rem">
+        <!-- Componente en vivo -->
+        <div>
+          <p-button label="Secondary" [raised]="true" [rounded]="true" severity="secondary" />
+          <p-button icon="pi pi-check" [rounded]="true" [raised]="true"  severity="secondary" />
+          <p-button icon="pi pi-check" [rounded]="true" [outlined]="true" severity="secondary" />
+          <p-button icon="pi pi-check" [rounded]="true" [text]="true" [raised]="true" severity="secondary" />
+          <p-button icon="pi pi-check" [rounded]="true" [text]="true" severity="secondary" />
+          <p-button label="Save" icon="pi pi-check" severity="secondary" />
+        </div>
+        <!-- Código fuente mostrado -->
+        <pre class="bg-surface-100 border-1 border-round surface-border overflow-auto">
+          <code>
+            &lt;p-button label="Secondary" [raised]="true"  [rounded]="true" /&gt;
+          </code>
+        </pre>
+      </div>
+    </div>
+    <!-- Estilos para validación de formulario -->
+    <h2>Validación formulario</h2>
+    <p class="text-primary-500">Referencia <a target="_blank" href="https://v18.primeng.org/inputtext#invalid">PRIMENG InputText Invalid</a></p>
+    <p class="text-primary-500">Referencia <a target="_blank" href="https://v18.primeng.org/select#invalid">PRIMENG Select Invalid</a></p>
+    <form class="p-fluid">      
+      <div class="field my-5">
+        <p-floatlabel>
+          <input 
+            pInputText 
+            id="over_label" 
+            autocomplete="off"
+            class="border-round-sm w-full"
+            [ngClass]="{'ng-invalid ng-dirty':erroresVisibles}" />
+          <label for="over_label">Nombre ciudadano</label>
+        </p-floatlabel>
+        @if (erroresVisibles) {
+            <small class="text-red-500 block mt-1">
+          El nombre es obligatorio.
+        </small>
+        } 
+        @if (!erroresVisibles) { 
+          <small class="text-primary-500">
+          Nombre que aparece en documento identidad
+          </small>
+        } 
+      </div>
+      <div class="field my-5">
+        <p-floatlabel>
+          <p-select 
+            [options]="cities" 
+            optionLabel="name" [showClear]="true" 
+            class="border-round-sm w-full"
+            [ngClass]="{'ng-invalid ng-dirty':erroresVisibles}"/>         
+          <label for="over_label">Ciudad</label>
+        </p-floatlabel>
+        @if (erroresVisibles) {
+           <small class="text-red-500 block mt-1">
+          Campo ciudad es obligatorio.
+        </small>
+        } 
+        @if (!erroresVisibles) {
+          <small class="text-primary-500">
+          Ciudad que le gustaria visitar
+        </small>
+        } 
+      </div>
+      <p-button [label]="erroresVisibles ? 'Ocultar errores' : 'Mostrar errores'" [raised]="true" [rounded]="true" (onClick)="mostrarErrores()" /> 
+    </form>
+    <!-- Mensajes de error general -->
+    <h2>Mensajes de fallo peticiones HTTP externas</h2>
+    <div>
+      <p class="text-primary-500">Referencia <a target="_blank" href="https://v18.primeng.org/toast#sticky">PRIMENG TOAST</a></p>
+      <p-toast />
+      <div>
+        <p-button [raised]="true"  [rounded]="true" (click)="mostrarMensajeFalloRequest()" label="Mostrar mensaje de error" />
+      </div>
+    </div>    
+    <!-- ICONOS -->
+    <h2>ICONOS</h2>
+    <div>
+      <div class="grid gap-3">
+        @for (icono of iconosOpiac; track icono) {
+        <div class="flex align-items-center justify-content-between gap-3 p-3 border-round-sm border-1 border-primary-500 w-full"
+        >
+          <div class="flex align-items-center gap-2">
+            <span [class]="icono"></span>
+            <span>{{ icono }}</span>
+          </div>
+          <p-button icon="pi pi-copy" [rounded]="true" [raised]="true" (click)="copiarTexto(icono)" /> 
+        </div>
+        }
+        
+      </div>
+    </div>
+    <h3>Boton con icono</h3>
+    <div>
+        <p-button  [rounded]="true" [raised]="true" aria-label="Selección Espacial" >
+          <ng-template #icon>
+            <i class="ICON-VISOR-OPIAC_SELECCION-ESPACIAL"></i>
+          </ng-template>
+        </p-button>
+    </div>
+    <!-- Mascara de carga -->
+    <h2>Loader</h2>
+    <p>Mascara de carga a usar cuando hay peticiones http o procesamiento de datos que no es instantaneo.</p>
+    <p-card header="Loader contenido">
+      <div  class="h-10rem flex align-items-center justify-content-center relative">
+        <p-button label="Mostrar loader" [rounded]="true" [raised]="true" (onClick)="mostrarLoader()" /> 
+        @if (loaderContenidoEsVisible) {
+            <app-loading-data-mask-with-overlay 
+            [isContained]="true" title="Cargando...">  
+          </app-loading-data-mask-with-overlay> 
+        }      
+      </div>
+    </p-card>
+    <div class="p-3">
+      <p-button label="Mostrar loader Full Screen" [rounded]="true" [raised]="true" (onClick)="mostrarLoaderFullScreen()" /> 
+      @if (loaderFullScreenEsVisible) {
+      <app-loading-data-mask-with-overlay 
+      [isContained]="false" title="Cargando...">  
+    </app-loading-data-mask-with-overlay>  
+      }
+          
+    </div>
+  </div>
+</div>
+
+
+
+

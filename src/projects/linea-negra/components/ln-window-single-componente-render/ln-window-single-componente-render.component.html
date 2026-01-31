@@ -1,0 +1,29 @@
+@if (existeWidgetAbierto$ | async) {
+  @if (!isMobile) {
+    <div  class="fixed pointer-events-auto static_window z-1">
+        <app-linea-negra-responsive-floating-window
+        [title]="
+          configuracionWidgetAbierto
+            ? configuracionWidgetAbierto.titulo
+            : 'Sin título'
+        "
+        [minimized]="false"
+        (closeEmitter)="cerrarWidget()"
+        [background]="'bg-primary-600'">
+        <app-single-component-render></app-single-component-render>
+      </app-linea-negra-responsive-floating-window>
+    </div>    
+  } @else {
+    <app-mobile-floating-window
+      [titulo]="
+        configuracionWidgetAbierto
+          ? configuracionWidgetAbierto.titulo
+          : 'Sin título'
+      "
+      [widgetFloatingWindowConfig]="configFloatingWindow"
+      (closeWindowEvent)="cerrarWidget()"
+      class="h-50vh mr-2 z-5 p-1">
+      <app-single-component-render></app-single-component-render>
+    </app-mobile-floating-window>
+  }
+}

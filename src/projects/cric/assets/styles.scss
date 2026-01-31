@@ -1,0 +1,106 @@
+/* === UBUNTU === */
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('projects/cric/assets/fonts/ubuntu/Ubuntu-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('projects/cric/assets/fonts/ubuntu/Ubuntu-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('projects/cric/assets/fonts/ubuntu/Ubuntu-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* === INTER (VARIABLE FONT) === */
+@font-face {
+  font-family: 'Inter';
+  src: url('projects/cric/assets/fonts/inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  /* Soporta todos los pesos */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('projects/cric/assets/fonts/inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--p-typography-font-family-body, 'Ubuntu', system-ui, sans-serif);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--p-typography-font-family-heading, 'Inter', system-ui, sans-serif);
+  font-weight: 600;
+  /* o 700 */
+}
+
+/**grupo de estilos  globales para el scroll de todos los elementos. del proyecto*/
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #dfe9eb;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: var(--p-primary-200);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--p-primary-300);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: var(--p-primary-300);
+}
+
+.break-word {
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  /* soporte adicional */
+}
+
+/* Forzar repintado tras el resize ya que edge a veces no re-renderiza correctamente los icon fonts (.pi) tras un cambio en el layout */
+.p-button .pi {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}

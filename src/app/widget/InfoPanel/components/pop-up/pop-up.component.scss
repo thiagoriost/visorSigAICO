@@ -1,0 +1,25 @@
+.info-panel-card {
+  bottom: 1px;
+  min-width: 280px;
+}
+
+.arrow-down {
+  width: 20px;
+  height: 10px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background-color: currentColor;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.header-bar {
+  background-color: var(--popup-header-bg, var(--p-card-background));
+}
+
+/* Estilo base del header */
+.header-bar {
+  font-weight: 600;
+  color: #000;
+}
+
+

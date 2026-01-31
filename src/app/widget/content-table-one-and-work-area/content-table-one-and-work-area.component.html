@@ -1,0 +1,15 @@
+<div class="h-full flex flex-column overflow-hidden">
+  <!--TABLA DE CONTENIDO 1-->
+  <div id="content_table">
+    <app-content-table></app-content-table>
+  </div>
+  @if (showDivider) {
+    <div id="divider">
+      <p-divider></p-divider>
+    </div>
+  }
+  <!--AREA DE TRABAJO 1-->
+  <div id="work_area" class="mt-2">
+    <app-work-area-layers></app-work-area-layers>
+  </div>
+</div>

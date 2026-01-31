@@ -1,0 +1,41 @@
+<div
+  class="absolute flex flex-column bottom-0 left-0 w-full z-3 shadow-4 border-round-top-2xl"
+  [style.height]="(state.isMinimized ? '50' : '100') + 'vh'"
+  [hidden]="!widgetFloatingWindowConfig">
+  <!-- Contenido header -->
+  <div
+    [class]="
+      (widgetFloatingWindowConfig && widgetFloatingWindowConfig.headerClass) ??
+      'flex flex-row align-items-center h-3rem'
+    ">
+    @if (!state.isMinimized) {
+      <p-button
+        icon="pi pi-minus"
+        iconPos="bottom"
+        severity="danger"
+        [text]="true"
+        (click)="toggleMinimize()"></p-button>
+    }
+
+    <p-button
+      icon="pi pi-times"
+      iconPos="bottom"
+      severity="danger"
+      [text]="true"
+      (click)="closeWindow()"></p-button>
+  </div>
+
+  <!-- Contenido Tabs dinámicos -->
+  <div class="flex-1 overflow-auto bg-floating-window">
+    <p-tabs [value]="activeTab">
+      <p-tablist>
+        <p-tab>{{ titulo }}</p-tab>
+      </p-tablist>
+      <p-tabpanels>
+        <p-tabpanel [value]="'1'">
+          <ng-content></ng-content>
+        </p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
+  </div>
+</div>

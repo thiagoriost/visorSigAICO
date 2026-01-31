@@ -1,0 +1,7 @@
+.floating-menu{
+  top: 20px;  
+}
+/* Ajustar la posición del menú desplegable segun diseño*/
+::ng-deep .p-popover-custom{
+  transform: translate(-45px, -29px) !important;
+}

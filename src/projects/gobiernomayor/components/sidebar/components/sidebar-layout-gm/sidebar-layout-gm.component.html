@@ -1,0 +1,13 @@
+<div class="flex flex-col h-full surface-0">
+  <div class="flex-none">
+    <ng-content select="[slot-top]"></ng-content>
+  </div>
+
+  <div class="flex-auto min-h-0">
+    <ng-content select="[slot-center]"></ng-content>
+  </div>
+
+  <div class="flex-none">
+    <ng-content select="[slot-bottom]"></ng-content>
+  </div>
+</div>

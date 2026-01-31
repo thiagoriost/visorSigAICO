@@ -1,0 +1,84 @@
+@font-face {
+  font-family: 'icon-gobierno-mayor';
+  src:  url('fonts/icon-gobierno-mayor.eot?qlb0ll');
+  src:  url('fonts/icon-gobierno-mayor.eot?qlb0ll#iefix') format('embedded-opentype'),
+    url('fonts/icon-gobierno-mayor.ttf?qlb0ll') format('truetype'),
+    url('fonts/icon-gobierno-mayor.woff?qlb0ll') format('woff'),
+    url('fonts/icon-gobierno-mayor.svg?qlb0ll#icon-gobierno-mayor') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icon-gobierno-mayor' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-gm_abajo:before {
+  content: "\e900";
+}
+.icon-gm_acercar:before {
+  content: "\e901";
+}
+.icon-gm_activar_capa:before {
+  content: "\e902";
+}
+.icon-gm_alejar:before {
+  content: "\e903";
+}
+.icon-gm_arriba:before {
+  content: "\e904";
+}
+.icon-gm_ayuda:before {
+  content: "\e905";
+}
+.icon-gm_buscar:before {
+  content: "\e906";
+}
+.icon-gm_capas:before {
+  content: "\e907";
+}
+.icon-gm_derecha:before {
+  content: "\e908";
+}
+.icon-gm_desactivar_capa:before {
+  content: "\e909";
+}
+.icon-gm_desactivar_capas:before {
+  content: "\e90a";
+}
+.icon-gm_doble_abajo:before {
+  content: "\e90b";
+}
+.icon-gm_drag:before {
+  content: "\e90c";
+}
+.icon-gm_identificar:before {
+  content: "\e90d";
+}
+.icon-gm_izquierda:before {
+  content: "\e90e";
+}
+.icon-gm_mapa:before {
+  content: "\e90f";
+}
+.icon-gm_panear:before {
+  content: "\e910";
+}
+.icon-gm_salida_grafica:before {
+  content: "\e911";
+}
+.icon-gm_vista_total:before {
+  content: "\e912";
+}

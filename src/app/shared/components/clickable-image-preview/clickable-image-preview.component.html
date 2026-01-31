@@ -1,0 +1,22 @@
+<!-- Contenedor principal que centra el contenido -->
+<div class="flex justify-content-center align-items-center w-full m-1" [style]="{ 'max-width': '300px' }">
+  <!-- Muestra la imagen si la URL es válida -->
+  <p-image
+    *ngIf="isValidUrl"
+    [src]="imageUrl"
+    alt="Vista previa de la imagen"
+    [preview]="true"
+    imageClass="w-full"
+    appendTo="body"
+    [style]="{ 'max-width': '300px' }"
+  >
+    <!-- Template para el ícono de previsualización (lupa) -->
+    <ng-template #indicator>
+        <i class="pi pi-search"></i>
+    </ng-template>
+  </p-image>
+
+  <!-- Muestra un mensaje de error si la URL no es válida -->
+  <p-message *ngIf="!isValidUrl" severity="error" [text]="validationMessage">
+  </p-message>
+</div>

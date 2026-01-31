@@ -1,0 +1,21 @@
+/* Etilo para controlar el tamño de la barra de escala */
+:host ::ng-deep {
+
+  .p-select {
+    height: 40px !important;
+    min-height: 40px !important;
+    line-height: 40px !important;
+  }
+
+  .p-select-label,
+  .p-select-dropdown {
+    height: 40px !important;
+    line-height: 40px !important;
+    display: flex;
+    align-items: center;
+  }
+
+  .p-button .pi {
+      font-size: 26.4px;
+  }
+} 

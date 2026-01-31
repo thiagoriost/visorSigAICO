@@ -1,0 +1,31 @@
+@if (layerToRender) {
+  <div
+    class="w-full"
+    [style]="{
+      'flex justify-content-center': layerToRender.leaf,
+    }">
+    <app-layer-item-v4
+      [layer]="layerToRender"
+      [fontSizeLeafLayer]="fontSizeLeafLayer"
+      [fontSizeParentLayer]="fontSizeParentLayer"
+      [fontSizeTransparencyText]="fontSizeTransparencyText"
+      [textColor]="textColor" />
+  </div>
+
+  @if (!layerToRender.leaf && layerToRender.Result?.length) {
+    @for (child of layerToRender.Result; track $index) {
+      <div class="m-0 p-0">
+        <app-layer-tree-item-v4
+          [layerToRender]="child"
+          [textColor]="textColor"
+          [fontSizeLeafLayer]="fontSizeLeafLayer"
+          [fontSizeParentLayer]="fontSizeParentLayer"
+          [fontSizeTransparencyText]="fontSizeTransparencyText" />
+      </div>
+    }
+    <p-divider
+      [layout]="'horizontal'"
+      type="solid"
+      class="border-top-1 border-primary"></p-divider>
+  }
+}

@@ -1,0 +1,60 @@
+<div class="flex h-screen bg-gray-50">
+
+  <!-- SIDEBAR -->
+  <!-- <div class="w-64 min-w-[16rem] max-w-xs border-r border-gray-300 bg-white"> -->
+      <div
+    class="surface-section border-right-1 border-300"
+    [ngStyle]="sidebarHostHidden ? sidebarHostCollapsedStyle : sidebarHostExpandedStyle"
+    aria-label="Sidebar host"
+  >
+    <app-sidebar
+    [widgets]="widgets"
+    (toggleWidget)="onToggleWidget($event)"
+    (verReadme)="mostrarReadme($event)"
+  ></app-sidebar>
+  </div>
+
+  <!-- CONTENEDOR DERECHA: TOPBAR + CONTENIDO -->
+  <div class="flex flex-column flex-1">
+
+    <!-- TOPBAR -->
+    <div class="h-[64px] w-full">
+      <app-topbar
+        [widgetsActivos]="widgetsActivos"
+        (openWidget)="onOpenFromTopbar($event)"
+        (focusWidget)="bringToFront($event)"
+        (clearConfig)="clearWidgetsConfig()"
+        (sidebarToggle)="onToggleSidebar()">
+      </app-topbar>
+    </div>
+
+    <p-toast position="top-right"></p-toast>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-1 overflow-auto p-1">      
+      <app-map></app-map>
+        <ng-container *ngFor="let w of widgetsConVentana; trackBy: trackByNombre">
+          <app-window-component-render
+            [widgetName]="w.nombreWidget"
+            (windowClosed)="onWindowClosed(w.nombreWidget)">
+          </app-window-component-render>
+        </ng-container>
+    </div>
+
+    <!-- <app-readme-modal
+      [visible]="readmeVisible"
+      [readmeUrl]="readmeUrl"
+      (cerrarModal)="readmeVisible = false"
+    ></app-readme-modal> -->
+
+<app-readme-modal
+  [visible]="readmeVisible"
+  [readmeUrl]="readmeUrl"
+  (cerrarModal)="readmeVisible = false"
+></app-readme-modal>
+
+
+  </div>
+
+</div>
+

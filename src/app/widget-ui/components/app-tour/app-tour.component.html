@@ -1,0 +1,51 @@
+@if (showOverlay) {
+  <app-overlay [isContained]="false">
+    <div
+      class="block items-center justify-center text-center gap-4 {{
+        backgroundOverlay
+      }} p-6 tour">
+      <p class="text-center text-3xl {{ textcolorClass }}">
+        {{ title }}
+      </p>
+      <p class="text-center text-xl {{ textcolorClass }}">
+        {{ messageHelp }}
+      </p>
+      <p-button [label]="startButtonLabel" (onClick)="startTour()"></p-button>
+      <p-button
+        class="ml-2"
+        [label]="omitButtonLabel"
+        severity="secondary"
+        (onClick)="omitTour()"></p-button>
+    </div>
+  </app-overlay>
+}
+<ngx-guided-tour
+  [skipText]="skipTourText"
+  [nextText]="nextStepText"
+  [backText]="prevStepText"
+  [doneText]="doneTourText"></ngx-guided-tour>
+<!--
+<app-ngx-guided-tour-visor
+  [skipTourText]="skipTourText"
+  [nextStepText]="nextStepText"
+  [prevStepText]="prevStepText"
+  [doneTourText]="doneTourText"></app-ngx-guided-tour-visor>
+-->
+@if (isAvaliableOverlayFinalizedTour) {
+  <app-overlay [isContained]="true">
+    <div
+      class="block items-center justify-center text-center gap-4 {{
+        backgroundOverlay
+      }} p-6 tour">
+      <p class="text-center text-3xl {{ textcolorClass }}">
+        {{ titleFinalizedTour }}
+      </p>
+      <p class="text-center text-xl {{ textcolorClass }}">
+        {{ messageFinalizedTour }}
+      </p>
+      <p-button
+        [label]="continueButtonLabel"
+        (onClick)="onContinue()"></p-button>
+    </div>
+  </app-overlay>
+}

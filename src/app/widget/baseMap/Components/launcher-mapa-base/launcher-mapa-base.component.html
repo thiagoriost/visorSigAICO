@@ -1,0 +1,24 @@
+<p-card header="Selector de Mapas Base" class="p-4">
+  <div class="flex flex-column gap-3">
+
+    <p-multiSelect
+      [options]="opcionesMapas"
+      [(ngModel)]="seleccionados"
+      optionLabel="label"
+      placeholder="Seleccione uno o varios mapas base"
+      display="chip"
+      class="w-full"
+    ></p-multiSelect>
+
+    <button pButton 
+            label="Mostrar Mapas" 
+            icon="pi pi-check" 
+            class="p-button-primary" 
+            (click)="mostrarMapasSeleccionados()">
+    </button>
+  </div>
+</p-card>
+
+<div class="mt-4" *ngIf="mapasParaMostrar.length > 0">
+  <app-base-map [nombresMapas]="mapasParaMostrar"></app-base-map>
+</div>

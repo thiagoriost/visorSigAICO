@@ -1,0 +1,12 @@
+.visor-default{
+  display: flex; 
+  height: 100vh; 
+  &__mapa{
+    width: 70vw;
+    height: 100vh;
+  }
+  &__panel{
+    width: 30vw;
+    height: 100vh;
+  }
+}

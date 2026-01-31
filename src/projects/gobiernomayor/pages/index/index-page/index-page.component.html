@@ -1,0 +1,117 @@
+<p-toast></p-toast>
+
+<app-layout-c
+  [sidebarTemplate]="sidebar"
+  [showHeader]="false"
+  [sidebarCollapsed]="false"
+  [sidebarWidth]="468"
+  [minSidebarWidth]="240"
+  [sidebarRightOffset]="10"
+  [sidebarRailWidth]="56"
+  [sidebarIconBox]="56"
+  [sidebarTopGap]="16"
+  [sidebarBottomGap]="88"
+  (sidebarWidthChange)="onSidebarResize($event)"
+>
+  <!-- ===== MAP (z-0) ===== -->
+  <!-- Importante: proyectar DIRECTO bajo #main-content -->
+  <app-map slot-map></app-map>
+  <app-basemap-override slot-map></app-basemap-override>
+
+  <!-- ===== OVERLAYS (z-2) ===== -->
+  @if (mapReady) {
+    <div slot-overlay>
+      <!-- Ubicación -->
+      <div style="position: fixed; top: 392px; left: 72px; pointer-events: auto">
+        <app-floating-menu [isMobile]="isSmallScreen"></app-floating-menu>
+      </div>
+
+      <!-- Buscar -->
+      <div style="position: fixed; top: 42px; left: 18px; pointer-events: auto">
+        <button
+          pButton
+          type="button"
+          [rounded]="false"
+          icon="pi pi-search"
+          [attr.aria-label]="'Buscar'"
+          [style]="{ height: '45px', width: '45px', padding: '0' }"
+          pTooltip="Buscar un lugar"
+          tooltipPosition="right"
+          (click)="toggleSearch()"
+        ></button>
+      </div>
+
+      <div style="position: fixed; top: 150px; left: 17px; pointer-events: auto">
+        <app-floating-map-controls></app-floating-map-controls>
+      </div>
+
+      <!-- Ventanas flotantes (clave: pointer-events:auto para poder arrastrar) -->
+      <div style="pointer-events: auto">
+        <app-export-map5-wrapper></app-export-map5-wrapper>
+
+        <!-- Leyenda (desktop) -->
+      </div>
+
+      <!-- Botón UBICACIÓN / MINIMAPA (solo móvil, debajo de leyenda) -->
+      @if (isSmallScreen) {
+        <div
+          style="position: fixed; top: 595px; left: 17px; pointer-events: auto"
+        >
+          <app-map-location [isSmallScreen]="isSmallScreen"></app-map-location>
+        </div>
+      }
+
+      <!-- ===== UBICACIÓN / MINIMAPA en DESKTOP ===== -->
+      @if (!isSmallScreen) {
+        <div
+          style="position: fixed; bottom: 130px; left: 10px; pointer-events: auto"
+        >
+          <app-map-location [isSmallScreen]="isSmallScreen"></app-map-location>
+        </div>
+      }
+
+      <!-- Panel buscador -->
+      <div style="pointer-events: auto">
+        @if (showSearch) {
+          <app-buscar-gobiernomayor></app-buscar-gobiernomayor>
+        }
+      </div>
+
+      <!-- Escala + coordenadas -->
+      <div style="pointer-events: auto">
+        <app-coordinate-scale-line
+          [isSmallScreen]="isSmallScreen"
+        ></app-coordinate-scale-line>
+      </div>
+    </div>
+  }
+
+  <div slot-windows>
+    <app-window-single-gmrender-component
+      [isMobile]="isSmallScreen"
+      [tamanoCabecera]="48"
+      [baseConfig]="getConfigFloatingWindow()"
+      [mobileOverrides]="getMobileOverrides()"
+    >
+    </app-window-single-gmrender-component>
+
+    @if (!isSmallScreen && showLegendWindow) {
+      <app-floating-window
+        class="bg-floating-Window-border"
+        [titulo]="'Leyenda'"
+        [widgetFloatingWindowConfig]="legendWindowCfg"
+      >
+        <app-legend></app-legend>
+        <div
+          class="absolute top-0 right-0 bottom-0 left-0 pointer-events-none border-2 border-round-2xl text-primary"
+          style="border-color: currentColor"
+        ></div>
+      </app-floating-window>
+    }
+  </div>
+
+  <!-- ===== Sidebar Template ===== -->
+  <ng-template #sidebar>
+    <app-sidebar-gm></app-sidebar-gm>
+  </ng-template>
+</app-layout-c>

@@ -1,0 +1,29 @@
+<div #popupNode>
+  <p-card [styleClass]="'info-panel-card ' + bgColorClass">
+    <!-- HEADER -->
+    <ng-template pTemplate="header">
+      <div class="header-bar flex justify-content-end align-items-center p-2 border-round-top" [ngClass]="bgColorClass">
+        <p-button
+          icon="pi pi-times"
+          [rounded]="true"
+          severity="success"
+          class="mr-2"
+          (onClick)="closePopup()"
+        ></p-button>
+      </div>
+    </ng-template>
+
+    <!-- SLOT HEADER -->
+    <div class="mb-2 font-semibold">
+      <ng-content select="[slot-header]"></ng-content>
+    </div>
+
+    <!-- BODY -->
+    <div class="popup-slot">
+      <ng-content></ng-content>
+    </div>
+
+    <!-- ARROW -->
+    <div class="arrow-down absolute top-100 left-50" [ngClass]="bgColorClass"></div>
+  </p-card>
+</div>

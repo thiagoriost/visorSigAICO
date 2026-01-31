@@ -1,0 +1,101 @@
+@if (layer) {
+  <div class="grid border-2 border-primary p-0">
+    <!--Zona de Drag&Drop y Titulo de la capa-->
+    <div
+      class="col-12 flex align-items-center justify-content-start m-0 p-1 gap-2">
+      <i class="pi pi-ellipsis-v cursor-move"></i>
+      <p
+        class="m-0 font-bold text-lg content_table__layer_title"
+        [ngClass]="textColor">
+        {{ getLayerTitle(layer) }}
+      </p>
+    </div>
+    <div
+      class="col-12 flex align-items-center justify-content-end text-center gap-1">
+      <!--Prender/Apagar Capa-->
+      <p-button
+        [icon]="layer.isVisible ? ocultLayerIcon : showLayerIcon"
+        [text]="isTextButton"
+        [rounded]="isRoundedButton"
+        [pTooltip]="layer.isVisible ? 'Apagar la capa' : 'Prender la capa'"
+        tooltipPosition="top"
+        (onClick)="
+          layer.isVisible
+            ? onTurnOffLayer(layer.layerDefinition)
+            : onTurnOnLayer(layer.layerDefinition)
+        " />
+      <!--Generar transparencia-->
+      <p-button
+        [icon]="setTransparencyIcon"
+        [text]="isTextButton"
+        [rounded]="isRoundedButton"
+        [pTooltip]="'Generar transparencia'"
+        tooltipPosition="top"
+        [disabled]="!layer.isVisible"
+        (onClick)="op.toggle($event)">
+        <p-popover #op>
+          <div>
+            <div class="text-center">
+              <p class="m-0 font-bold" [ngClass]="textColor">Transparencia</p>
+              <p class="m-0" [ngClass]="textColor">{{ transparencyValue }}</p>
+            </div>
+            <p-slider
+              [(ngModel)]="transparencyValue"
+              styleClass="w-14rem"
+              [step]="1"
+              [min]="0"
+              [max]="90"
+              (onChange)="
+                onChangeSliderValue(layer.layerDefinition, transparencyValue)
+              " />
+          </div>
+        </p-popover>
+      </p-button>
+      <!--Visualizar metadatos-->
+      <p-button
+        [icon]="showMetadataIcon"
+        [text]="isTextButton"
+        [rounded]="isRoundedButton"
+        [pTooltip]="'Visualizar metadatos'"
+        tooltipPosition="top"
+        [disabled]="layer.layerDefinition.urlMetadato ? false : true"
+        (onClick)="onShowMetadata(layer.layerDefinition)" />
+      <!--Mostrar/Ocultar leyenda-->
+      <p-button
+        [icon]="showLegendIcon"
+        [text]="isTextButton"
+        [rounded]="isRoundedButton"
+        [pTooltip]="isLegendVisible ? 'Ocultar leyenda' : 'Mostrar leyenda'"
+        [severity]="isLegendVisible ? 'info' : null"
+        tooltipPosition="top"
+        (onClick)="onChangeLegendVisibility()" />
+      <!--Eliminar capa-->
+      <p-button
+        [icon]="deleteLayerIcon"
+        [text]="isTextButton"
+        [rounded]="isRoundedButton"
+        [pTooltip]="'Eliminar la capa'"
+        tooltipPosition="top"
+        (onClick)="onDeleteLayer(layer.layerDefinition)" />
+    </div>
+    <!--Muestra la leyenda-->
+    @if (isLegendVisible) {
+      <div
+        class="col-12 flex align-items-center justify-content-center m-0 w-full"
+        style="overflow: hidden">
+        <ng-container *ngIf="legendUrl; else cargandoLeyenda">
+          <p-image
+            [src]="legendUrl"
+            [alt]="layer.layerDefinition.titulo || 'Imagen de la capa'"
+            class="w-full h-auto flex justify-content-center">
+          </p-image>
+        </ng-container>
+        <ng-template #cargandoLeyenda>
+          <div class="text-sm text-gray-500 italic text-center">
+            Leyenda no disponible
+          </div>
+        </ng-template>
+      </div>
+    }
+  </div>
+}

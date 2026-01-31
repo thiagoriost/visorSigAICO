@@ -1,0 +1,182 @@
+/* ======== Ajustes del RAIL (como el prototipo) ======== */
+/* ===============================
+   VARIABLES -> TOKENS DEL PRESET
+   =============================== */
+
+/*
+Para el rail (fondo sólido del bloque) vamos a usar el tono de marca oscuro,
+porque 1) te da buen contraste con icono blanco y 2) ya usas blanco en el texto.
+*/
+$rail-bg: var(--p-primary-400); // '#214829' según tu preset
+
+/*
+Sombras y radios los podemos alinear al preset:
+- border radius xs = 5px en tu preset.
+- sombra: ya definiste en overlay.navigation algo tipo
+  0 4px 6px -1px rgba(0,0,0,.1), ... pero tu sombra original
+  es más fuerte (0 2px 10px rgba(0,0,0,.25)). La dejamos igual
+  porque es parte del look flotante.
+*/
+$rail-shadow: 0 2px 10px rgba(0,0,0,.25);
+$rail-radius: var(--p-border-radius-xs); // '{border.radius.xs}' = 5px
+$rail-padding: 0px;
+
+/* Medidas fijas que son layout, no tema */
+$rail-width: 48px;            /* ancho del bloque */
+$segment-height: 46px;        /* alto por botón */
+
+/*
+Separador:
+Era rgba(255,255,255,.9).
+En el preset tienes texto blanco como contraste en botones "text":
+components.button.text.color = #FFFFFF.
+Vamos a usar blanco semitransparente.
+*/
+$separator-color: rgba(255,255,255,.9);
+
+
+/* ===============================
+   CONTENEDOR EXTERNO DEL RAIL
+   =============================== */
+
+/* Parte que NO podemos 100% lograr solo con PrimeFlex:
+   - width fija
+   - background temático
+   - box-shadow custom
+   - border-radius custom que no viene como clase utilitaria
+*/
+.gm-rail-container {
+  /* PF ya mete flex-column/align-stretch en el HTML,
+     así que aquí NO repetimos display:flex si no quieres.
+     Pero si prefieres aislar estilos dentro del CSS y NO
+     depender de HTML, puedes dejar display flex acá y
+     quitarlo del HTML. Te doy ambas opciones:
+  */
+
+  display: inline-flex;                   // CSS (estructura)
+  flex-direction: column;                 // CSS
+  align-items: stretch;                   // CSS
+
+  width: $rail-width;                     // CSS
+  background: $rail-bg;                   // usa token verde oscuro
+  border-radius: $rail-radius;            // token radius xs
+  padding: $rail-padding;                 // 0
+  box-shadow: $rail-shadow;               // sombra flotante
+}
+
+/*
+
+Entonces:
+  En HTML puedes reemplazar todo menos
+  width / background / border-radius / box-shadow,
+  que requieren CSS.
+*/
+
+
+/* ===============================
+   OVERRIDES INTERNOS DEL WIDGET
+   SIN TOCAR EL WIDGET
+   =============================== */
+
+/* Contenedor interno del widget */
+:host ::ng-deep app-botonera-vertical .botonera-vertical {
+  /* El rail ya pinta el fondo. */
+  background: transparent !important;
+
+  /* Quitamos sombra local del widget, usamos la del rail */
+  box-shadow: none !important;
+
+  /* Queremos un bloque rígido de 48px ancho, sin bordes redondeados propios */
+  border-radius: 0 !important;
+
+  /* padding/gap los vamos a aplanar para que el separador blanco funcione */
+  padding: 0 !important;
+  gap: 0 !important;
+
+  max-width: none !important;
+
+  /* Stretch vertical total */
+  align-items: stretch !important;
+
+}
+
+/* Cada “slot” (cada botón) envuelto en un <div> */
+:host ::ng-deep app-botonera-vertical .botonera-vertical > div {
+  position: relative;
+  height: $segment-height;              // CSS (fijo)
+  display: flex;                        // PF: flex
+  align-items: center;                  // PF: align-items-center
+  /* Si quisieras máximo PrimeFlex, podrías también
+     meter aquí: justify-content-center desde CSS.
+  */
+  justify-content: center;
+}
+
+/* Línea separadora entre botones */
+:host ::ng-deep app-botonera-vertical
+  .botonera-vertical
+  > div:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 0;
+  height: 2px;
+  background: $separator-color;    // blanco casi sólido
+  border-radius: 1px;
+  opacity: .95;
+}
+
+
+/* ===============================
+   PRIMENG BUTTON DENTRO DEL SLOT
+   =============================== */
+
+:host ::ng-deep app-botonera-vertical .p-button {
+  width: 100% !important;
+  height: 100% !important;
+
+  /* Quitar bordes del botón */
+  border: none !important;
+  box-shadow: none !important;
+
+  /* Fondo transparente por defecto */
+  background: transparent !important;
+
+  /* Color del icono/texto del botón, blanco del preset */
+  color: var(--p-button-text-color, #FFFFFF) !important;
+
+  /*
+    Radio interno:
+    Tu rail tiene radius XS=5px.
+    Si quieres conservar la sensación "pastilla dentro del rail"
+    puedes usar el mismo token para coherencia.
+  */
+  border-radius: var(--p-border-radius-xs) !important;
+
+  /* PF equivalentes:
+     w-full h-full border-none shadow-none bg-transparent text-white text-center
+     PERO como .p-button ya trae estilos, necesitamos !important
+     así que esto se queda en CSS.
+  */
+}
+
+/* Ícono centrado y tamaño consistente */
+:host ::ng-deep app-botonera-vertical .p-button .p-button-icon {
+  font-size: 20px;
+  margin: 0;
+  line-height: 1;
+  /* PF: text-2xl line-height-1 etc., pero esto
+     igual requiere override puntual del componente,
+     así que lo dejamos en CSS.
+  */
+}
+
+:host ::ng-deep app-botonera-vertical .p-button:hover,
+:host ::ng-deep app-botonera-vertical .p-button:focus {
+  background: rgba(255,255,255,.08) !important;
+}
+
+:host ::ng-deep app-botonera-vertical .p-button.p-highlight {
+  background: rgba(255,255,255,.12) !important;
+}

@@ -1,0 +1,47 @@
+.map-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  margin: 10px;
+}
+
+.image-wrapper {
+  position: relative;
+  border-radius: 2px; /* borde redondeado general */
+  transition: all 0.3s ease;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); /* elevación base (shadow-1 aprox.) */
+}
+
+.image-wrapper img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 2px;
+
+}
+
+/* ==== Imagen seleccionada ==== */
+.image-wrapper.selected {
+  border: 3px solid var(--p-primary-color); /* borde color primario */
+  border-radius: 2px;
+}
+
+/* ==== Ícono circular de selección ==== */
+.selection-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--p-primary-color);
+  color: var(--p-primary-contrast-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  z-index: 2;
+}

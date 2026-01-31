@@ -1,0 +1,23 @@
+.ql-font-arial {
+  font-family: Arial, sans-serif;
+}
+.ql-font-tahoma {
+  font-family: Tahoma, sans-serif;
+}
+.ql-font-times-new-roman {
+  font-family: 'Times New Roman', serif;
+}
+.ql-font-verdana {
+  font-family: Verdana, sans-serif;
+}
+
+
+/* Ocultar la barra de herramientas que agrega PrimeNG por defecto */
+::ng-deep .p-editor-toolbar {
+  display: none !important;
+}
+
+/* Asegurar que tu barra personalizada (Quill) se mantenga */
+::ng-deep .p-editor-container .ql-toolbar {
+  display: block !important;
+}

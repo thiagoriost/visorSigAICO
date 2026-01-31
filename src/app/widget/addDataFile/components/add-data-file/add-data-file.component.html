@@ -1,0 +1,37 @@
+<div class="upload-container flex justify-content-center align-items-center w-full">
+  <p-fileUpload
+    #fileUploader
+    name="files[]"
+    chooseLabel="Examinar archivos"
+    [showUploadButton]="false"
+    [showCancelButton]="false"
+    [auto]="true"
+    [customUpload]="true"
+    (onSelect)="onFileChange($event)"
+    [maxFileSize]="maxFileSize"
+    accept=".kml,.shp,.geojson,.gpx,.zip"
+    chooseStyleClass="p-button p-button-rounded p-button-raised"
+    invalidFileSizeMessageSummary="{0}: Archivo demasiado grande,"
+    invalidFileSizeMessageDetail="el tamaño máximo de carga es {0}."
+    invalidFileTypeMessageSummary="{0}: Tipo de archivo no válido,"
+    invalidFileTypeMessageDetail="tipos de archivo permitidos: {0}."
+    invalidFileLimitMessageSummary="Se excedió el número máximo de archivos,"
+    invalidFileLimitMessageDetail="el límite es {0} como máximo."
+  >
+    <ng-template pTemplate="content">
+      <div
+        class="flex flex-column align-items-center justify-content-center text-center p-5 w-full gap-1"
+        style="min-height: 200px; border: 2px dashed #999; border-radius: 8px;"
+      >
+        <i class="pi pi-cloud-upload text-4xl mb-1"></i>
+        <p class="font-bold mb-1">Arrastra los archivos aquí</p>
+        <p class="text-sm mb-0">
+          Archivos permitidos: <strong>.kml, .shp, .geojson, .gpx</strong>
+        </p>
+        <p class="text-sm mb-0">
+          Tamaño máximo permitido: <strong>20 MB</strong>
+        </p>
+      </div>
+    </ng-template>
+  </p-fileUpload>
+</div>

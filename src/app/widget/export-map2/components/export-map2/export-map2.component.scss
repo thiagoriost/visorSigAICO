@@ -1,0 +1,26 @@
+/* Mapa en sí mismo */
+.map-preview {
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* En horizontal, contenedor y mapa ancho */
+.horizontal-orient.map-preview-wrapper {
+  width: 90vw;
+  height: auto;
+}
+/* En vertical, contenedor y mapa alto */
+.vertical-orient.map-preview-wrapper {
+  width: 65vw;
+  height: auto;
+}
+
+.horizontal-orient.map-preview {
+  width: 90vw;
+  height: 75vh;
+}
+
+.vertical-orient.map-preview {
+  width: 75vw;
+  height: 90vh;
+}

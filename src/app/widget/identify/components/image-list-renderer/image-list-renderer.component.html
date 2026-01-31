@@ -1,0 +1,16 @@
+<div>
+  @if (urlImageList && urlImageList.length > 0) {
+    @for (item of urlImageList; track $index) {
+      <div class="flex flex-column">
+        <p class="text-left font-bold pl-0" [ngClass]="textColorClass">
+          Imagen {{ $index + 1 }}
+        </p>
+        <app-clickable-image-preview
+          [imageUrl]="item"></app-clickable-image-preview>
+      </div>
+      <p-divider />
+    }
+  } @else {
+    <p class="text-center" [ngClass]="textColorClass">{{ emptyListMessage }}</p>
+  }
+</div>

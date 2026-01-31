@@ -1,0 +1,30 @@
+<p-toast></p-toast>
+<form [formGroup]="widgetForm" (ngSubmit)="addWidget()" class="ml-2">
+  <div class="grid">
+    <div class="col col-12">
+      <p-select
+        [options]="itemsList"
+        optionLabel="titulo"
+        optionValue="nombreWidget"
+        formControlName="widgetName"
+        placeholder="Seleccione el widget" />
+    </div>
+
+    <div class="col col-12">
+      <p-button type="submit" label="Abrir" [outlined]="true" />
+    </div>
+  
+    <div class="col col-12">
+      <div *ngFor="let widget of widgetsAbiertos$ | async">
+        <app-panel-window [widgetDefinition]="widget"></app-panel-window>
+      </div>
+    </div>
+    <app-patrones></app-patrones>
+  </div>
+</form>
+
+
+<app-window-single-component-render></app-window-single-component-render>
+
+
+  

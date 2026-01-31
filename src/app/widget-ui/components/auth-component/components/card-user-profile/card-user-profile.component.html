@@ -1,0 +1,41 @@
+<div class="flex flex-column align-content-center align-items-center">
+  <div class="flex align-content-center align-items-center">
+    <p-avatar 
+      [icon]="config.avatarIcon ?? 'pi pi-user'" 
+      class="m-3 bg-transparent border-2" 
+      size="large" 
+      shape="circle"
+      [styleClass]="config.avatarIconColor || 'text-primary-500'">
+    </p-avatar>
+  </div>
+  <div>
+    <span class="font-bold  m-3" [ngClass]="config.textColor">
+      {{ user.first_name }} {{ user.last_name }}
+    </span>
+  </div>
+
+  <ng-container *ngIf="config.templateMain" class="flex align-items-center gap-2 m-2" >
+    <ng-container *ngTemplateOutlet="config.templateMain"></ng-container>
+  </ng-container>
+
+  <p-divider />
+  
+  <div class="w-full mb-3">
+    <p-button 
+      (onClick)="cerrarSesion()" 
+      icon="pi pi-sign-in" 
+      [label]="config.outputButtonText ?? 'Cerrar Sesión'"
+      [styleClass]="
+        'w-full flex align-items-center justify-content-center py-2 text-white surface-primary ' +
+        (config.outputButtonBorder || '')
+      "
+      [severity]="config.outputButtonColor ?? 'primary'"
+    ></p-button>
+  </div>
+
+<ng-container *ngIf="config.templateFooter" class=" w-full m-2" >
+  <ng-container *ngTemplateOutlet="config.templateFooter"></ng-container>
+</ng-container>
+
+
+</div>

@@ -1,0 +1,198 @@
+<app-sidebar-layout-gm>
+  <!-- Contenedor del sidebar: columna -->
+  <div slot-center class="h-full flex flex-column min-h-0 surface-0">
+
+    <!-- FRANJA SUPERIOR: LOGO interno (opcional) -->
+    @if (showHeaderLogo) {
+      <div
+        class="surface-0 border-bottom-1 surface-border px-3 pt-3 pb-2 flex align-items-center"
+      >
+        <img
+          [src]="logoUrl"
+          alt="SIG Gobierno Mayor"
+          class="block"
+          [style.max-height.px]="64"
+          [style.height]="'auto'"
+          [style.width.%]="100"
+          [style.objectFit]="'contain'"
+          pTooltip="SIG Gobierno Mayor"
+          tooltipPosition="bottom"
+        />
+      </div>
+    }
+
+    <!-- CUERPO: TOC (izq) + RAIL (der) -->
+    <div class="flex flex-row flex-auto min-h-0">
+
+      <!-- Panel de contenido (TOC) -->
+      <div class="flex-auto min-w-0 min-h-0 overflow-hidden" [style.zIndex]="1">
+        <!-- Header blanco -->
+        <div class="surface-0 text-900 font-semibold px-5 py-2 surface-border">
+          @if (isActive('capas')) {
+            TABLA DE CONTENIDO
+          } @else {
+            AYUDA
+          }
+        </div>
+
+        <div class="h-full min-h-0 p-2 surface-0" [style.paddingRight.px]="0">
+          @if (isActive('capas')) {
+            <section
+              id="panel-capas"
+              role="tabpanel"
+              [style.height.%]="95"
+              aria-labelledby="tab-capas"
+            >
+              <app-content-table-v4></app-content-table-v4>
+            </section>
+          } @else {
+            <section
+              id="panel-ayuda"
+              role="tabpanel"
+              aria-labelledby="tab-ayuda"
+              class="surface-0"
+            >
+              <app-descarga-manual></app-descarga-manual>
+            </section>
+          }
+        </div>
+      </div>
+
+      <!-- RAIL derecho -->
+      <div
+        class="relative surface-border pl-2"
+        [style.width.px]="railWidth"
+        [style.flex]="'0 0 ' + railWidth + 'px'"
+        style="overflow:hidden; z-index:0;"
+      >
+        <!-- patrón vertical -->
+        <div class="absolute top-0 right-0 bottom-0 left-0" [ngStyle]="railPatternStyle"></div>
+
+        <!-- Botonera vertical -->
+        <div
+          class="relative flex flex-column gap-2 mt-8 md:mt-1 mr-3 align-items-center"
+          role="tablist"
+          aria-orientation="vertical"
+        >
+          <!-- ===== TAB: CAPAS ===== -->
+          <div class="relative" [style.width.px]="buttonBox" [style.height.px]="buttonBox">
+            <!-- Bridge blanco (solo cuando activo) -->
+            @if (isActive('capas')) {
+              <div
+                class="absolute"
+                [ngStyle]="{
+                  left: (-activeBridgeOverlap) + 'px',
+                  top: (-activeBridgeExtraH/2) + 'px',
+                  width: (buttonBox + activeBridgeOverlap + activeBridgeExtraW) + 'px',
+                  height: (buttonBox + activeBridgeExtraH) + 'px',
+                  'background': '#fff',
+                  'box-shadow': '0 1px 6px rgba(0,0,0,.12)'
+                }"
+              ></div>
+            }
+
+            <!-- Indicador vertical verde -->
+            @if (isActive('capas')) {
+              <div
+                class="absolute border-round"
+                [style.left.px]="indicatorOffset"
+                [style.top.%]="20"
+                [style.bottom.%]="20"
+                [style.width.px]="3"
+                [style.background]="primaryColor"
+              ></div>
+            }
+
+            <!-- Botón (siempre blanco) -->
+            <button
+              pButton
+              type="button"
+              class="p-button p-button-icon-only flex align-items-center justify-content-center"
+              [ngClass]="isActive('capas')
+                ? 'surface-0 text-color'
+                : 'surface-0 border-200 text-color border-1'"
+              [style.border]="isActive('capas') ? 'none' : null"
+              [style.width.px]="buttonBox"
+              [style.height.px]="buttonBox"
+              [style.borderRadius.px]="buttonRadius"
+              pTooltip="Capas"
+              tooltipPosition="left"
+              id="tab-capas"
+              role="tab"
+              [attr.aria-selected]="isActive('capas')"
+              [attr.aria-controls]="'panel-capas'"
+              (click)="setTab('capas')"
+              aria-label="Capas"
+            >
+              <span
+                class="p-button-icon flex align-items-center justify-content-center"
+                [ngStyle]="{ fontSize: '1.6rem', lineHeight: 1 }"
+              >
+                <i class="icon-gm_capas"></i>
+              </span>
+            </button>
+          </div>
+
+          <!-- ===== TAB: AYUDA ===== -->
+          <div class="relative" [style.width.px]="buttonBox" [style.height.px]="buttonBox">
+            <!-- Bridge blanco (solo cuando activo) -->
+            @if (isActive('ayuda')) {
+              <div
+                class="absolute"
+                [ngStyle]="{
+                  left: (-activeBridgeOverlap) + 'px',
+                  top: (-activeBridgeExtraH/2) + 'px',
+                  width: (buttonBox + activeBridgeOverlap + activeBridgeExtraW) + 'px',
+                  height: (buttonBox + activeBridgeExtraH) + 'px',
+                  'background': '#fff',
+                  'box-shadow': '0 1px 6px rgba(0,0,0,.12)'
+                }"
+              ></div>
+            }
+
+            <!-- Indicador vertical verde -->
+            @if (isActive('ayuda')) {
+              <div
+                class="absolute border-round"
+                [style.left.px]="indicatorOffset"
+                [style.top.%]="20"
+                [style.bottom.%]="20"
+                [style.width.px]="3"
+                [style.background]="primaryColor"
+              ></div>
+            }
+
+            <!-- Botón (siempre blanco) -->
+            <button
+              pButton
+              type="button"
+              class="p-button p-button-icon-only flex align-items-center justify-content-center"
+              [ngClass]="isActive('ayuda')
+                ? 'surface-0 text-color'
+                : 'surface-0 border-200 text-color border-1'"
+              [style.border]="isActive('ayuda') ? 'none' : null"
+              [style.width.px]="buttonBox"
+              [style.height.px]="buttonBox"
+              [style.borderRadius.px]="buttonRadius"
+              pTooltip="Ayuda"
+              tooltipPosition="left"
+              id="tab-ayuda"
+              role="tab"
+              [attr.aria-selected]="isActive('ayuda')"
+              [attr.aria-controls]="'panel-ayuda'"
+              (click)="setTab('ayuda')"
+              aria-label="Ayuda"
+            >
+              <span
+                class="p-button-icon flex align-items-center justify-content-center"
+                [ngStyle]="{ fontSize: '1.6rem', lineHeight: 1 }"
+              >
+                <i class="icon-gm_ayuda"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-sidebar-layout-gm>

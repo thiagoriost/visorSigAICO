@@ -1,0 +1,120 @@
+<div>
+  <form [formGroup]="coordenadaPlanaForm" (ngSubmit)="onLocatePoint()">
+    <div>
+      <div class="grid mb-2 mt-1">
+        <div class="col-3 xs:col-4">
+          <label
+            for="esteInput"
+            class="col-fixed font-bold vertical-align-middle"
+            >x (Este)</label
+          >
+        </div>
+
+        <div class="col-9 xs:col-8 flex flex-column gap-2">
+          <p-inputNumber
+            id="esteInput"
+            [ngClass]="{
+              'ng-invalid ng-dirty':
+                getErrorCampo('este') &&
+                (openProfile === openingProfiles.LOCATING ||
+                  openProfile === openingProfiles.ORIGIN_TRANSFORM),
+            }"
+            locale="es-CO"
+            formControlName="este"
+            mode="decimal"
+            [minFractionDigits]="0"
+            [maxFractionDigits]="4"
+            [min]="3681461.16"
+            [max]="5683149.09"
+            [showButtons]="true"
+            placeholder="Ejemplo: 4687714,04"
+            [readonly]="openProfile === openingProfiles.DESTINATION_TRANSFORM"
+            size="small" />
+          <small
+            *ngIf="
+              (getErrorCampo('este') || isErrorOnForm) &&
+              (openProfile === openingProfiles.LOCATING ||
+                openProfile === openingProfiles.ORIGIN_TRANSFORM)
+            "
+            class="text-red-500 block mt-1 font-bold">
+            {{ getErrorCampo('este') }}
+          </small>
+          <span class="text-xs ml-1 text-left"
+            >Ingrese la coordenada este (x) en metros.
+          </span>
+        </div>
+      </div>
+      <div class="grid mb-1 mt-3">
+        <div class="col-3">
+          <label
+            for="norteInput"
+            class="col-fixed font-bold vertical-align-middle"
+            >y (Norte)</label
+          >
+        </div>
+
+        <div class="col-9 flex flex-column gap-2">
+          <p-inputNumber
+            id="norteInput"
+            [ngClass]="{
+              'ng-invalid ng-dirty':
+                getErrorCampo('norte') &&
+                (openProfile === openingProfiles.LOCATING ||
+                  openProfile === openingProfiles.ORIGIN_TRANSFORM),
+            }"
+            locale="es-CO"
+            formControlName="norte"
+            mode="decimal"
+            [minFractionDigits]="0"
+            [maxFractionDigits]="4"
+            [showButtons]="true"
+            [min]="1080616.36"
+            [max]="3307327.96"
+            placeholder="Ejemplo: 2181965,44"
+            [readonly]="openProfile === openingProfiles.DESTINATION_TRANSFORM"
+            size="small" />
+          <small
+            *ngIf="
+              (getErrorCampo('norte') || isErrorOnForm) &&
+              (openProfile === openingProfiles.LOCATING ||
+                openProfile === openingProfiles.ORIGIN_TRANSFORM)
+            "
+            class="text-red-500 block mt-1 font-bold">
+            {{ getErrorCampo('norte') }}
+          </small>
+          <span class="text-xs ml-1 text-left"
+            >Ingrese la coordenada norte (y) en metros.
+          </span>
+        </div>
+      </div>
+      <!-- Botones de acción -->
+      @if (openProfile === openingProfiles.LOCATING) {
+        <div class="flex justify-content-end align-items-center m-0 p-0">
+          <p-button
+            type="submit"
+            label="UBICAR"
+            [rounded]="true"
+            [raised]="true"
+            severity="primary"></p-button>
+        </div>
+      } @else if (openProfile === openingProfiles.ORIGIN_TRANSFORM) {
+        <div class="flex justify-content-end align-items-center m-0 p-0">
+          <p-button
+            type="submit"
+            styleClass="m-2"
+            label="TRANSFORMAR"
+            [rounded]="true"
+            [raised]="true"
+            severity="primary"></p-button>
+        </div>
+      }
+
+      <div class="col p-0 text-left">
+        <span class="text-xs font-italic font-bold"
+          >Coordenadas en el datúm MAGNA-SIRGAS 2018 / Origen-Nacional
+          (EPSG:9377)</span
+        >
+      </div>
+    </div>
+  </form>
+</div>

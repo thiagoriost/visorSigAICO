@@ -1,0 +1,12 @@
+<p-card header="Selector de Proyección de Coordenadas" class="p-4">
+    <div class="flex flex-column gap-3">
+
+        <!-- Selector de una sola proyección -->
+        <p-select [options]="opcionesProyecciones" [(ngModel)]="seleccionada" optionLabel="label"
+            placeholder="Seleccione una proyección" class="w-full" optionValue="value"></p-select>
+        <!-- Sección para mostrar el componente hijo -->
+        <div class="mt-4" *ngIf="seleccionada">
+            <app-view-coords [crsCode]="seleccionada"></app-view-coords>
+        </div>
+    </div>
+</p-card>

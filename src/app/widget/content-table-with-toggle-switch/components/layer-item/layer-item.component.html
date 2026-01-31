@@ -1,0 +1,39 @@
+@if (layer) {
+  <div class="grid align-items-center justify-content-center">
+    @if (!layer.leaf) {
+      <div
+        class="col-9 flex align-items-center w-full h-auto"
+        [ngClass]="[
+          isCenterTitleText
+            ? 'justify-content-center'
+            : 'justify-content-start',
+        ]">
+        <p
+          class="font-bold text-base m-0 content_table__layer_title"
+          [ngClass]="textColor">
+          {{ layer.titulo }}
+        </p>
+      </div>
+    } @else {
+      <div
+        class="col-9 flex align-items-center h-auto content_table__layer_title">
+        <p
+          class="text-base m-0 text-900 leading-none"
+          id="title"
+          [ngClass]="textColor">
+          {{ layer.titulo }}
+        </p>
+      </div>
+      <div class="col-3 flex justify-content-center" id="tour-layer-tree-item">
+        <div
+          class="flex align-items-center justify-content-center w-full h-full">
+          <p-toggleswitch
+            [trueValue]="true"
+            [falseValue]="false"
+            [(ngModel)]="isActivated"
+            (onChange)="onChangeActivatedValue(layer, isActivated)" />
+        </div>
+      </div>
+    }
+  </div>
+}

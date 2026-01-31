@@ -1,0 +1,63 @@
+version: "3.3"
+services:
+  ngnix-angular:
+    image: ngnix-angular:1.0.0
+    build:
+      context: .
+      dockerfile: ./docker/ngnix-angular/Dockerfile
+    container_name: ngnix-angular
+    extra_hosts:
+      - "dev-visoropiac.igac.gov.co:172.19.3.237"
+    ports:
+      - 80:80               # not-secured  
+      - 443:443             # secured        
+    restart: always
+    volumes:
+      - ${SSL_CERT_VOLUME}:/etc/ssl/certs
+      - ${SSL_KEY_VOLUME}:/etc/ssl/private
+  ms-interseccion:
+    image: ms-interseccion:1.0.0
+    build:
+      context: .
+      dockerfile: ./docker/ms-interseccion/Dockerfile
+    container_name: ms-interseccion
+  wildfly_services:
+    image: wildfly-service:1.0.0
+    build: ./docker/sig
+    container_name: wildfly_service
+    extra_hosts:
+      - "dev-visoropiac.igac.gov.co:172.19.3.237"    
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      APP_URL: "wildfly_opiac:8080"    
+    depends_on:
+      - db
+  db:
+    image: postgis/postgis:12-3.5
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5433:5432" 
+    volumes:
+      - ./docker/database/init-scripts:/docker-entrypoint-initdb.d # Carpeta local para scripts de inicialización
+      - ${POSTGRES_VOLUME}:/var/lib/postgresql/data
+  geoserver:
+      image: geoserver-service:1.0.0
+      build: 
+       context: ./docker/geoserver
+       dockerfile: Dockerfile
+      container_name: geoserver-service
+      ports:
+      - 8080:8080
+      restart: unless-stopped
+      volumes:
+        - ${GEOSERVER_VOLUME}:/opt/geoserver_data
+      environment:
+        - INSTALL_EXTENSIONS=true
+        - STABLE_EXTENSIONS=ysld,h2

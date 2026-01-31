@@ -1,0 +1,22 @@
+<!-- Verificamos si no hay mapas disponibles en la lista. -->
+  @if (nombresMapas?.length === 0) {
+  <div>
+    <p>No hay mapas disponibles.</p>
+  </div>
+}
+
+<div class="grid">
+  @for (item of mapas; track item.id) {
+    <div class="col-6">
+      <div>
+        <!-- Componente "app-base-map-item" que recibe las propiedades del mapa y maneja el evento de click -->
+        <app-base-map-item 
+          [icon]="icon"
+          (click)="changeLayer(item)"  
+          [mapa]="item"  
+          [selected]="selectedItemId"  
+        />
+      </div>
+    </div>
+  }
+</div>

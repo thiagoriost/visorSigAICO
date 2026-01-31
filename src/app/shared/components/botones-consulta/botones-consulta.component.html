@@ -1,0 +1,29 @@
+<!-- Contenedor en forma de grid -->
+<div class="grid p-mt-3" style="margin-top: 16px;">
+  <!-- Botón para limpiar -->
+  <div class="col-6">
+    <button 
+      pButton 
+      type="button" 
+      label="Limpiar" 
+      class="w-full"
+      [rounded]="true" 
+      [outlined]="true"
+      (click)="limpiar()">
+    </button>
+  </div>
+  <!-- Botón para consultar -->
+  <div class="col-6">
+    <button 
+      pButton 
+      type="button" 
+      label="Consultar" 
+      class="w-full" 
+      [loading]="loading"   
+      [disabled]="loading"
+      [rounded]="true" 
+      [raised]="true"
+      (click)="consultar()">
+    </button>
+  </div>
+</div>

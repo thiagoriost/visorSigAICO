@@ -1,0 +1,33 @@
+.app_controls {
+  top: 20% !important;
+}
+
+.floating_buttons {
+  top: 50% !important;
+  transform: translateY(-50%);
+  bottom: auto !important;
+}
+
+.static_window_mobile {
+  bottom: 2% !important;
+  width: 100% !important;
+  height: 50% !important;
+  overflow-x: auto;
+}
+
+.scaleline {
+  left: 300px;
+}
+.scaleline_mobile {
+  left:50% !important;
+  transform: translateX(-50%) !important;
+}
+
+#slot_bottom_right {
+  bottom: -70px !important;
+  right: -120px !important;
+}
+#slot-bottom-left {
+  bottom: -100px !important;
+  left: -100px !important;
+}

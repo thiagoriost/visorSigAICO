@@ -1,0 +1,67 @@
+<div class="w-full h-full overflow-hidden">
+  <p-toast></p-toast>
+  <div>
+    <app-search-layer-input
+      [placeHolder]="'Buscar capa(s)'"
+      [iconPosition]="'right'"
+      [iconClass]="'pi pi-search'"
+      [iconInputVisible]="true"
+      (textEmitter)="onSearchInput($event)" />
+  </div>
+
+  <div class="mt-2 pl-0 pr-1 h-full">
+    <div
+      class="flex align-items-center mt-2 bg-white p-2"
+      [ngClass]="
+        headerText ? 'justify-content-between' : 'justify-content-end'
+      ">
+      @if (headerText) {
+        <p class="font-bold m-0" [ngClass]="layerItemTextColor">
+          {{ headerText }}
+        </p>
+      }
+      <p-button
+        [rounded]="deleteAllLayersButtonRounded"
+        [variant]="deleteAllLayersButtonVariant"
+        [icon]="deleteAllLayersButtonIcon"
+        [severity]="deleteAllLayersButtonSeverity"
+        [pTooltip]="deleteAllLayersButtonTooltip"
+        (onClick)="deleteAllLayers()"
+        [disabled]="disabledEraser"></p-button>
+    </div>
+
+    <div class="mt-1 overflow-y-auto" id="scrollable_list">
+      @if (isSearchingLayerList) {
+        <div class="flex align-items-center justify-content-center">
+          <app-personalized-spinner></app-personalized-spinner>
+        </div>
+      } @else {
+        @if (layerList && layerList.length > 0) {
+          <div>
+            @for (layer of layerList; track $index) {
+              <div class="mt-1 pl-1">
+                <app-layer-tree
+                  [layer]="layer"
+                  [isExpanded]="isExpandedList"
+                  [background]="backgroundColor"
+                  [isFilteringResult]="isFiltering"
+                  [iconsColor]="iconsColor"
+                  [layerItemIconsColor]="layerItemIconsColor"
+                  [titleColor]="layerItemTextColor"
+                  [showMetadataIcon]="showMetadataIcon"
+                  [turnOffLayerIcon]="turnOffLayerIcon"
+                  [turnOnLayerIcon]="turnOnLayerIcon"
+                  [moreOptionsIcon]="moreOptionsIcon"
+                  [severityButtonList]="severityButtonsLayer"></app-layer-tree>
+              </div>
+            }
+          </div>
+        } @else {
+          <div>
+            <p>No se encontraron capas para mostrar</p>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="dibujo-container p-2 w-full max-w-screen-md mx-auto">
+  <!-- Fila 1: hasta 6 botones visibles -->
+  <div class="flex flex-wrap gap-3 mb-3">
+    @for (btn of botonesFiltrados(drawingOptions) | slice:0:6; track btn.tipo) {
+      <button
+        type="button"
+        (click)="activarOpciones(btn.tipo)"
+        pButton
+        [icon]="btn.icon"
+        [rounded]="true"
+        [raised]="modoActivo !== btn.tipo"
+        [ngClass]="{
+          'text-sm': true,
+          'bg-primary-100': modoActivo === btn.tipo
+        }"
+        [pTooltip]="btn.tooltip"
+        tooltipPosition="top"
+        tooltipStyleClass="text-sm">
+      </button>
+    }
+  </div>
+  <!-- Fila 2: el resto de botones -->
+  <div class="flex flex-wrap gap-3">
+    @for (btn of botonesFiltrados(drawingOptions) | slice:6; track btn.tipo) {
+      <button
+        type="button"
+        (click)="activarOpciones(btn.tipo)"
+        pButton
+        [icon]="btn.icon"
+        [rounded]="true"
+        [raised]="modoActivo !== btn.tipo"
+        [ngClass]="{
+          'text-sm': true,
+          'bg-primary-100': modoActivo === btn.tipo
+        }"
+        [pTooltip]="btn.tooltip"
+        tooltipPosition="top"
+        tooltipStyleClass="text-sm">
+      </button>
+    }
+  </div>
+  <!-- Opciones de color -->
+  @if (mostrarOpcionesColor) {
+    <app-opciones-color-dibujo
+      [tipoGeometria]="modoActivo">
+    </app-opciones-color-dibujo>
+  }
+  <!-- Entrada de texto -->
+  @if (mostrarDibujarTexto) {
+    <app-dibujar-texto
+      [texto]="texto"
+      (textoChange)="texto = $event">
+    </app-dibujar-texto>
+  }
+</div>

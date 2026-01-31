@@ -1,0 +1,20 @@
+<div class="flex flex-column h-full p-2">
+
+  <!-- Barra de escala OL arriba a la derecha -->
+  <div class="flex justify-content-end mb-2">
+    <app-barra-escala [scaleType]="'scalebar'" [showDropdown]="false" [showEscalas]="true"></app-barra-escala>
+  </div>
+
+  <!-- Contenedor que cambia de fila a columna si no cabe -->
+  <div class="flex flex-wrap align-items-center gap-2">
+
+    <app-barra-escala [showDropdown]="true" [showEscalas]="false">
+    </app-barra-escala>
+
+    <div class="flex align-items-center p-2">
+      <app-view-coords class="surface-0"></app-view-coords>
+    </div>
+
+  </div>
+
+</div>

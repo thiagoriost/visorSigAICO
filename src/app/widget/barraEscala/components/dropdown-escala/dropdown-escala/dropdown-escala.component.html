@@ -1,0 +1,8 @@
+<p-select
+  [options]="(escalas$ | async) || []"
+  optionLabel="nombre"
+  [ngModel]="(escalaSelected$ | async)"
+  (onChange)="onChangeEscala($event)"
+  placeholder="Selecciona una escala"
+  pTooltip="Selecciona la escala a la cual se mostrará el mapa"
+></p-select>

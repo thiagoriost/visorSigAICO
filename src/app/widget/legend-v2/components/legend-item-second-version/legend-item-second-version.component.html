@@ -1,0 +1,42 @@
+<div class="border-1 border-round border-primary" cdkDrag>
+  <p-accordion [(value)]="isExpandedPanel">
+    <p-accordion-panel value="1">
+      <p-accordion-header>
+        <div
+          class="flex align-items-center justify-content-center text-center font-bold text-lg">
+          <i
+            class="pi pi-ellipsis-v font-bold text-color"
+            style="
+              width: 50px !important;
+              height: 50px !important;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: move !important;
+            "
+            cdkDragHandle></i>
+          <p
+            class="m-0 font-bold text-primary text-lg content_table__layer_title">
+            {{ layer?.layerDefinition?.titulo || 'Sin título' }}
+          </p>
+        </div>
+      </p-accordion-header>
+      <p-accordion-content>
+        <div class="flex align-items-center justify-content-center text-center">
+          <ng-container *ngIf="layer?.leyendaUrl; else cargandoLeyenda">
+            <p-image
+              [src]="layer?.leyendaUrl"
+              [alt]="layer?.layerDefinition?.titulo || 'Imagen de la capa'"
+              class="leyenda-imagen w-full"></p-image>
+          </ng-container>
+
+          <ng-template #cargandoLeyenda>
+            <div class="text-sm text-gray-500 italic text-center">
+              Leyenda no disponible
+            </div>
+          </ng-template>
+        </div>
+      </p-accordion-content>
+    </p-accordion-panel>
+  </p-accordion>
+</div>

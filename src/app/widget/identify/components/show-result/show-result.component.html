@@ -1,0 +1,9 @@
+<div>
+  @if (result) {
+    <p>Capa: {{ result.layerName }}</p>
+    <p-divider type="solid" />
+    <app-result [result]="result.geometry"></app-result>
+  } @else {
+    <p>No se ha identificado la geometría</p>
+  }
+</div>

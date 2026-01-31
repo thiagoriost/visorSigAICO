@@ -1,0 +1,54 @@
+<form [formGroup]="formBufferLocation" class="w-full" (ngSubmit)="onSubmit()" >
+  <!-- Sección 1: Seleccione Unidad de Distancia -->
+  <div class="field my-5 w-full">
+    <p-floatlabel>
+      <p-select                 
+        class="border-round-sm w-full"
+        optionLabel="name"
+        optionValue="code"
+        [options]="unidadDistancia"
+        name="unit"
+        formControlName="unit"></p-select>
+      <label for="unit">Unidad de medida*</label>
+    </p-floatlabel>  
+    <small 
+      *ngIf="formBufferLocation.get('unit')?.hasError('required') &&
+        (formBufferLocation.get('unit')?.touched)"
+      class="text-red-500 block mt-1">
+      Campo obligatorio
+    </small>
+  </div>
+
+  <!-- Sección 2: Distancia -->
+  <div class="field my-5 w-full">
+    <p-floatlabel>
+      <p-inputNumber 
+        id="minmaxfraction"
+        name="distancia"
+        class="border-round-sm w-full"
+        formControlName="distance" 
+        inputId="minmaxfraction" 
+        mode="decimal" 
+        [minFractionDigits]="0" 
+        [maxFractionDigits]="0"         
+        [min]="1"    >
+      </p-inputNumber>
+      <label for="distancia">Distancia *</label>
+    </p-floatlabel>
+    <small 
+      *ngIf="formBufferLocation.get('distance')?.hasError('required') &&
+        (formBufferLocation.get('distance')?.touched)"
+      class="text-red-500 block mt-1">
+      Campo obligatorio
+    </small>
+  </div>
+  <!-- Sección 3: Ubicación en el mapa -->
+  <div class="field my-5 w-full">
+    <label for="location" [ngClass]="{'text-red-500': formBufferLocation.get('location')?.hasError('required') && (formBufferLocation.get('location')?.touched)}" >Coordenadas de ubicación *</label>
+    <app-ubicar-mediante-coordenadas
+        name="location"
+        [solicitarCoordenadas]="true" 
+        (coordinateEmitter)="setLocation($event)">
+    </app-ubicar-mediante-coordenadas>
+  </div>
+</form>

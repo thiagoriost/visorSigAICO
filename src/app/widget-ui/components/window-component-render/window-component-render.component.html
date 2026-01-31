@@ -1,0 +1,6 @@
+
+@if(widgetFloatingWindowConfig && tituloWidget){
+  <app-floating-window [titulo]="tituloWidget" [widgetFloatingWindowConfig]="widgetFloatingWindowConfig" (closeWindowEvent)="onClose()">
+    <app-widget-render [widgetName]="widgetName"></app-widget-render>
+  </app-floating-window>
+}

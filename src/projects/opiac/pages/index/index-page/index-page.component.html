@@ -1,0 +1,22 @@
+<app-layout-a [sidebarTemplate]="sidebar">
+  <!-- HEADER -->
+  <app-opiac-header slot-header></app-opiac-header>
+  <!-- SIDEBAR -->
+  <ng-template #sidebar>
+    <app-sidebar></app-sidebar>
+  </ng-template>
+  <!-- MAIN -->
+  <app-map></app-map>
+  <app-map-location></app-map-location>
+  <app-coordinate-scale-line></app-coordinate-scale-line>
+  <app-floating-menu></app-floating-menu>
+  <app-floating-map-controls></app-floating-map-controls>
+  <app-window-single-component-render
+    [isMobile]="isSmallScreen"></app-window-single-component-render>
+  
+    @if (!isSmallScreen) {
+    <app-window-tabla-atributos></app-window-tabla-atributos>
+    } 
+  <app-export-map2-wrapper></app-export-map2-wrapper>
+  <app-tour-ui-opiac></app-tour-ui-opiac>
+</app-layout-a>

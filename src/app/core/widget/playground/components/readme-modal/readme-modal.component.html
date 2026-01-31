@@ -1,0 +1,21 @@
+<p-dialog
+  header="Documentación del Widget"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '60vw', maxWidth: '900px' }"
+  (onHide)="cerrar()"
+>
+  @if (estado === 'ok') {
+    <pre
+      style="white-space: pre-wrap; word-break: break-word; max-height: 70vh; overflow: auto;"
+    >{{ contenido }}</pre>
+  } @else {
+    @if (estado === 'cargando') {
+      <p>Cargando documentación...</p>
+    } @else if (estado === 'error') {
+      <p>Error al cargar el README.</p>
+    } @else if (estado === 'vacio') {
+      <p>No hay README para este widget.</p>
+    }
+  }
+</p-dialog>

@@ -1,0 +1,9 @@
+<div class="flex flex-column w-full overflow-x-auto">
+  @for (capa of capas; track capa) {
+    <div
+      class="flex flex-column gap-4 border-bottom-1 surface-border py-3 w-full"
+    >
+      <app-leyenda-item [capa]="capa"></app-leyenda-item>
+    </div>
+  }
+</div>

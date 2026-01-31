@@ -1,0 +1,60 @@
+<!-- TOPBAR (Encabezado) -->
+<div class="bg-blue-900 text-white p-3 flex justify-between items-center w-full shadow-2">
+  <div class="flex items-center gap-2">
+    <button
+      pButton
+      icon="pi pi-bars"
+      class="p-button-rounded p-button-text text-white hover:text-blue-900 hover:bg-white"
+      pTooltip="Esconder Menú"
+      (click)="toggleSidebar()"
+      aria-label="Esconder Menú"
+    ></button>
+
+    <button
+      pButton
+      icon="pi pi-save"
+      class="p-button-rounded p-button-text text-white hover:bg-green-600"
+      pTooltip="Guardar"
+      (click)="saveWidgetsConfig()"
+      aria-label="Guardar"
+    ></button>
+
+    <button
+      pButton
+      icon="pi pi-trash"
+      class="p-button-rounded p-button-text text-white hover:bg-red-600"
+      pTooltip="Borrar"
+      (click)="clearConfig.emit()"
+      aria-label="Borrar"
+    ></button>
+
+    <span class="text-xl font-bold mt-2 ml-3">Visor Play Ground</span>
+  </div>
+
+  <button
+    pButton
+    icon="pi pi-chevron-down"
+    (click)="toggleDetalle()"
+    [ngClass]="{ 'rotate-180': mostrarDetalle }"
+    class="p-button-rounded p-button-text text-white transition-transform duration-100"
+    pTooltip="Mostrar/Ocultar widgets"
+    aria-label="Mostrar/Ocultar widgets"
+  ></button>
+</div>
+
+<!-- DETALLE EXPANDIBLE -->
+@if (mostrarDetalle) {
+  <div class="p-3 gap-2 flex flex-wrap items-center border-b-2 border-blue-300">
+    @for (widget of widgetsActivos; track widget.nombreWidget) {
+      <button
+        pButton
+        type="button"
+        (click)="abrirWidget(widget)"
+        [label]="widget.titulo"
+        [icon]="widget.icono || 'pi pi-question-circle'"
+        class="p-button-sm p-button-rounded p-button-outlined p-button-primary border-blue-300 bg-blue-900 text-white hover:bg-white hover:text-blue-900"
+        aria-label="widget"
+      ></button>
+    }
+  </div>
+}

@@ -1,0 +1,67 @@
+<div class="card p-fluid flex justify-content-center align-items-center flex-column gap-4" [formGroup]="formConsulta">
+
+  <!-- Dropdown 1: Seleccione una Capa -->
+  <div class="flex flex-column w-full">
+    <app-workarea-dropdown-select [checkmark]="true" [dataKey]="'id'" [placeholder]="'Seleccione una capa'"
+      [optionLabel]="'titulo'" [emptyMessage]="'No hay capas cargadas en el área de trabajo'"
+      formControlName="selectedLayer" [filtroServicio]="'wfs'"></app-workarea-dropdown-select>
+    <small *ngIf="formConsulta.get('selectedLayer')?.touched && formConsulta.get('selectedLayer')?.invalid"
+    class="text-red-500 block mt-1">
+    Selecciona una capa
+    </small>
+  </div>
+
+  <!-- Dropdown 2: Seleccione un Atributo -->
+  <div class="flex flex-column w-full">
+
+    <p-floatlabel>
+      <p-select 
+        id="dropdownAttribute" 
+        formControlName="selectedAttribute" 
+        [options]="attributeValues"
+        optionLabel="name" 
+        appendTo="body"
+        [loading]="atributosDisponibles" 
+        (onChange)="onAttributeChange()"
+        [ngClass]="{'ng-invalid ng-dirty':formConsulta.get('selectedAttribute')?.touched && formConsulta.get('selectedAttribute')?.invalid}"
+        class="border-round-sm w-full" />
+      <label for="dropdownAttribute"class="block mb-2">Seleccione un Atributo:</label>
+    </p-floatlabel>
+    <small *ngIf="formConsulta.get('selectedAttribute')?.touched && formConsulta.get('selectedAttribute')?.invalid"
+      class="text-red-500 block mt-1">
+      Selecciona un atributo
+    </small>
+  </div>
+
+  <!-- Dropdown 3: Valor del Atributo -->
+  <div class="flex flex-column w-full">
+
+
+    <p-floatlabel>
+      <p-select 
+        id="dropdownValue" 
+        formControlName="selectedValue" 
+        [options]="attributeValueOptions" 
+        optionLabel="value"
+        [loading]="valoresDisponibles" 
+        (onChange)="onValueSelect()"
+        [virtualScroll]="true" 
+        [virtualScrollItemSize]="38" 
+        [virtualScrollOptions]="options"
+        class="border-round-sm w-full" 
+        [filter]="true" 
+        appendTo="body"
+        [ngClass]="{'ng-invalid ng-dirty': formConsulta.get('selectedValue')?.touched && formConsulta.get('selectedValue')?.invalid}" 
+        />
+      <label for="dropdownValue"class="block mb-2">
+        Valor del Atributo:
+      </label>
+    </p-floatlabel>
+    <small *ngIf="formConsulta.get('selectedValue')?.touched && formConsulta.get('selectedValue')?.invalid"
+      class="text-red-500 block mt-1">
+      Selecciona un valor
+    </small>
+  </div>
+  <app-loading-data-mask-with-overlay *ngIf="loaderContenidoEsVisible" [isContained]="true" title="Cargando...">
+  </app-loading-data-mask-with-overlay>
+</div>

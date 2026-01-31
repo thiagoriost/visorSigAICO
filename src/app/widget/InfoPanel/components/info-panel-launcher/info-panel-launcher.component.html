@@ -1,0 +1,65 @@
+<p-card class="p-4">
+  <h2 class="text-xl font-semibold mb-4">Prueba de Popups</h2>
+
+  <!-- Formulario de coordenadas -->
+  <form [formGroup]="formCoords" class="formgrid p-fluid mb-4">
+    <div class="field col-12">
+      <label for="lon" class="block mb-1">Longitud</label>
+      <input
+        id="lon"
+        type="number"
+        pInputText
+        formControlName="lon"
+        class="w-full"
+      />
+      <small
+        class="p-error"
+        *ngIf="formCoords.controls['lon'].invalid && formCoords.controls['lon'].touched"
+      >
+        La longitud es obligatoria
+      </small>
+    </div>
+
+    <div class="field col-12">
+      <label for="lat" class="block mb-1">Latitud</label>
+      <input
+        id="lat"
+        type="number"
+        pInputText
+        formControlName="lat"
+        class="w-full"
+      />
+      <small
+        class="p-error"
+        *ngIf="formCoords.controls['lat'].invalid && formCoords.controls['lat'].touched"
+      >
+        La latitud es obligatoria
+      </small>
+    </div>
+  </form>
+
+  <!-- Botón único para abrir/cerrar popup -->
+  <div class="flex align-items-center gap-2">
+    <p-button
+      [label]="isPopupOpen ? 'Cerrar pop-up' : 'Abrir pop-up'"
+      icon="pi pi-map-marker"
+      (onClick)="togglePopup(popup)"
+      [rounded]="true"
+      [raised]="true"
+    ></p-button>
+  </div>
+</p-card>
+
+<!-- Popups -->
+<app-pop-up #popup [coordenadas]="coords" color="primary">
+  <div slot-header>Ubicación seleccionada</div>
+  <app-mini-map></app-mini-map>
+</app-pop-up>
+
+<app-pop-up #popup [coordenadas]="[-70, 6]" color="primary">
+  <app-identify></app-identify>
+</app-pop-up>
+
+<app-pop-up #popup [coordenadas]="[-60, 6]" color="primary">
+  <app-buscar-direccion></app-buscar-direccion>
+</app-pop-up>

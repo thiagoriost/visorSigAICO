@@ -1,0 +1,163 @@
+<div class="flex flex-col h-screen w-full overflow-x-hidden">
+  <!-- HEADER -->
+  @if (showHeader) {
+    <div id="header-content" class="md:h-6rem h-4rem">
+      <ng-content select="[slot-header]"></ng-content>
+    </div>
+  }
+
+  <!-- BODY -->
+  <div class="flex flex-auto min-h-0 overflow-hidden">
+    <!-- MAP (z-0) -->
+    <div class="relative flex-auto min-h-0 h-full z-0">
+      <div id="main-content" class="w-full h-full relative z-0">
+        <ng-content select="[slot-map]"></ng-content>
+      </div>
+    </div>
+
+    <!-- SIDEBAR (z-3) -->
+    <div
+      class="fixed pointer-events-auto z-3"
+      [style.right]="getResponsiveRightOffset()"
+      [style.top]="getResponsiveTopGap()"
+      [style.bottom]="getResponsiveBottomGap()"
+      [style.width]="getResponsiveSidebarWidth()"
+      [style.height.px]="tocHidden ? logoOnlyHeight : null"
+    >
+      <div class="relative h-full w-full">
+        <!-- COLUMNA INTERNA (z-1) -->
+        <div
+          class="absolute flex flex-column min-h-0 z-1"
+          [class.inset-0]="!tocHidden"
+          [style.top.px]="0"
+          [style.height.%]="!tocHidden ? panelHeightPercent : null"
+          [style.paddingBottom.px]="isSmallScreen ? 0 : panelBottomPadding"
+          [style.pointerEvents]="tocHidden ? 'none' : 'auto'"
+        >
+          <!-- LOGO (solo desktop) -->
+          @if (!isSmallScreen) {
+            <div
+              class="flex-none surface-0 shadow-lg border-200 border-left-1 border-top-1 border-right-1 ml-2 px-3 pt-2 pb-2 flex justify-content-center m-0"
+              [ngClass]="tocHidden ? 'border-round' : 'border-round-top'"
+            >
+              <div
+                class="flex align-items-center justify-content-center w-full"
+                [style.maxWidth.px]="420"
+                [style.width.%]="100"
+              >
+                <img
+                  [style.maxWidth.px]="420"
+                  [style.width.%]="100"
+                  [src]="logoUrl"
+                  alt="SIG Gobierno Mayor"
+                  class="block pl-6 pr-6 w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+          }
+
+          <!-- Panel (cuerpo) -->
+          <div
+            class="flex-auto min-h-0 surface-0 shadow-lg border-200 border-left-1 border-right-1 border-bottom-1 border-round-bottom pt-2 md:pt-4 ml-2 m-0"
+            [style.display]="tocHidden ? 'none' : 'block'"
+            [style.maxWidth.px]="460"
+            [style.width.%]="100"
+          >
+            <div id="sidebar-panel" class="h-full w-full flex flex-column min-h-0 box-border">
+              <div class="flex-auto h-full w-full overflow-hidden">
+                <ng-container *ngTemplateOutlet="sidebarTemplate"></ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOCK (z-2) -->
+        @if (!isSmallScreen) {
+          <div
+            class="absolute left-0 right-0 flex justify-content-center pointer-events-auto z-2"
+            [style.bottom.px]="tocHidden ? null : buttonBottomGap"
+            [style.top.px]="!tocHidden ? null : buttonBottomGap"
+          >
+            <div
+              class="w-full flex justify-content-center"
+              [ngStyle]="{ padding: isSmallScreen ? '0 8px 12px 8px' : '0 8px' }"
+            >
+              <button
+                pButton type="button"
+                class="p-button-icon-only surface-0 border-1 border-200 shadow-1 flex align-items-center justify-content-center w-full"
+                [icon]="'icon-gm_doble_abajo'" [outlined]="true" [raised]="true" [rounded]="false"
+                [style.height.px]="collapseBarSize" [style.borderRadius.px]="8" [style.padding.px]="0"
+                (click)="toggleToc()"
+                [pTooltip]="tocHidden ? 'Mostrar contenido' : 'Ocultar contenido'"
+                [ngClass]="{ 'gm-rotate': !tocHidden }"
+                tooltipPosition="top">
+              </button>
+            </div>
+          </div>
+        }
+
+        <!-- BOTÓN MÓVIL (PrimeFlex + mínimos estilos custom) -->
+        @if (isSmallScreen) {
+          <div
+            class="absolute z-5 flex align-items-center justify-content-center pointer-events-auto"
+            [style.top.px]="12"
+            [style.right.px]="0"
+          >
+            <button
+              pButton type="button"
+              class="p-button p-button-icon-only surface-0 border-1 border-200 flex align-items-center justify-content-center p-0 shadow-3"
+              [style.width.px]="mobileTocButtonSize"
+              [style.height.px]="mobileTocButtonSize"
+              [style.borderRadius.px]="8"
+              (click)="toggleToc()"
+              [pTooltip]="tocHidden ? 'Mostrar contenido' : 'Ocultar contenido'"
+              tooltipPosition="left">
+              <img
+                src="assets/images/logo_a.png"
+                alt="Abrir/ocultar menú"
+                class="block object-contain"
+                style="max-width:70%; max-height:70%;"
+              />
+            </button>
+          </div>
+        }
+
+        <!-- MANIJA DE RESIZE (z-3 con PrimeFlex; resto custom) -->
+        @if (enableResize && !isSmallScreen && !tocHidden) {
+          <div
+            class="absolute top-0 z-3 h-full mt-2 flex align-items-center justify-content-center transition-colors"
+            [class.bg-primary-500]="isResizing"
+            [class.surface-700]="!isResizing"
+            (mousedown)="startResize($event)"
+            (mouseenter)="isHovering = true"
+            (mouseleave)="isHovering = false"
+            style="left:-6px; width:6px; cursor: col-resize;"
+          >
+            <i class="pi pi-ellipsis-v text-white text-xs opacity-90"></i>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- OVERLAYS (z-4) -->
+  @if (!isSmallScreen || (isSmallScreen && tocHidden)) {
+    <div class="fixed inset-0 bg-transparent z-4">
+      <div class="h-full w-full pointer-events-auto">
+        <ng-content select="[slot-overlay]"></ng-content>
+      </div>
+    </div>
+  }
+
+  <!-- WINDOWS (z-5) -->
+  <div class="bg-transparent z-5">
+    <ng-content select="[slot-windows]"></ng-content>
+  </div>
+
+  <!-- TOP / WRAPPER (z-5 según necesites) -->
+  <div class="fixed inset-0 bg-transparent z-5">
+    <div class="h-full w-full pointer-events-auto">
+      <ng-content select="[slot-top]"></ng-content>
+    </div>
+  </div>
+</div>

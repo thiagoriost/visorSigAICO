@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* === NG PRIME === */
+/* FROM: https://primeng.org/installation#styles */
+
+@use 'primeicons/primeicons.css';
+
+/*
+  PrimeFlex is a lightweight responsive CSS utility library to accompany Prime
+  FROM: https://primeflex.org/installation 
+*/
+@use 'primeflex/primeflex.css';
+
+/*
+  styles Quill Editor
+*/
+
+@use 'assets/styles/quillEditor.scss';
+
+/**
+ * Iconos del visor
+ */
+@use 'assets/fonts/visor-icons-v1.0/style.css';
+
+/* === TOUR GUIDE JS === */
+
+@use '@sjmc11/tourguidejs/dist/css/tour.min.css';
+
+/** === IMPORTACION DE ESTILOS PARA LOS TITULOS DE LAS CAPAS EN LAS TABLAS DE CONTENIDO ===*/
+@use 'assets/styles/content-table.scss';

@@ -1,0 +1,30 @@
+@if (isMobile) {
+  <div
+    class="surface-0 opacity-70 flex flex-column align-items-center justify-content-center pt-1 pl-1 pr-4 pb-0 m-0 gap-1 shadow-3">
+    <app-scale-line-mobile-version></app-scale-line-mobile-version>
+  </div>
+} @else {
+  <div
+    class="surface-0 opacity-70 flex flex-column align-items-center justify-content-center pt-1 pl-1 pr-4 pb-0 m-0 gap-1 shadow-3">
+    <div class="flex flex-column gap-2" data-tour="coordinates">
+      <div class="bg-gray-600 p-1 text-white">
+        <app-view-coords
+          [crsCode]="crsCode.WGS84"
+          [width]="'20rem'"></app-view-coords>
+      </div>
+      <div class="bg-gray-600 p-1 text-white">
+        <app-view-coords
+          [crsCode]="crsCode.MAGNA_OCCIDENTE"
+          [width]="'20rem'"></app-view-coords>
+      </div>
+    </div>
+
+    <div
+      class="mt-1 flex flex-column align-items-center justify-content-center p-0 w-full">
+      <app-barra-escala
+        scaleType="scalebar"
+        [showEscalas]="true"
+        [showDropdown]="true" />
+    </div>
+  </div>
+}

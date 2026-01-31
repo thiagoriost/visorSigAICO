@@ -1,0 +1,29 @@
+<!-- Selección de formatos con radioButton -->
+<div class="flex flex-column gap-2">
+  <div class="flex align-items-center gap-2">
+    <p-radioButton
+      name="formato"
+      value="Excel"
+      [(ngModel)]="formatoSeleccionado"
+      inputId="excel"
+      variant="filled" 
+    ></p-radioButton>
+    <label for="excel">Excel</label>
+  </div>
+
+  <div class="flex align-items-center gap-2">
+    <p-radioButton
+      name="formato"
+      value="Shape"
+      [(ngModel)]="formatoSeleccionado"
+      inputId="shape"
+      variant="filled" 
+    ></p-radioButton>
+    <label for="shape">Shapefile</label>
+  </div>
+</div>
+
+<!-- Botón para exportar -->
+ <div class="pt-4">
+<p-button label="Exportar"  (click)="exportar()" [rounded]="true" [raised]="true"></p-button>
+</div>

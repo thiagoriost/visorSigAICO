@@ -1,0 +1,59 @@
+<app-layout-b (isMobileChange)="onIsMobileChange($event)">
+    <!--Encabezado     -->
+    <app-leftbar-header slot-top>
+    </app-leftbar-header>
+    <!--Contenido Barra Izquierda  -->
+    <app-content-table-v3 slot-content-leftbar 
+        backgroundColor="bg-white" 
+        iconsColor="text-red-500" 
+        headerText="Grupos temáticos" 
+        layerItemTextColor="text-primary-900"
+        deleteAllLayersButtonIcon="pi cric-capas">      
+    </app-content-table-v3>
+ 
+    <!-- Barra derecha     -->
+    @if (isMobileFromLayout){
+    <app-cric-rightbar [isMobile]="true" slot-right></app-cric-rightbar>
+    } @else {
+    <app-cric-rightbar slot-right></app-cric-rightbar>
+    }
+
+    <!-- MAIN  -->
+    <p-toast position="top-right"></p-toast>
+    <app-map></app-map>
+
+    <!-- LEYENDA  -->
+    <app-window-single-cric-component-render [isMobile]="isMobileFromLayout"
+        [configFloatingWindow]="isMobileFromLayout ? configMobileFloatingWindow : configClosedFloatingWindow">
+    </app-window-single-cric-component-render>
+
+    @if (!isMobileFromLayout){
+    <app-floating-window [titulo]="'Leyenda'" [widgetFloatingWindowConfig]="configFloatingWindow" [tamanoCabecera]="48">
+        <app-legend-second-version></app-legend-second-version>
+    </app-floating-window>
+    }
+
+    <!-- BARRA INFERIOR   -->
+    @if (isMobileFromLayout){
+        <app-mobile-cric-bottombar slot-bottom/>
+    }@else{
+        <app-cric-bottombar slot-bottom background="transparent" />
+    }
+
+    <!-- MiniMapa -->
+    @if (!isMobileFromLayout){
+        <app-mini-map-v2 slot-minimapa          
+          headerClass ="bg-minimap-header"
+          [baseMap]="baseMiniMap"                    
+          [mapPosition]="'bottom-right'"
+          [buttonPosition]="'bottom-right'"
+          buttonSize='small'
+          width = '300px'
+          bodyClass="border-solid border-top-none border-primary-500"
+          [headerButtonSeverity]="undefined"
+          [buttonRounded]=true
+          [severity]="undefined"          
+          >
+        </app-mini-map-v2>
+    }
+</app-layout-b>

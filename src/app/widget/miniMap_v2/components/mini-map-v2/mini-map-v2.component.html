@@ -1,0 +1,73 @@
+<div class="w-3rem h-3rem flex justify-content-center align-items-center relative">
+
+  <p-button
+    type="button"
+    (click)="toggleMinimize()"
+    [icon]="buttonIconValue"
+    [rounded]="buttonRoundedValue"
+    [size]="buttonSizeValue"
+    pTooltip="Mostrar Mapa Localización"
+    tooltipPosition="top"
+    [severity]="severity"
+    tooltipStyleClass="text-sm">
+  </p-button>
+
+  @if (isMiniMapVisible) {
+    <div
+      class="absolute z-2 shadow-2"
+      [ngClass]="windowPositionClasses">
+
+      <!-- Header -->
+      @if (variant === 'header') {
+        <div
+          [ngStyle]="{ width: width }"
+          [ngClass]="[headerClass]"
+          class="flex justify-content-end items-center w-full px-2 h-2rem bg-primary-500 border-round-top">
+
+          @if (headerTitle) {
+            <span class="text-sm font-semibold flex-1 text-left pt-2">
+              {{ headerTitle }}
+            </span>
+          }
+
+          <p-button
+            [icon]="closeButtonIcon"
+            (click)="toggleMinimize()"
+            [severity]="headerButtonSeverity"
+            size="small"
+            class="mr-1">
+          </p-button>
+        </div>
+      }
+
+      <!-- Botón afuera -->
+      @if (variant === 'button') {
+        <div
+          class="absolute z-3"
+          [ngClass]="buttonClasses">
+
+          <p-button
+            [icon]="closeButtonIcon"
+            (click)="toggleMinimize()"
+            size="small"
+            [severity]="closeButtonSeverity"
+            pTooltip="Ocultar Mapa Localización"
+            tooltipPosition="top"
+            tooltipStyleClass="text-sm">
+          </p-button>
+        </div>
+      }
+
+      <!-- Mini-mapa -->
+      <div
+        [id]="miniMapId"
+        [ngClass]="bodyClass"
+        [ngStyle]="{ width: width, height: height }"
+        style="top: 1rem; left: 1rem;">
+        <app-mini-map-ppal></app-mini-map-ppal>
+      </div>
+
+    </div>
+  }
+
+</div>

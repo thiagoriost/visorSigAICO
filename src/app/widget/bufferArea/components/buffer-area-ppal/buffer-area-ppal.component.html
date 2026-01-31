@@ -1,0 +1,38 @@
+<div class="relative">
+  @if (isLoading) {
+    <app-loading-data-mask-with-overlay
+      [isContained]="true"
+      title="Realizando buffer ...">
+    </app-loading-data-mask-with-overlay>
+  }
+  <!-- Selección de tipo -->
+  <div class="field">
+    <label for="metodo">Método de Ubicación</label>
+    @for (metodo of metodosUbicacion; track metodo.value) {
+      <div class="field-checkbox pl-3">
+        <p-radiobutton
+          [inputId]="metodo.value"
+          name="metodo"
+          [value]="metodo"
+          [(ngModel)]="metodoSeleccionado">
+        </p-radiobutton>
+
+        <label [for]="metodo.value" class="ml-2">
+          {{ metodo.label }}
+        </label>
+      </div>
+    }
+  </div>
+  <!-- OPCIÓN 1 - SELECCIÓN ESPACIAL -->
+  @if (metodoSeleccionado?.value === 'seleccion') {
+    <app-buffer-area
+      (loading)="setLoading($event)">
+    </app-buffer-area>
+  }
+  <!-- OPCIÓN 2 - COORDENADAS -->
+  @if (metodoSeleccionado?.value === 'coordenadas') {
+    <app-buffer-area-location
+      (loading)="setLoading($event)">
+    </app-buffer-area-location>
+  }
+</div>

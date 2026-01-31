@@ -1,0 +1,44 @@
+<div class="h-full overflow-hidden">
+  <p-tabs value="0" class="h-full">
+    <p-tablist>
+      <p-tab value="0">Capas</p-tab>
+      <p-tab value="1">Zona de trabajo</p-tab>
+    </p-tablist>
+    <p-tabpanels class="px-0" id="p_tabpanel_height">
+      <p-tabpanel value="0" class="h-full">
+        <div class="h-full p-0 m-0">
+          <app-content-table-toggle-switch
+            [iconEraserLayersClass]="iconEraserLayers"
+            [textColor]="textColor"
+            [placeHolderSearchInput]="placeHolderSearchInput"
+            [iconSearchInputClass]="iconSearchInputClass"
+            [iconPosition]="iconPosition"
+            [iconInputVisible]="iconInputVisible"
+            [isCenteredLayerParentTitle]="isCenteredLayerParentTitle"
+            [requiredDivider]="requiredDivider"
+            [requireIdentation]="requireIdentation"
+            class="h-full" />
+        </div>
+      </p-tabpanel>
+      <p-tabpanel value="1" class="h-full">
+        <div class="h-full p-1 mx-1 my-0">
+          <app-work-area-v3
+            [isLegendVisible]="isLegendVisible"
+            [ocultLayerIcon]="ocultLayerIcon"
+            [showLayerIcon]="showLayerIcon"
+            [setTransparencyIcon]="setTransparencyIcon"
+            [showMetadataIcon]="showMetadataIcon"
+            [showLegendIcon]="showLegendIcon"
+            [deleteLayerIcon]="deleteLayerIcon"
+            [textColor]="textColor"
+            [isTextButton]="isTextButton"
+            [isRoundedButton]="isRoundedButton"
+            [isCenteredButtons]="isCenteredButtons"
+            [turnOnAllLayersIcon]="turnOnAllLayersIcon"
+            [turnOffAllLayersIcon]="turnOffAllLayersIcon"
+            class="h-full"></app-work-area-v3>
+        </div>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+</div>

@@ -1,0 +1,31 @@
+<div class="grid grid-nogutter relative">
+  <div class="col-4">
+    <div class="aiso-header-main h-20 flex justify-content-center align-items-center">
+      
+      @if (isSmallScreen) {
+        <p-image
+          src="projects/aiso/assets/images/sig_aiso_sig_aiso_b.png"
+          alt="Image"
+          imageClass="h-full max-h-4rem"
+        ></p-image>
+      }
+
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="aiso-header-stripe h-20"></div>
+  </div>
+
+  @if (!isSmallScreen) {
+    <div class="absolute top-0 left-0 w-full h-full grid grid-nogutter z-2">
+      <div class="col-4 flex align-items-center pl-4">
+        <p-image
+          src="projects/aiso/assets/images/sig_aiso_sig_aiso_b.png"
+          alt="Image"
+          imageClass="w-full max-w-20rem"
+        ></p-image>
+      </div>
+    </div>
+  }
+  
+</div>

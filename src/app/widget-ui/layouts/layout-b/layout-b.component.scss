@@ -1,0 +1,146 @@
+:host ::ng-deep {
+    .bg-floating-window {  
+        background-image: var(--p-background-pattern-image);
+        background-size: var(--p-background-pattern-size);
+        background-position: var(--p-background-pattern-position);
+        background-repeat: var(--p-background-pattern-repeat);
+        background-color: var(--p-background-pattern-color); 
+    }
+
+    .contenedor-floating-window {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+
+    .bg-leftbar-header {
+        background: var(--p-auxiliary-500);
+        background: -webkit-linear-gradient(90deg, var(--p-auxiliary-500) 0%, var(--p-auxiliary-600) 100%);
+        background: -moz-linear-gradient(90deg, var(--p-auxiliary-500) 0%, var(--p-auxiliary-600) 100%);
+        background: linear-gradient(90deg, var(--p-auxiliary-500) 0%, var(--p-auxiliary-600) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=var(--p-auxiliary-500), endColorstr=var(--p-auxiliary-600), GradientType=1);
+        height: 85px;
+    }
+
+    .bg-leftbar-content {
+        background: var(--p-auxiliary-100);
+        background: -webkit-linear-gradient(90deg, var(--p-auxiliary-100) 0%, var(--p-auxiliary-50) 100%);
+        background: -moz-linear-gradient(90deg, var(--p-auxiliary-100) 0%, var(--p-auxiliary-50) 100%);
+        background: linear-gradient(90deg, var(--p-auxiliary-100) 0%, var(--p-auxiliary-50) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=var(--p-auxiliary-100), endColorstr=var(--p-auxiliary-50), GradientType=1);
+    }
+
+    .bg-minimap-header {
+        background: var(--p-auxiliary-600);
+        background: -webkit-linear-gradient(90deg, var(--p-auxiliary-600) 0%, var(--p-auxiliary-500) 100%);
+        background: -moz-linear-gradient(90deg, var(--p-auxiliary-600) 0%, var(--p-auxiliary-500) 100%);
+        background: linear-gradient(90deg, var(--p-auxiliary-600) 0%, var(--p-auxiliary-500) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=var(--p-auxiliary-600), endColorstr=var(--p-auxiliary-500), GradientType=1);
+        border-top-left-radius: 1rem !important;  // Sí no se especifica como important no toma el cambio, por tanto; al pasar al mouse por encima genera un contraste
+        border-top-right-radius: 1rem !important; // Sí no se especifica como important no toma el cambio, por tanto; al pasar al mouse por encima genera un contraste
+    }
+   
+    
+    /* Autocomplete propiedades que no permite modificar desde el preset
+        - Bordes redondeados 
+    */
+    .p-autocomplete .p-inputtext {
+        border-radius: 50px 0 0 50px;        
+        border-right: none ;
+    }
+
+    /* La caja de sugerencias respete bordes */
+    .p-autocomplete-panel {
+        border-radius: 50px ;
+    }
+          
+    /* Estilos del botón barar izquierda, no se puede desde el preset pues afectaría todos los botones*/
+    .btn-reset .p-button {
+        all: unset;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        box-shadow: none ;
+    }    
+    .btn-reset .pi,
+    .btn-reset .p-icon {
+        font-size: 1.65rem;
+        line-height: 1;
+        color: var(--p-primary-500); /* hereda el color del padre */
+    }         
+    .btn-reset .p-button:hover { // Sí no se especifica como important no toma el cambio, por tanto; al pasar al mouse por encima genera un contraste
+        background: transparent !important;
+        box-shadow: none !important;
+        border-color: transparent !important;
+    }
+    .btn-reset .p-button .p-ripple {
+        display: none !important; 
+    }
+    
+
+    /* aplica estilo al tab versión móvil*/
+    .p-accordionheader {
+        border-bottom: 2px solid var(--p-primary-500);  
+        color:var(--p-red-500);
+    }
+
+    /* Header al pasar el mouse */
+    .p-accordionheader:hover {
+        background: var(--p-primary-200) !important; // Sí no se especifica como important no toma el cambio, por tanto; al pasar al mouse por encima genera un contraste
+        color:var(--p-red-500);
+    }
+
+    /* Fondo del tab activo, no permite desde el preset, afecta todos los tabs*/
+    .p-tab.p-tab-active {
+        background: rgba(255, 255, 255, 0.6);  
+        margin-top: 4px; 
+        margin-bottom: 4px;
+        color: var(--primary-500) ;
+
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+
+    /* Se implementan los estilos ya que en el preset no toma la configuración de los siguientes estilos.*/
+    .p-slider {
+        background-color: var(--p-red-300);
+        border-radius: 20px;  
+    }
+    .p-slider .p-slider-range {
+        border-radius: 20px;
+    }     
+    
+    /* Se aumenta el tamaño tipografía cric, ya que sí se aumenta desde el preset aplica a todos los iconos */
+    app-content-table-v3 p-button .p-button .pi {
+        font-size: 26.4px;
+    }
+    app-layer-item-v3 p-button .p-button .pi {
+        font-size: 20.8px;        
+    }       
+    app-mini-map-v2 p-button .p-button.p-button-icon-only .pi.pi-eye { 
+        font-size: 26.4px;
+    }
+    app-floating-window-header p-button .p-button .pi {
+        font-size: 26.4px;
+    }
+
+    /* Elimina el padding que especifica el preset en formField.paddingX, paddingY */
+     app-layer-item-v3 p-button .p-button  {        
+        padding-block-end:0px;
+        padding-block-start:0px;
+    }
+    app-mobile-floating-tab-window p-button .p-button.p-button-icon-only {
+        padding-block-end:0px;
+        padding-block-start:0px;
+    }
+}

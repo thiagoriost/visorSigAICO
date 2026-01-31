@@ -1,0 +1,15 @@
+<p-toast></p-toast>
+<app-layout-d>
+  <!-- SIDEBAR -->
+  <app-sidebar-menu-aiso
+    [isMobile]="isSmallScreen"
+    slot-left-sidebar></app-sidebar-menu-aiso>
+  <!-- MAIN -->
+  <app-map></app-map>
+  <app-aiso-header
+    [isSmallScreen]="isSmallScreen"
+    slot-header></app-aiso-header>
+  <app-aiso-footer
+    [isSmallScreen]="isSmallScreen"
+    slot-footer></app-aiso-footer>
+</app-layout-d>

@@ -1,0 +1,60 @@
+<div
+  class="relative h-screen w-screen m-0 overflow-hidden"
+  [ngClass]="[isMobile ? 'overflow-auto' : 'overflow-hidden']">
+  <!--COMPONENTE PRINCIPAL (MAPA)-->
+  <div class="absolute top-0 left-0 h-screen w-screen z-0">
+    <ng-content select="[slot-map]"></ng-content>
+  </div>
+  <!--TABLA DE ATRIBUTOS-->
+  @if (!isMobile) {
+    <div class="absolute z-3 border-1 ml-8 mt-1">
+      <ng-content select="[slot-attribute-table]"></ng-content>
+    </div>
+  }
+  <!--HEADER SUPERIOR IZQUIERDO-->
+  <div class="absolute left-0 m-3 pointer-events-auto z-1">
+    <ng-content select="[slot-header]"></ng-content>
+  </div>
+  <!--HEADER SUPERIOR DERECHO-->
+  <div class="absolute right-0 mt-3 mr-3 pointer-events-auto z-3">
+    <ng-content select="[slot-user]"></ng-content>
+  </div>
+
+  <!--CONTROLES DEL MAPA-->
+  <div
+    class="absolute left-0 bottom-0 flex flex-column gap-2 ml-3 z-2 app_controls pointer-events-auto">
+    <ng-content select="[slot-map-controls]"></ng-content>
+  </div>
+  <!--BOTONES FLOTANTES-->
+  <div
+    class="absolute right-0 flex flex-column gap-3 mr-3 z-2 pointer-events-auto floating_buttons">
+    <ng-content select="[slot-sidebar-buttons]"></ng-content>
+  </div>
+  <div>
+    <ng-content select="[slot-static-window]"></ng-content>
+  </div>
+  <!--COMPONENTE PARTE INFERIOR IZQUIERDA-->
+  <div
+    class="absolute bottom-0 m-0 left-0 z-1 pointer-events-auto"
+    id="slot-bottom-left">
+    <ng-content select="[slot-bottom-left]"></ng-content>
+  </div>
+  <!--COMPONENTE PARTE INFERIOR ALINEADO A LA IZQUIERDA-->
+  <div
+    class="absolute bottom-0 z-2 pointer-events-auto scaleline mb-3"
+    [ngClass]="isMobile ? 'scaleline_mobile' : 'scaleline'">
+    <ng-content select="[slot-map-scaleline-coordinates]"></ng-content>
+  </div>
+
+  <!--COMPONENTE PARTE INFERIOR DERECHA-->
+  <div
+    class="absolute bottom-0 right-0 mr-0 z-0 h-full pointer-events-auto"
+    id="slot_bottom_right">
+    <ng-content select="[slot-bottom-right]"></ng-content>
+  </div>
+  <!--MINIMAPA-->
+  <div
+    class="absolute flex flex-column gap-2 bottom-0 left-0 ml-2 mb-5 z-2 pointer-events-auto">
+    <ng-content select="[slot-minimap]"></ng-content>
+  </div>
+</div>

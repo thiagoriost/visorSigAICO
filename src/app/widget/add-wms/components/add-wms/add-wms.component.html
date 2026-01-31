@@ -1,0 +1,76 @@
+<!-- Formulario con Angular Reactive Forms -->
+<form [formGroup]="formGroup">
+
+    <div *ngIf="urlValid === false" class="p-fluid">
+        <!-- Campo de entrada para la URL -->
+        <div class="field">
+            <label for="url">URL:</label>
+            <div class="input-group">
+                <input pInputText id="url" formControlName="url" class="border-round-sm w-full "
+                    placeholder="Ingrese la URL"
+                    [ngClass]="{'ng-invalid ng-dirty': formGroup.get('url')?.invalid && formGroup.get('url')?.touched}" />
+            </div>
+            <div *ngIf="formGroup.get('url')?.invalid && formGroup.get('url')?.touched" class="text-red-500 block mt-1">
+                <small>Ingrese una URL Válida</small>
+            </div>
+        </div>
+
+        <!-- Botón para analizar la URL ingresada -->
+        <div class="field">
+            <p-button (onClick)="searchLayers()" label="Analizar" [loading]="loading" icon="pi pi-search" iconPos="left"
+                [raised]="true" [rounded]="true"/>
+        </div>
+
+
+    </div>
+
+    <!-- Mostrar esto si no se cumple el *ngIf anterior -->
+    <div *ngIf="urlValid">
+        <p-button (onClick)="comeBack()" label="Atras" icon="pi pi-arrow-left" [rounded]="true" [outlined]="true" />
+        <!-- Select para seleccionar las capas disponibles -->
+
+        <div class="formgrid grid ">
+            <div class="field col pt-2">
+                <label for="layers">Servicio:</label>
+            </div>
+            <div class="field col">
+                <p for="layers">WPS</p>
+            </div>
+        </div>
+        <p-divider />
+        <div class="formgrid grid">
+            <div class="field col">
+                <label for="layers">URL</label>
+            </div>
+            <div class="field col  p-overflow-hidden">
+                <p for="layers">{{ url || 'No disponible' }}</p>
+            </div>
+        </div>
+
+        <label for="layers mb-4">Capas disponibles en el servicio:</label>
+
+        <!-- Select que muestra las capas obtenidas del servicio -->
+        <p-select formControlName="selectedLayers" [options]="layers" optionLabel="displayName" class="border-round-sm w-full mt-2"
+            appendTo="body"
+            placeholder="Seleccione una capa" [style]="{ width: '100%' }"
+            [ngClass]="{'ng-invalid ng-dirty': formGroup.get('selectedLayers')?.invalid && formGroup.get('selectedLayers')?.touched}" />
+
+        <div *ngIf="formGroup.get('selectedLayers')?.invalid && formGroup.get('selectedLayers')?.touched"
+            class="p-error">
+            <small>Aún no ha seleccionado la capa</small>
+        </div>
+        <!-- Botón para añadir la capa -->
+        <div class="field pt-2">
+            <p-button (onClick)="addLayer()" label="Añadir" [loading]="loading" [raised]="true" [rounded]="true" />
+        </div>
+    </div>
+
+    <div class="p-fluid">
+
+        <div>
+            <p-message severity="info" size="large" icon="pi pi-info-circle"
+                text="Los datos cargados en esta herramienta son temporales y no se guardan." />
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,122 @@
+<div class="p-4">
+  <p-card header="Configurador del Mini-Mapa">
+    <div class="grid">
+
+      <!-- Columna del formulario -->
+      <div class="col-12 md:col-6">
+        <div class="p-fluid">
+
+          <!-- Mapa Base -->
+          <div class="field">
+            <label for="baseMap">Mapa Base</label>
+            <p-select
+              id="baseMap"
+              [options]="mapasBaseOptions"
+              optionLabel="label"
+              optionValue="value"
+              [(ngModel)]="baseMap"
+              placeholder="Seleccione un mapa base">
+            </p-select>
+          </div>
+
+          <!-- Icono del botón -->
+          <div class="field">
+            <label for="buttonIcon">Icono del botón</label>
+            <input
+              id="buttonIcon"
+              type="text"
+              pInputText
+              [(ngModel)]="buttonIcon" />
+          </div>
+
+          <!-- Botón redondeado -->
+          <div class="field flex align-items-center gap-2">
+            <p-toggleSwitch [(ngModel)]="buttonRounded"></p-toggleSwitch>
+            <label for="buttonRounded">Botón redondeado</label>
+          </div>
+
+          <!-- Tamaño del botón -->
+          <div class="field">
+            <label for="buttonSize">Tamaño del botón</label>
+            <p-select
+              id="buttonSize"
+              [options]="sizeOptions"
+              optionLabel="label"
+              optionValue="value"
+              [(ngModel)]="buttonSize"
+              placeholder="Selecciona un tamaño">
+            </p-select>
+          </div>
+
+          <!-- Clase de estilo para el contenedor del mapa -->
+          <div class="field">
+            <label for="mapContainerClass">
+              Clase de estilo para el contenedor del mapa
+            </label>
+            <input
+              id="mapContainerClass"
+              type="text"
+              pInputText
+              [(ngModel)]="mapContainerClass" />
+          </div>
+
+          <!-- Posición del mapa -->
+          <div class="field">
+            <label for="mapPosition">Posición del mapa</label>
+            <p-select
+              id="mapPosition"
+              [options]="positionOptions"
+              optionLabel="label"
+              optionValue="value"
+              [(ngModel)]="mapPosition"
+              placeholder="Selecciona una posición">
+            </p-select>
+          </div>
+
+          <!-- Ancho -->
+          <div class="field">
+            <label for="width">Ancho</label>
+            <input
+              id="width"
+              type="text"
+              pInputText
+              [(ngModel)]="width" />
+          </div>
+
+          <!-- Alto -->
+          <div class="field">
+            <label for="height">Alto</label>
+            <input
+              id="height"
+              type="text"
+              pInputText
+              [(ngModel)]="height" />
+          </div>
+
+          <!-- Paneo habilitado -->
+          <div class="field flex align-items-center gap-2">
+            <p-toggleSwitch [(ngModel)]="isPanEnabled"></p-toggleSwitch>
+            <label for="isPanEnabled">Habilitar paneo en el mini mapa</label>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Columna del Mini-Mapa -->
+      <div class="col-12 md:col-6 flex justify-content-center align-items-center">
+        <app-mini-map
+          [baseMap]="baseMap"
+          [buttonIcon]="buttonIcon"
+          [buttonRounded]="buttonRounded"
+          [buttonSize]="buttonSize"
+          [mapContainerClass]="mapContainerClass"
+          [mapPosition]="mapPosition"
+          [width]="width"
+          [height]="height"
+          [isPanEnabled]="isPanEnabled">
+        </app-mini-map>
+      </div>
+
+    </div>
+  </p-card>
+</div>

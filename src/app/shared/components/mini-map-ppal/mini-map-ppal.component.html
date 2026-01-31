@@ -1,0 +1,19 @@
+<!-- 
+  Componente MiniMapPpal
+  ----------------------
+  Este contenedor es el espacio donde el servicio `MiniMapService` renderiza el mini mapa.
+
+  Notas:
+  - El atributo `#miniMapContainer` se usa con @ViewChild en el componente TS para obtener
+    una referencia directa al elemento HTML y pasarlo al servicio.
+  - Las clases de PrimeFlex (`w-12rem h-12rem shadow-2 border-round`) definen tamaño,
+    sombra y bordes redondeados de manera rápida y estandarizada.
+-->
+
+<div
+  #miniMapContainer
+  id="mini-map"
+  class="w-full h-full bg-white"
+>
+  <!-- El mini mapa se renderiza dinámicamente mediante OpenLayers -->
+</div>

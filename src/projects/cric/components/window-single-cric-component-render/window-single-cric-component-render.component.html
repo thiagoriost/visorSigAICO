@@ -1,0 +1,20 @@
+@if (existeWidgetAbierto$ | async) {
+    @if (!isMobile) {     
+        <app-floating-window 
+            [titulo]="configuracionWidgetAbierto ? configuracionWidgetAbierto.titulo : 'Sin título'"
+            [widgetFloatingWindowConfig]="configFloatingWindow"
+            (closeWindowEvent)="cerrarWidget()"
+            [tamanoCabecera]=48>   
+                <app-single-component-render></app-single-component-render>      
+        </app-floating-window>        
+    
+    }@else {
+        <app-mobile-floating-tab-window
+        [titulo]="configuracionWidgetAbierto ? configuracionWidgetAbierto.titulo : 'Sin título'"
+        [widgetFloatingWindowConfig]="configFloatingWindow"
+        (closeWindowEvent)="cerrarWidget()">   
+            <app-single-component-render></app-single-component-render>      
+        </app-mobile-floating-tab-window>
+    }                   
+   
+} 

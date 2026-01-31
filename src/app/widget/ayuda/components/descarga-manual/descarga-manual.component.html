@@ -1,0 +1,26 @@
+<div class="p-mt-4">
+    <div>
+        <label for="resultado" class="font-bold">
+            Para descargar el manual de usuario, haga clic en el botón:
+        </label>
+    </div>
+    <div style="margin-top: 2rem;">
+       <p-button 
+        label="Descargar" 
+        icon="pi pi-download" 
+        iconPos="right" 
+        (click)="descargarManual()" 
+        [rounded]="true" 
+        [raised]="true"
+        />
+    </div>
+    <div>
+    @if (mensajeError) {
+        <p-message
+        severity="error"
+        [text]="mensajeError"
+        [style]="{ 'margin-top': '1rem' }">
+        </p-message>
+    }
+    </div>
+</div>

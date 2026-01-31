@@ -1,0 +1,31 @@
+<div
+  class="absolute top-0 right-0 mr-4 z-10 surface-500 border-round-2xl shadow-7 flex flex-column responsive_floating_window"
+  [ngClass]="{ 'h-[60px]': minimized, 'h-[80vh]': !minimized }">
+  <!-- Header -->
+  <div
+    class="flex justify-content-between align-items-center px-3 py-2 border-bottom-1 surface-border"
+    [ngClass]="appliedClass">
+    <span class="font-bold text-white">{{ title }}</span>
+    <div class="flex gap-2">
+      @if (minimized) {
+        <p-button
+          icon="pi pi-minus"
+          (onClick)="toggleMinimize()"
+          text="true"
+          severity="primary">
+        </p-button>
+      }
+      <p-button
+        icon="pi pi-times"
+        (onClick)="onClose()"
+        text="true"
+        [severity]="'warn'"
+        [ngStyle]="appliedStyle">
+      </p-button>
+    </div>
+  </div>
+
+  <div *ngIf="!minimized" class="flex-auto overflow-auto p-3 bg-white">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="flex flex-row w-full justify-content-around ">
+  @for (item of comunidades; track item.Logo) {
+    <div
+      class="logo-wrapper flex items-center justify-center border-round-md mx-1 p-1"
+      [ngStyle]="{ 'background-color': getColor(item) }"
+    >
+      <p-image
+        [src]="getLogoUrl(item.Logo)"
+        alt="{{ item.Nombre_Comunidad }}"
+        class="object-contain"
+        width="50"
+        height="50"
+      ></p-image>
+    </div>
+  }
+</div>

@@ -1,0 +1,10 @@
+::ng-deep .p-popover-custom{
+  border-radius: 8px !important; 
+  .p-popover-content{
+    padding: 6px !important;
+  }
+  
+  // Alinea el triángulo manualmente
+  --p-popover-arrow-left: 0.75rem !important;
+
+}

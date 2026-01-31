@@ -1,0 +1,19 @@
+@if (existeWidgetAbierto$ | async) {
+     <div *ngIf="!isMobile">    
+        <app-floating-window 
+            [titulo]="configuracionWidgetAbierto ? configuracionWidgetAbierto.titulo : 'Sin título'"
+            [widgetFloatingWindowConfig]="configFloatingWindow"
+            (closeWindowEvent)="cerrarWidget()">   
+                <app-single-component-render></app-single-component-render>      
+        </app-floating-window>        
+    </div>
+    <div *ngIf="isMobile">
+         <app-mobile-floating-window 
+            [titulo]="configuracionWidgetAbierto ? configuracionWidgetAbierto.titulo : 'Sin título'"
+            [widgetFloatingWindowConfig]="configFloatingWindow"
+            (closeWindowEvent)="cerrarWidget()">   
+                <app-single-component-render></app-single-component-render>      
+        </app-mobile-floating-window>   
+    </div>
+} 
+

@@ -1,0 +1,297 @@
+<div class="p-0 border-round-2xl overflow-hidden">
+  <!-- Encabezado -->
+  <div class="flex align-items-center justify-content-between px-4 py-3">
+    <div class="flex align-items-center gap-2">
+      <i class="pi pi-print text-xl"></i>
+      <h3 class="m-0 font-medium">Salida Gráfica</h3>
+    </div>
+    <p-button
+      label="Salida personalizada"
+      icon="pi pi-sliders-h"
+      [rounded]="true"
+      [raised]="true"
+      (onClick)="openTemplateDialog()">
+    </p-button>
+  </div>
+
+  <!-- Tabs -->
+  <p-tabs [value]="activeIndex" (valueChange)="onTabChange($event)">
+    <p-tablist>
+      <p-tab [value]="0">Parámetros</p-tab>
+      <p-tab [value]="1">Resultados</p-tab>
+    </p-tablist>
+
+    <p-tabpanels>
+      <!-- Tab: Parámetros -->
+      <p-tabpanel [value]="0">
+        <form [formGroup]="exportForm" (ngSubmit)="onSubmit()" class="p-4 grid p-fluid gap-3">
+
+          <!-- Título -->
+          <div class="col-12">
+            <div class="field w-full">
+              <p-floatLabel>
+                <input
+                  id="title"
+                  pInputText
+                  formControlName="title"
+                  class="border-round-sm w-full"
+                  [attr.maxlength]="MAXLEN.title + 10"
+                  [ngClass]="{ 'p-invalid': campoInvalido('title') }"
+                  [attr.aria-describedby]="'title-help'"
+                  [attr.aria-invalid]="campoInvalido('title') ? 'true' : 'false'"
+                />
+                <label for="title">Título</label>
+              </p-floatLabel>
+
+              <small
+                id="title-help"
+                class="block mt-1"
+                [ngClass]="campoInvalido('title') ? 'text-red-500' : 'text-600'">
+                {{
+                  campoInvalido('title')
+                    ? (errorMsg('title') || ('El título debe contener máximo ' + MAXLEN.title + ' caracteres.'))
+                    : ('Máximo ' + MAXLEN.title + ' caracteres.')
+                }}
+              </small>
+            </div>
+          </div>
+
+          <!-- Autor -->
+          <div class="col-12">
+            <div class="field w-full">
+              <p-floatLabel>
+                <input
+                  id="author"
+                  pInputText
+                  formControlName="author"
+                  class="border-round-sm w-full"
+                  [attr.maxlength]="MAXLEN.author + 10"
+                  [ngClass]="{ 'p-invalid': campoInvalido('author') }"
+                  [attr.aria-describedby]="'author-help'"
+                  [attr.aria-invalid]="campoInvalido('author') ? 'true' : 'false'"
+                />
+                <label for="author">Autor</label>
+              </p-floatLabel>
+
+              <small
+                id="author-help"
+                class="block mt-1"
+                [ngClass]="campoInvalido('author') ? 'text-red-500' : 'text-600'">
+                {{
+                  campoInvalido('author')
+                    ? (errorMsg('author') || ('El autor debe contener máximo ' + MAXLEN.author + ' caracteres.'))
+                    : ('Máximo ' + MAXLEN.author + ' caracteres.')
+                }}
+              </small>
+            </div>
+          </div>
+
+          <div class="col-12 lg:col-6">
+            <div class="flex align-items-center gap-3">
+              <p-checkbox inputId="grid" formControlName="showGrid" binary="true"></p-checkbox>
+              <label for="grid" class="ml-2">Mostrar grilla</label>
+            </div>
+          </div>
+
+          <div class="col-12 lg:col-6">
+            <div class="flex align-items-center gap-3">
+              <p-checkbox inputId="legend" formControlName="includeLegend" binary="true"></p-checkbox>
+              <label for="legend" class="ml-2">Incluir leyenda</label>
+            </div>
+          </div>
+
+          <!-- Orientación -->
+          <div class="col-12">
+            <label for="orientation" class="block mb-2">Orientación del papel</label>
+
+            <!-- PrimeNG 20+: Dropdown ya no existe → se usa Select -->
+            <p-select
+              inputId="orientation"
+              [options]="orientationOptions"
+              formControlName="orientation"
+              placeholder="Seleccione orientación"
+              optionLabel="label"
+              optionValue="value"
+              class="w-full"
+              [ngClass]="{ 'ng-invalid ng-dirty': campoInvalido('orientation') }">
+            </p-select>
+
+            <small *ngIf="campoInvalido('orientation')" class="block mt-1 text-red-500">
+              Seleccione una orientación para el papel.
+            </small>
+          </div>
+
+          <!-- Acciones -->
+          <div class="col-12 flex justify-content-end gap-2 pt-2">
+            <p-button
+              label="Imprimir"
+              type="submit"
+              icon="pi pi-print"
+              [rounded]="true"
+              [raised]="true">
+            </p-button>
+          </div>
+        </form>
+      </p-tabpanel>
+
+      <!-- Tab: Resultados -->
+      <p-tabpanel [value]="1">
+        <div class="p-4">
+          <div class="flex justify-content-end mb-3">
+            <p-button
+              label="Borrar descargas"
+              icon="pi pi-trash"
+              [rounded]="true"
+              [raised]="true"
+              [disabled]="!canClearDownloads"
+              (onClick)="clearDownloads()">
+            </p-button>
+          </div>
+
+          <ng-container *ngIf="printJobs.length; else empty">
+            <div *ngFor="let job of printJobs; trackBy: trackJob; index as i"
+                 class="p-3 border-round-lg w-full mb-3">
+
+              <div class="flex align-items-center gap-3 min-w-0">
+                <span class="font-medium">{{ i + 1 }}.</span>
+
+                <i class="pi pi-file-pdf text-2xl"></i>
+
+                <div class="flex-1 min-w-0">
+                  <ng-container [ngSwitch]="job.status">
+                    <a *ngSwitchCase="'done'"
+                       [href]="job.url"
+                       [download]="job.name"
+                       target="_blank"
+                       class="hover:underline block overflow-hidden white-space-nowrap text-overflow-ellipsis">
+                      {{ job.name }}
+                    </a>
+
+                    <span *ngSwitchDefault class="block overflow-hidden white-space-nowrap text-overflow-ellipsis">
+                      {{ job.name }}
+                    </span>
+                  </ng-container>
+                </div>
+
+                <small class="ml-auto">
+                  {{ job.status === 'creating' ? 'Creando impresión…' :
+                     job.status === 'done'     ? 'Listo' :
+                     job.status === 'error'    ? 'Error' : '' }}
+                </small>
+              </div>
+
+              <!-- Progreso -->
+              <div class="mt-2">
+                <p-progressBar
+                  [value]="job.progress"
+                  [showValue]="false"
+                  [style]="{ height: '10px', width: '100%' }">
+                </p-progressBar>
+              </div>
+
+              <!-- Error (si aplica) -->
+              <p-message *ngIf="job.status === 'error' && job.error"
+                         severity="error"
+                         class="mt-2"
+                         [text]="job.error">
+              </p-message>
+            </div>
+          </ng-container>
+
+          <!-- Vacío -->
+          <ng-template #empty>
+            <div class="mt-3 p-4 border-round text-center">
+              No hay impresiones aún. Usa <b>Imprimir</b> en la pestaña “Parámetros”.
+            </div>
+          </ng-template>
+        </div>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+
+  <!-- Contenedor off-screen para render temporal del mapa -->
+  <div #hiddenMapContainer
+       class="absolute pointer-events-none"
+       style="left:-10000px; top:0; opacity:0;"
+       aria-hidden="true"></div>
+</div>
+
+<!-- Diálogo: Salida personalizada -->
+<p-dialog
+  header="Selecciona un estilo de PDF"
+  [(visible)]="templateDialogVisible"
+  [modal]="true"
+  [dismissableMask]="true"
+  [style]="{ width: '980px' }"
+  [breakpoints]="{ '960px': '95vw', '640px': '98vw' }"
+>
+  <div class="p-3 border-round-xl">
+    <div class="text-xl font-medium mb-3">Selecciona la plantilla de impresión</div>
+
+    <div class="grid">
+      <!-- Opción A -->
+      <div class="col-12 md:col-6">
+        <div
+          class="p-3 border-1 border-round-xl cursor-pointer transition-all"
+          (click)="selectTemplate('A')"
+          (keyup.enter)="selectTemplate('A')"
+          (keyup.space)="selectTemplate('A'); $event.preventDefault()"
+          tabindex="0"
+          role="button"
+          aria-label="Plantilla de una página"
+          [ngClass]="{ 'border-2 shadow-3': selectedTemplate === 'A', 'shadow-1': selectedTemplate !== 'A' }"
+        >
+          <div class="text-lg font-medium mb-2">Salida estandar Version 1</div>
+          <div class="border-1 border-round-md overflow-hidden mb-2">
+            <img
+              src="/assets/images/PDF_EstandarV1.PNG"
+              alt="Vista previa: una página con mapa y pie"
+              style="max-width: 100%; max-height: 100%; object-fit: contain;"
+            />
+          </div>
+          <div class="text-sm line-height-3">
+            Plantilla básica con título, autor, fecha y créditos en el pie de página. Ideal para reportes rápidos y de uso general.
+          </div>
+          <div class="flex justify-content-end mt-2">
+            <p-radioButton name="pdfTpl" [value]="'A'" [(ngModel)]="selectedTemplate"></p-radioButton>
+          </div>
+        </div>
+      </div>
+
+      <!-- Opción B -->
+      <div class="col-12 md:col-6">
+        <div
+          class="p-3 border-1 border-round-xl cursor-pointer transition-all"
+          (click)="selectTemplate('B')"
+          (keyup.enter)="selectTemplate('B')"
+          (keyup.space)="selectTemplate('B'); $event.preventDefault()"
+          tabindex="0"
+          role="button"
+          aria-label="Plantilla de dos páginas"
+          [ngClass]="{ 'border-2 shadow-3': selectedTemplate === 'B', 'shadow-1': selectedTemplate !== 'B' }"
+        >
+          <div class="text-lg font-medium mb-2">Salida estandar Version 2</div>
+          <div class="border-1 border-round-md overflow-hidden mb-2">
+            <img
+              src="/assets/images/PDF_EstandarV2.PNG"
+              alt="Vista previa: mapa con pie institucional y leyendas"
+              style="max-width: 100%; max-height: 100%; object-fit: contain;"
+            />
+          </div>
+          <div class="text-sm line-height-3">
+            Plantilla con un pie de página más estructurado que incluye título, autor, escala, fecha, número de página y espacio para logo. Diseñada para presentaciones más formales y completas.
+          </div>
+          <div class="flex justify-content-end mt-2">
+            <p-radioButton name="pdfTpl" [value]="'B'" [(ngModel)]="selectedTemplate"></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Acciones -->
+    <div class="flex justify-content-end gap-2 mt-4">
+      <p-button label="Cerrar" (onClick)="templateDialogVisible = false"></p-button>
+      <p-button label="Usar este estilo" icon="pi pi-check" (onClick)="applyTemplate()"></p-button>
+    </div>
+  </div>
+</p-dialog>

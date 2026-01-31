@@ -1,0 +1,21 @@
+<div class="w-full py-3 pl-1 pr-0 z-5">
+  <p-button
+    [raised]="config.loginButtonShadow ?? true"
+    [severity]="config.loginButtonColor"
+    [label]="
+      isMobileVersion ? undefined : (config.loginButtonText ?? 'INICIAR SESIÓN')
+    "
+    [icon]="isMobileVersion ? config.iconUser : undefined"
+    (click)="showDialog()"
+    [styleClass]="
+      'm-1 px-5 py-2 white-space-nowrap ' + (config.loginButtonBorder || '')
+    "></p-button>
+
+  @if (showModal) {
+    <app-auth-login-modal
+      [config]="config"
+      [demo]="demo"
+      [(visible)]="showModal"
+      (authenticated)="onAuthenticated()" />
+  }
+</div>

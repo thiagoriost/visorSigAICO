@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'aiso-icon';
+  src:  url('fonts/aiso-icon.eot?3errs8');
+  src:  url('fonts/aiso-icon.eot?3errs8#iefix') format('embedded-opentype'),
+    url('fonts/aiso-icon.ttf?3errs8') format('truetype'),
+    url('fonts/aiso-icon.woff?3errs8') format('woff'),
+    url('fonts/aiso-icon.svg?3errs8#aiso-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-aiso-"], [class*=" icon-aiso-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'aiso-icon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-aiso-mapa-localizacion:before {
+  content: "\e910";
+}
+.icon-aiso-acercar:before {
+  content: "\e900";
+}
+.icon-aiso-alejar:before {
+  content: "\e901";
+}
+.icon-aiso-apagar-capas:before {
+  content: "\e902";
+}
+.icon-aiso-ayuda:before {
+  content: "\e903";
+}
+.icon-aiso-buscar:before {
+  content: "\e904";
+}
+.icon-aiso-capas:before {
+  content: "\e905";
+}
+.icon-aiso-cerrar:before {
+  content: "\e906";
+}
+.icon-aiso-identificar:before {
+  content: "\e907";
+}
+.icon-aiso-leyenda:before {
+  content: "\e908";
+}
+.icon-aiso-metadatos:before {
+  content: "\e909";
+}
+.icon-aiso-ocultar_capa:before {
+  content: "\e90a";
+}
+.icon-aiso-opciones:before {
+  content: "\e90b";
+}
+.icon-aiso-panear:before {
+  content: "\e90c";
+}
+.icon-aiso-salida_grafica:before {
+  content: "\e90d";
+}
+.icon-aiso-ver_capa:before {
+  content: "\e90e";
+}
+.icon-aiso-vista_total:before {
+  content: "\e90f";
+}

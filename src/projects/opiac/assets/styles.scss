@@ -1,0 +1,51 @@
+@use 'assets/fonts/gill_sans_mt/stylesheet.scss';
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Gill Sans MT', 'Gill Sans', Calibri, 'Trebuchet MS', sans-serif;
+}
+/* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
+/** {
+  scrollbar-width: thin;
+  scrollbar-color: #397524 #DFE9EB;
+}*/
+
+/* Chrome, Edge and Safari */
+
+/**grupo de estilos  globales para el scroll de todos los elementos. del proyecto*/
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #dfe9eb;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: var(--p-primary-200);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--p-primary-300);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: var(--p-primary-300);
+}
+
+.break-word{
+  word-break: break-word !important;
+  overflow-wrap: break-word !important; /* soporte adicional */
+}

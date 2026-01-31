@@ -1,0 +1,34 @@
+<div class="flex flex-column w-full">
+  <div
+    class="flex align-items-center gap-3 p-0 border-round w-full max-w-25rem border-round-xl h-4rem opacity-80"
+    id="header">
+    <!-- Logo -->
+    <div class="h-full bg-primary-500 border-round-left-xl p-1">
+      <img
+        [src]="urlImagenLogo"
+        [width]="45"
+        [height]="45"
+        class="w-auto h-full p-1"
+        alt="Logo Comunidad indigena" />
+    </div>
+    <!-- Texto -->
+    <div class="flex align-items-center justify-content-center w-full">
+      @if (titleHeader) {
+        <p
+          class="ml-0 mr-3 text-white text-5xl text-left leading-tight break-words text-ellipsis w-full font-bold"
+          [ngClass]="[isMobile ? 'text-base' : 'text-5xl']">
+          {{ titleHeader }}
+        </p>
+      } @else {
+        <div class="pr-2">
+          <p-image [src]="imagePath" imageClass="w-full h-auto"></p-image>
+        </div>
+      }
+    </div>
+  </div>
+  @if (!isAuthenticatedUser) {
+    <div class="mt-2 ml-5 mr-5">
+      <app-linea-negra-logos-comunidades></app-linea-negra-logos-comunidades>
+    </div>
+  }
+</div>

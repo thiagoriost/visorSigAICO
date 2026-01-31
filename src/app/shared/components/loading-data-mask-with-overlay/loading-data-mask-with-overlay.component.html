@@ -1,0 +1,9 @@
+<app-overlay [isContained]="isContained">
+  <div
+    class="card flex flex-column justify-content-center align-items-center p-1" >
+    @if (title) {
+      <p class="font-bold text-xl text-center text-white">{{ title }}</p>
+    }
+    <app-personalized-spinner />
+  </div>
+</app-overlay>

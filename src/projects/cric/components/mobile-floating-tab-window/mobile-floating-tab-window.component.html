@@ -1,0 +1,72 @@
+
+    <div
+        class="absolute flex flex-column bottom-0 left-0 w-full z-3 shadow-4 border-round-top-2xl"
+        [style.height]="(state.isMinimized ? '50' : '100') + 'vh'"
+        [hidden]="!widgetFloatingWindowConfig">
+        <!-- Contenido header --> 
+        <div [class]="(widgetFloatingWindowConfig && widgetFloatingWindowConfig.headerClass) ?? 'flex flex-row align-items-center h-3rem'">            
+            @if(!state.isMinimized){
+                <p-button                                    
+                icon="pi pi-minus"
+                iconPos="bottom"
+                severity="danger"
+                [text]="true"                
+                (click)="toggleMinimize()"
+                ></p-button>
+            } 
+            @if(state.isMinimized){
+                <p-button                                      
+                icon="pi pi-window-maximize"
+                iconPos="bottom"
+                severity="danger"
+                [text]="true"                
+                (click)="toggleMaximize()"
+                ></p-button> 
+            }        
+            <p-button                               
+            icon="pi pi-times"
+            iconPos="bottom"
+            severity="danger"
+            [text]="true"            
+            (click)="closeWindow()"
+            ></p-button>                                        
+        </div>
+        <!-- Contenido Tabs dinámicos -->
+        <div class="flex-1 overflow-auto bg-floating-window">
+            <p-tabs [value]="activeTab">
+                <p-tablist>
+                    <p-tab value="0">Leyenda</p-tab>                    
+                    @if(!isLeyenda){
+                        <p-tab value="1">{{ titulo }}</p-tab>
+                    }
+                    @if (showAttributeTable){
+                        <p-tab value="2">Tabla resultados</p-tab>               
+                    }                    
+                </p-tablist>
+                <p-tabpanels>
+                    <!--Leyenda-->
+                    <p-tabpanel value="0">   
+                        <div class="flex-auto p-2 contenedor-floating-window" >
+                            <app-legend-second-version></app-legend-second-version>                        
+                        </div>                                                 
+                    </p-tabpanel>
+                    <!--Componente a inyectar-->   
+                    @if(!isLeyenda){     
+                        <p-tabpanel value="1" class="w-full h-full">                                                                                                    
+                            <div class="flex-auto p-2 contenedor-floating-window" >
+                                <ng-content></ng-content>
+                            </div> 
+                        </p-tabpanel>
+                    }
+                    <!--Tabla de resultado-->
+                    @if (showAttributeTable){
+                        <p-tabpanel value="2">
+                            <div class="flex-auto p-2 contenedor-floating-window" >
+                                <app-attribute-table></app-attribute-table> 
+                            </div>
+                        </p-tabpanel>  
+                    }                  
+                </p-tabpanels>
+            </p-tabs>
+        </div>
+    </div>

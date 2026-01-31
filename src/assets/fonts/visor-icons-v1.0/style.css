@@ -1,0 +1,111 @@
+@font-face {
+  font-family: 'visor-icons';
+  src:  url('fonts/visor-icons.eot?8o6l7w');
+  src:  url('fonts/visor-icons.eot?8o6l7w#iefix') format('embedded-opentype'),
+    url('fonts/visor-icons.ttf?8o6l7w') format('truetype'),
+    url('fonts/visor-icons.woff?8o6l7w') format('woff'),
+    url('fonts/visor-icons.svg?8o6l7w#visor-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="ICON-"], [class*=" ICON-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'visor-icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ICON-VISOR-OPIAC_borrador:before {
+  content: "\e914";
+}
+.ICON-VISOR-OPIAC_mano-abierta:before {
+  content: "\e918";
+}
+.ICON-VISOR-OPIAC_mano-cerrada:before {
+  content: "\e919";
+}
+.ICON-VISOR-OPIAC_zoom-alejar:before {
+  content: "\e91a";
+}
+.ICON-VISOR-OPIAC_zoom-aumentar:before {
+  content: "\e91b";
+}
+.ICON-VISOR-OPIAC_ACERCAR:before {
+  content: "\e900";
+}
+.ICON-VISOR-OPIAC_AJUSTES:before {
+  content: "\e901";
+}
+.ICON-VISOR-OPIAC_ALEJAR:before {
+  content: "\e902";
+}
+.ICON-VISOR-OPIAC_CAPA-ABIERTA:before {
+  content: "\e903";
+}
+.ICON-VISOR-OPIAC_CAPA-CERRADA:before {
+  content: "\e906";
+}
+.ICON-VISOR-OPIAC_CARPETA:before {
+  content: "\e907";
+}
+.ICON-VISOR-OPIAC_CERRAR:before {
+  content: "\e908";
+}
+.ICON-VISOR-OPIAC_COLOMBIA:before {
+  content: "\e909";
+}
+.ICON-VISOR-OPIAC_EDICION:before {
+  content: "\e90a";
+}
+.ICON-VISOR-OPIAC_INFO:before {
+  content: "\e90f";
+}
+.ICON-VISOR-OPIAC_MINIMIZAR:before {
+  content: "\e911";
+}
+.ICON-VISOR-OPIAC_BUFFER:before {
+  content: "\e904";
+}
+.ICON-VISOR-OPIAC_BUSCAR:before {
+  content: "\e905";
+}
+.ICON-VISOR-OPIAC_CONSULTA-AVANZADA:before {
+  content: "\e90b";
+}
+.ICON-VISOR-OPIAC_CONSULTA-SIMPLE:before {
+  content: "\e90c";
+}
+.ICON-VISOR-OPIAC_DESPLEGAR:before {
+  content: "\e90d";
+}
+.ICON-VISOR-OPIAC_DIBUJAR:before {
+  content: "\e90e";
+}
+.ICON-VISOR-OPIAC_IDENTIFICAR:before {
+  content: "\e910";
+}
+.ICON-VISOR-OPIAC_INTERSECCION:before {
+  content: "\e912";
+}
+.ICON-VISOR-OPIAC_MEDIR:before {
+  content: "\e913";
+}
+.ICON-VISOR-OPIAC_SALIDA-GRAFICA:before {
+  content: "\e915";
+}
+.ICON-VISOR-OPIAC_SELECCION-ESPACIAL:before {
+  content: "\e916";
+}
+.ICON-VISOR-OPIAC_UBICAR-COORDENADA:before {
+  content: "\e917";
+}

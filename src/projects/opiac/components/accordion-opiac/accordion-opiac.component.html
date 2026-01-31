@@ -1,0 +1,47 @@
+<p-accordion value="0">
+  <p-accordion-panel value="0">
+    <p-accordion-header
+      class="text-center bg-primary-100 m-1 p-1 border-round-2xl">
+      <div class="w-full font-bold text-primary-500 text-base">
+        TABLA DE CONTENIDO
+      </div></p-accordion-header
+    >
+    <p-accordion-content>
+      <div class="p-accordion-content-wrapper pr-2">
+        <app-content-table-toggle-switch></app-content-table-toggle-switch>
+      </div>
+    </p-accordion-content>
+  </p-accordion-panel>
+
+  <p-accordion-panel value="1">
+    <p-accordion-header
+      class="text-center bg-primary-100 m-1 p-1 border-round-2xl"
+      ><div
+        class="w-full font-bold text-primary-500 text-base"
+        id="tour-add-wms">
+        AÑADIR WMS
+      </div>
+    </p-accordion-header>
+    <p-accordion-content>
+      <div class="w-full font-bold text-primary-500 overflow-y-auto h-20rem pr-2">
+        <app-add-wms></app-add-wms>
+      </div>
+    </p-accordion-content>
+  </p-accordion-panel>
+
+  <p-accordion-panel value="2">
+    <p-accordion-header
+      class="text-center bg-primary-100 m-1 p-1 border-round-2xl"
+      ><div
+        class="w-full font-bold text-primary-500 text-base"
+        id="tour-add-file">
+        AÑADIR ARCHIVO
+      </div></p-accordion-header
+    >
+    <p-accordion-content>
+      <div class="w-full font-bold text-primary-500 overflow-y-auto h-20rem">
+        <app-add-data-file></app-add-data-file>
+      </div>
+    </p-accordion-content>
+  </p-accordion-panel>
+</p-accordion>

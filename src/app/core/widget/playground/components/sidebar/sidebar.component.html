@@ -1,0 +1,84 @@
+<div class="flex flex-column h-full bg-white">
+
+  <!-- ENCABEZADO DEL SIDEBAR -->
+  <div class="h-[64px] flex items-center justify-center shadow-sm ml-6 mt-4 border-b border-gray-300 bg-white">
+    <i class="pi pi-th-large mr-2 text-blue-900"></i>
+    <span class="text-lg font-semibold text-blue-900">Widgets</span>
+  </div>
+
+  <!-- BUSCADOR -->
+  <div class="px-4 mt-4" role="search">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange()"
+      placeholder="Buscar widgets…"
+      class="w-full p-3 border-1 surface-border border-round surface-0 text-color shadow-1"
+      autocomplete="off"
+      aria-label="Buscar widgets"
+    />
+  </div>
+
+  <!-- CONTENIDO DEL SIDEBAR -->
+  <div class="flex-1 overflow-y-auto p-2 mt-5 border-t border-gray-300">
+
+    <!-- PrimeNG v20+: Accordion se controla con `value` (no activeIndex) -->
+    <p-accordion
+      class="w-full"
+      [multiple]="true"
+      [(value)]="openValues"
+      (valueChange)="onAccordionValueChange($event)"
+    >
+      @for (grupo of gruposFiltrados; track trackByCategoria($index, grupo); let i = $index) {
+
+        <p-accordion-panel [value]="asKey(grupo.categoria)">
+          <p-accordion-header>
+            <span class="text-base font-semibold text-blue-900">
+              {{ grupo.categoria }}
+            </span>
+          </p-accordion-header>
+
+          <p-accordion-content>
+            @for (sub of grupo.subcategorias; track trackBySubcategoria($index, sub)) {
+              <div class="mb-4">
+                <h6 class="font-semibold text-sm mb-2 text-blue-800">
+                  {{ sub.nombre }}
+                </h6>
+
+                @for (widget of sub.widgets; track trackByNombreWidget($index, widget)) {
+                  <div class="flex items-center gap-2 mb-2">
+                    <p-checkbox
+                      binary="true"
+                      [(ngModel)]="widget.abierto"
+                      (onChange)="onToggle(widget)"
+                      [inputId]="widget.nombreWidget"
+                      styleClass="p-checkbox-sm"
+                    ></p-checkbox>
+
+                    <label
+                      [for]="widget.nombreWidget"
+                      class="cursor-pointer text-sm text-gray-800"
+                    >
+                      {{ widget.titulo }}
+                    </label>
+
+                    @if (widget.readme) {
+                      <button
+                        type="button"
+                        class="pi pi-book text-blue-500 ml-auto cursor-pointer bg-transparent border-none"
+                        title="Ver documentación"
+                        (click)="verReadme.emit(widget.readme!)"
+                      ></button>
+                    }
+                  </div>
+                }
+              </div>
+            }
+          </p-accordion-content>
+        </p-accordion-panel>
+
+      }
+    </p-accordion>
+  </div>
+
+</div>

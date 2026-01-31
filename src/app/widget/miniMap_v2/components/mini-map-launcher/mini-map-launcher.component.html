@@ -1,0 +1,202 @@
+<p-card>
+  <ng-template pTemplate="title">Configuración del Mini Mapa</ng-template>
+
+  <ng-template pTemplate="content">
+    <div class="grid">
+
+      <!-- Columna del Formulario -->
+      <div class="col-12 md:col-6">
+        <form [formGroup]="formGroupLauncher" class="p-fluid">
+
+          <div class="p-field">
+            <label for="baseMap">Mapa Base</label>
+            <p-select
+              id="baseMap"
+              formControlName="baseMap"
+              [options]="mapasBaseOptions"
+              placeholder="Seleccione un mapa base">
+            </p-select>
+          </div>
+
+          <div class="p-field">
+            <label for="mapPosition">Posición del Mapa</label>
+            <p-select
+              id="mapPosition"
+              formControlName="mapPosition"
+              [options]="positionOptions">
+            </p-select>
+          </div>
+
+          <div class="p-field">
+            <label for="variant">Variante</label>
+            <p-select
+              id="variant"
+              formControlName="variant"
+              [options]="variantOptions">
+            </p-select>
+          </div>
+
+          <div class="p-field">
+            <label for="buttonPosition">Posición del Botón</label>
+            <p-select
+              id="buttonPosition"
+              formControlName="buttonPosition"
+              [options]="buttonPositionOptions">
+            </p-select>
+          </div>
+
+          <div class="p-field">
+            <label for="buttonSize">Tamaño del Botón</label>
+            <p-select
+              id="buttonSize"
+              formControlName="buttonSize"
+              [options]="buttonSizeOptions">
+            </p-select>
+          </div>
+
+          <div class="p-field">
+            <label for="severity">Estilo del Botón Principal</label>
+            <p-select
+              id="severity"
+              formControlName="severity"
+              [options]="severityOptions">
+            </p-select>
+          </div>
+
+          <div class="p-field">
+            <label for="headerButtonSeverity">Estilo del Botón del Encabezado</label>
+            <p-select
+              id="headerButtonSeverity"
+              formControlName="headerButtonSeverity"
+              [options]="severityOptions">
+            </p-select>
+          </div>
+
+          <div class="p-field">
+            <label for="closeButtonSeverity">Estilo del Botón de cierre</label>
+            <p-select
+              id="closeButtonSeverity"
+              formControlName="closeButtonSeverity"
+              [options]="severityOptions">
+            </p-select>
+          </div>
+
+          <div class="p-field">
+            <label for="buttonIcon">Icono del Botón</label>
+            <input
+              id="buttonIcon"
+              pInputText
+              formControlName="buttonIcon"
+              placeholder="Ej: pi pi-eye" />
+          </div>
+
+          <div class="p-field">
+            <label for="closeButtonIcon">Icono del Botón cierre</label>
+            <input
+              id="closeButtonIcon"
+              pInputText
+              formControlName="closeButtonIcon"
+              placeholder="Ej: pi pi-minus" />
+          </div>
+
+          <div class="p-field">
+            <label for="buttonRounded">Botón Redondeado</label>
+            <p-select
+              id="buttonRounded"
+              formControlName="buttonRounded"
+              [options]="buttonRoundedOptions">
+            </p-select>
+          </div>
+
+          <div class="p-field">
+            <label for="width">Ancho</label>
+            <input
+              id="width"
+              pInputText
+              formControlName="width"
+              placeholder="Ej: 12rem" />
+          </div>
+
+          <div class="p-field">
+            <label for="height">Alto</label>
+            <input
+              id="height"
+              pInputText
+              formControlName="height"
+              placeholder="Ej: 12rem" />
+          </div>
+
+          <div class="p-field">
+            <label for="headerClass">Clase del Encabezado</label>
+            <input
+              id="headerClass"
+              pInputText
+              formControlName="headerClass"
+              placeholder="Ej: text-primary" />
+          </div>
+
+          <div class="p-field">
+            <label for="bodyClass">Clase del Cuerpo</label>
+            <input
+              id="bodyClass"
+              pInputText
+              formControlName="bodyClass"
+              placeholder="Ej: p-2" />
+          </div>
+
+          <div class="p-field flex align-items-center gap-2">
+            <label for="isPanEnabled">Habilitar paneo del mini mapa</label>
+            <p-toggleSwitch
+              id="isPanEnabled"
+              formControlName="isPanEnabled">
+            </p-toggleSwitch>
+          </div>
+
+          <div class="p-field">
+            <label for="headerTitle">Título del Header</label>
+            <input
+              id="headerTitle"
+              pInputText
+              formControlName="headerTitle"
+              placeholder="Ej: Mapa de Ubicación" />
+          </div>
+
+          <p-button
+            label="Generar Mini Mapa"
+            (onClick)="generarMiniMapa()"
+            styleClass="mt-4">
+          </p-button>
+
+        </form>
+      </div>
+
+      <!-- Columna del Mini Mapa -->
+      <div class="col-12 md:col-6 flex items-center justify-center">
+        @if (mostrarMapa && formGroupLauncher.value) {
+          <div class="relative w-full h-full">
+            <app-mini-map-v2
+              [baseMap]="formGroupLauncher.value.baseMap"
+              [mapPosition]="formGroupLauncher.value.mapPosition"
+              [variant]="formGroupLauncher.value.variant"
+              [buttonPosition]="formGroupLauncher.value.buttonPosition"
+              [buttonSize]="formGroupLauncher.value.buttonSize"
+              [buttonIcon]="formGroupLauncher.value.buttonIcon"
+              [closeButtonIcon]="formGroupLauncher.value.closeButtonIcon"
+              [severity]="formGroupLauncher.value.severity"
+              [closeButtonSeverity]="formGroupLauncher.value.closeButtonSeverity"
+              [headerButtonSeverity]="formGroupLauncher.value.headerButtonSeverity"
+              [buttonRounded]="formGroupLauncher.value.buttonRounded"
+              [width]="formGroupLauncher.value.width"
+              [height]="formGroupLauncher.value.height"
+              [headerClass]="formGroupLauncher.value.headerClass"
+              [bodyClass]="formGroupLauncher.value.bodyClass"
+              [isPanEnabled]="formGroupLauncher.value.isPanEnabled"
+              [headerTitle]="formGroupLauncher.value.headerTitle">
+            </app-mini-map-v2>
+          </div>
+        }
+      </div>
+
+    </div>
+  </ng-template>
+</p-card>

@@ -1,0 +1,268 @@
+<div class="p-0 overflow-hidden">
+  <!-- Tabs principales -->
+  <!-- PrimeNG 20+: TabView/TabPanel ya no existen → se usa p-tabs -->
+  <p-tabs [value]="activeIndex" (valueChange)="onTabChange($event)">
+    <p-tablist>
+      <p-tab [value]="0">Diseño</p-tab>
+      <p-tab [value]="1">Exportaciones</p-tab>
+    </p-tablist>
+
+    <p-tabpanels>
+      <!-- ===================== TAB 0: DISEÑO ===================== -->
+      <p-tabpanel [value]="0">
+        <form
+          [formGroup]="exportForm"
+          (ngSubmit)="onSubmit()"
+          class="p-4 grid p-fluid gap-3"
+        >
+          <!-- Mensajes globales -->
+          <!-- PrimeNG 20+: p-messages ya no existe → renderizar lista de p-message -->
+          <div class="col-12">
+            <div class="flex flex-column gap-2">
+              <p-message
+                *ngFor="let m of uiMessages"
+                [severity]="m.severity"
+                [text]="m.detail || m.summary || ''"
+                [life]="m.life"
+                [closable]="m.closable"
+              ></p-message>
+            </div>
+          </div>
+
+          <!-- TÍTULO -->
+          <div class="col-12">
+            <div class="field w-full">
+              <p-floatLabel>
+                <input
+                  id="title"
+                  pInputText
+                  formControlName="title"
+                  class="border-round-sm w-full"
+                  [attr.maxlength]="MAXLEN.title + 10"
+                  [ngClass]="{ 'p-invalid': campoInvalido('title') }"
+                  [attr.aria-describedby]="'title-help'"
+                  [attr.aria-invalid]="campoInvalido('title') ? 'true' : 'false'"
+                />
+                <label for="title">Título</label>
+              </p-floatLabel>
+
+              <small
+                id="title-help"
+                class="block mt-1"
+                [ngClass]="campoInvalido('title') ? 'text-red-500' : 'text-600'"
+              >
+                {{
+                  campoInvalido('title')
+                    ? (errorMsg('title') ||
+                      ('El título debe contener máximo ' + MAXLEN.title + ' caracteres.'))
+                    : ('Máximo ' + MAXLEN.title + ' caracteres.')
+                }}
+              </small>
+            </div>
+          </div>
+
+          <!-- AUTOR -->
+          <div class="col-12">
+            <div class="field w-full">
+              <p-floatLabel>
+                <input
+                  id="author"
+                  pInputText
+                  formControlName="author"
+                  class="border-round-sm w-full"
+                  [attr.maxlength]="MAXLEN.author + 10"
+                  [ngClass]="{ 'p-invalid': campoInvalido('author') }"
+                  [attr.aria-describedby]="'author-help'"
+                  [attr.aria-invalid]="campoInvalido('author') ? 'true' : 'false'"
+                />
+                <label for="author">Autor</label>
+              </p-floatLabel>
+
+              <small
+                id="author-help"
+                class="block mt-1"
+                [ngClass]="campoInvalido('author') ? 'text-red-500' : 'text-600'"
+              >
+                {{
+                  campoInvalido('author')
+                    ? (errorMsg('author') ||
+                      ('El autor debe contener máximo ' + MAXLEN.author + ' caracteres.'))
+                    : ('Máximo ' + MAXLEN.author + ' caracteres.')
+                }}
+              </small>
+            </div>
+          </div>
+
+          <!-- CHECKS -->
+          <div class="col-12 lg:col-6">
+            <div class="flex align-items-center gap-3">
+              <p-checkbox
+                inputId="grid"
+                formControlName="showGrid"
+                binary="true"
+              ></p-checkbox>
+              <label for="grid" class="ml-2">Mostrar grilla</label>
+            </div>
+          </div>
+
+          <div class="col-12 lg:col-6">
+            <div class="flex align-items-center gap-3">
+              <p-checkbox
+                inputId="legend"
+                formControlName="includeLegend"
+                binary="true"
+              ></p-checkbox>
+              <label for="legend" class="ml-2">Incluir leyenda</label>
+            </div>
+          </div>
+
+          <!-- ORIENTACIÓN -->
+          <div class="col-12">
+            <label for="orientation" class="block mb-2">
+              Orientación del papel
+            </label>
+
+            <!-- PrimeNG 20+: Dropdown ya no existe → Select -->
+            <p-select
+              inputId="orientation"
+              [options]="orientationOptions"
+              formControlName="orientation"
+              placeholder="Seleccione orientación"
+              optionLabel="label"
+              optionValue="value"
+              class="w-full border-round-sm"
+              [ngClass]="{ 'p-invalid': campoInvalido('orientation') }"
+              [attr.aria-invalid]="campoInvalido('orientation') ? 'true' : 'false'"
+            ></p-select>
+
+            <small
+              *ngIf="campoInvalido('orientation')"
+              class="block mt-1 text-red-500"
+            >
+              Seleccione una orientación para el papel.
+            </small>
+          </div>
+
+          <!-- BOTÓN EXPORTAR -->
+          <div class="col-12 flex justify-content-end gap-2 pt-2">
+            <p-button
+              label="Exportar"
+              type="submit"
+              icon="pi pi-print"
+              [rounded]="true"
+              [raised]="true"
+            >
+            </p-button>
+          </div>
+        </form>
+      </p-tabpanel>
+
+      <!-- ================= TAB 1: EXPORTACIONES ================= -->
+      <p-tabpanel [value]="1">
+        <div class="p-4">
+          <!-- Estado vacío -->
+          <ng-container *ngIf="!printJobs.length; else exportList">
+            <div
+              class="flex flex-column align-items-center justify-content-center py-6"
+            >
+              <div class="text-lg font-bold mb-2 text-center">
+                Ningún archivo exportado
+              </div>
+              <div class="text-600 max-w-24rem line-height-3 text-left">
+                Las exportaciones que realice aparecerán en esta lista. Los
+                archivos solo estarán disponibles por un tiempo limitado. Descargue
+                sus archivos para asegurarse de no perder el acceso.
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- Listado de exportaciones -->
+          <ng-template #exportList>
+            <div class="flex flex-column gap-2">
+              <div
+                *ngFor="let job of printJobs; trackBy: trackJob"
+                class="py-2 border-bottom-1 surface-border flex align-items-center gap-3"
+              >
+                <!-- Icono / spinner -->
+                <div class="flex align-items-center justify-content-center sg6-icon-cell">
+                  <ng-container [ngSwitch]="job.status">
+                    <p-progressSpinner
+                      *ngSwitchCase="'creating'"
+                      styleClass="sg6-spinner"
+                      [style]="{ width: '18px', height: '18px' }"
+                      strokeWidth="4"
+                    ></p-progressSpinner>
+
+                    <i
+                      *ngSwitchCase="'done'"
+                      class="pi pi-file-pdf text-xl text-700"
+                    ></i>
+
+                    <i
+                      *ngSwitchCase="'error'"
+                      class="pi pi-exclamation-circle text-xl text-red-500"
+                    ></i>
+                  </ng-container>
+                </div>
+
+                <!-- Nombre del archivo -->
+                <div class="flex-1 min-w-0">
+                  <ng-container [ngSwitch]="job.status">
+                    <span
+                      *ngSwitchCase="'done'"
+                      class="block overflow-hidden white-space-nowrap text-overflow-ellipsis"
+                    >
+                      {{ job.name }}
+                    </span>
+
+                    <span
+                      *ngSwitchDefault
+                      class="block overflow-hidden white-space-nowrap text-overflow-ellipsis"
+                    >
+                      {{ job.name }}
+                    </span>
+                  </ng-container>
+                </div>
+
+                <!-- Acciones -->
+                <div class="flex align-items-center gap-1">
+                  <!-- Descargar -->
+                  <button
+                    *ngIf="job.status === 'done'"
+                    pButton
+                    type="button"
+                    class="p-button-text p-button-rounded p-button-plain"
+                    icon="pi pi-download"
+                    [disabled]="!job.url"
+                    (click)="downloadJob(job)"
+                    aria-label="Descargar PDF"
+                  ></button>
+
+                  <!-- Eliminar -->
+                  <button
+                    *ngIf="job.status === 'done'"
+                    pButton
+                    type="button"
+                    class="p-button-text p-button-rounded p-button-plain"
+                    icon="pi pi-times"
+                    (click)="removeJob(job)"
+                    aria-label="Eliminar trabajo"
+                  ></button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+
+  <!-- Contenedor off-screen del mapa -->
+  <div
+    #hiddenMapContainer
+    class="absolute opacity-0 pointer-events-none"
+    aria-hidden="true"
+    [style.width.px]="0"
+    [style.height.px]="0"
+  ></div>
+</div>

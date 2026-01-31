@@ -1,0 +1,87 @@
+<div class="flex-column inline-flex gap-{{config.gapButtons}} p-2 border-round-3xl" [ngClass]="appliedClass"
+        [ngStyle]="appliedStyle">
+        <!-- Botón 3: paneo (PANEAR)-->
+        @if(config.showPan){
+        <p-button id="pan-button"
+                [icon]="stateMapNavButtons.isPaning ? config.customIconStyles?.iconPanEnabled ??  'ICON-VISOR-OPIAC_mano-cerrada':  config.customIconStyles?.iconPanDisabled ??'ICON-VISOR-OPIAC_mano-abierta'"
+                [rounded]="config.rounded ?? true" [severity]="config.buttomSeverity ?? 'secondary'"
+                [raised]="!stateMapNavButtons.isDrawingZoomBox || !stateMapNavButtons.isPaning"
+                [disabled]="stateMapNavButtons.isDrawingZoomBox" pTooltip="Panear" tooltipPosition="left"
+                (onClick)="onTogglePan()" class="flex-order-{{config.orderPan}}" [variant]="config.variant"
+                [size]="config.size">
+        </p-button>
+        }
+        <!-- Botón 2: Zoom In (ZOOM +) -->
+        @if(config.showZoomIn){
+        <p-button id="zoom-in-button" [icon]="config.customIconStyles?.iconZoomIn ??  'ICON-VISOR-OPIAC_ACERCAR'"
+                [rounded]="config.rounded ?? true" [severity]="config.buttomSeverity ?? 'secondary'"
+                [raised]="!stateMapNavButtons.isDrawingZoomBox || !stateMapNavButtons.isPaning"
+                [disabled]="stateMapNavButtons.isDrawingZoomBox || isMaxZoom || stateMapNavButtons.isPaning"
+                (onClick)="onZoomIn()" pTooltip="Acercar" tooltipPosition="left"
+                class="flex-order-{{config.orderZoomIn}}" [variant]="config.variant" [size]="config.size">
+        </p-button>
+        }
+        <!-- Botón 3: Zoom Out (ZOOM -)-->
+        @if(config.showZoomOut){
+        <p-button id="zoom-out-button" [icon]="config.customIconStyles?.iconZoomOut ??  'ICON-VISOR-OPIAC_ALEJAR'"
+                [rounded]="config.rounded ?? true" [severity]="config.buttomSeverity ?? 'secondary'"
+                [raised]="!stateMapNavButtons.isDrawingZoomBox || !stateMapNavButtons.isPaning"
+                [disabled]="stateMapNavButtons.isDrawingZoomBox || isMinZoom || stateMapNavButtons.isPaning"
+                (onClick)="onZoomOut()" pTooltip="Alejar" tooltipPosition="left"
+                class="flex-order-{{config.orderZoomOut}}" [variant]="config.variant" [size]="config.size">
+        </p-button>
+        }
+        <!-- Botón 4: Reset View (VISTA TOTAL) -->
+        @if(config.showResetView){
+        <p-button id="reset-view-button" [icon]="config.customIconStyles?.iconResetView ??  'ICON-VISOR-OPIAC_COLOMBIA'"
+                [rounded]="config.rounded ?? true" [severity]="config.buttomSeverity ?? 'secondary'"
+                [raised]="!stateMapNavButtons.isDrawingZoomBox || !stateMapNavButtons.isPaning"
+                (onClick)="onResetView()" pTooltip="Vista total" tooltipPosition="left"
+                class="flex-order-{{config.orderResetView}}" [variant]="config.variant" [size]="config.size">
+        </p-button>
+        }
+        <!-- Botón 5: Botón activar/inactivar funcionalidad zoom, através del scroll del mouse (icono de candado dinámico, color peligro) -->
+        @if(config.showToggleMouseWheelZoom){
+        <p-button id="toggle-mouse-wheel-zoom-button"
+                [icon]="config.isMouseWheelZoomEnabled ? config.customIconStyles?.iconToggleMouseWheelZoomEnabled ?? 'pi pi-lock' : config.customIconStyles?.iconToggleMouseWheelZoomDisabled?? 'pi pi-unlock'"
+                [severity]="config.buttomSeverity ?? 'danger'" [rounded]="config.rounded ?? true" [raised]="true"
+                (onClick)="onToggleMouseWheelZoom()" class="flex-order-{{config.orderToggleMouseWheelZoom}}"
+                [variant]="config.variant" [size]="config.size">
+        </p-button>
+        }
+        <!-- Botón 6: Advanced Zoom In (ZOOM +)-->
+        @if(config.showAdvancedZoomIn){
+        <p-button id="zoom-advanced-in-button"
+                [icon]="stateMapNavButtons.isAdvancedZoomInActive ? config.customIconStyles?.iconInactiveAdvancedZoom ?? 'pi pi-stop-circle' : config.customIconStyles?.iconAdvancedZoomIn?? 'ICON-VISOR-OPIAC_zoom-aumentar'"
+                [rounded]="config.rounded ?? true" [severity]="config.buttomSeverity ?? 'secondary'" [raised]="true"
+                [disabled]="stateMapNavButtons.isPaning || (isMaxZoom && !stateMapNavButtons.isAdvancedZoomInActive)"
+                (onClick)="onAdvancedZoomIn()" pTooltip="Acercar" tooltipPosition="left"
+                class="flex-order-{{config.orderAdvancedZoomIn}}" [variant]="config.variant" [size]="config.size">
+        </p-button>
+        }
+        <!-- Botón 7: Advanced Zoom Out (ZOOM -)-->
+        @if(config.showAdvancedZoomOut){
+        <p-button id="zoom-advanced-out-button"
+                [icon]="stateMapNavButtons.isAdvancedZoomOutActive ? config.customIconStyles?.iconInactiveAdvancedZoom ??'pi pi-stop-circle' : config.customIconStyles?.iconAdvancedZoomOut?? 'ICON-VISOR-OPIAC_zoom-alejar'"
+                [rounded]="config.rounded ?? true" [severity]="config.buttomSeverity ?? 'secondary'" [raised]="true"
+                [disabled]="stateMapNavButtons.isPaning || (isMinZoom && !stateMapNavButtons.isAdvancedZoomOutActive)"
+                (onClick)="onAdvancedZoomOut()" pTooltip="Alejar" tooltipPosition="left"
+                class="flex-order-{{config.orderAdvancedZoomOut}}" [variant]="config.variant" [size]="config.size">
+        </p-button>
+        }
+        <!-- Botones 8: Navegación-->
+        @if(config.showHistory){
+        <p-button id="history-back-button" [icon]="config.customIconStyles?.iconBack ??'pi pi-chevron-left'"
+                [rounded]="config.rounded ?? true" [severity]="config.buttomSeverity ?? 'secondary'" [raised]="true"
+                [disabled]="stateMapNavButtons.isPaning || (!isBackHistory || stateMapNavButtons.isAdvancedZoomOutActive || stateMapNavButtons.isAdvancedZoomInActive)"
+                (onClick)="onClickBack()" pTooltip="Vista previa" tooltipPosition="left"
+                class="flex-order-{{config.orderHistoryBack}}" [variant]="config.variant" [size]="config.size">
+        </p-button>
+        <p-button id="history-next-button" [icon]="config.customIconStyles?.iconNext ??'pi pi-chevron-right'"
+                [rounded]="config.rounded ?? true" [severity]="config.buttomSeverity ?? 'secondary'" [raised]="true"
+                [disabled]="!isForwadHistory"
+                (onClick)="onClickNext()" pTooltip="Vista posterior" tooltipPosition="left"
+                class="flex-order-{{config.orderHistoryNext}}" [variant]="config.variant" [size]="config.size">
+        </p-button>
+        }
+</div>

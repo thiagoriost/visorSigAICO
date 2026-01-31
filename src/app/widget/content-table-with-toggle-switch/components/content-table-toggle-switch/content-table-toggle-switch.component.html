@@ -1,0 +1,44 @@
+<div class="flex flex-column h-full" id="content-table">
+  <div class="flex flex-row gap-1 justify-content-center" id="header">
+    <div id="tour-content-table-search">
+      <app-search-layer-input
+        [placeHolder]="placeHolderSearchInput"
+        [iconInputVisible]="true"
+        [iconPosition]="iconPosition"
+        [iconClass]="iconSearchInputClass"
+        [iconInputVisible]="iconInputVisible"
+        (textEmitter)="onSearchInput($event)" />
+    </div>
+    <div class="mt-1" id="tour-content-table-unmark-layers">
+      <p-button
+        text="true"
+        severity="primary"
+        [icon]="iconEraserLayersClass ?? 'pi pi-eraser'"
+        pTooltip="Desseleccionar todo"
+        [disabled]="disabledEraser"
+        (onClick)="deleteAllLayers()"></p-button>
+    </div>
+  </div>
+  <!-- Contenedor de la lista con scroll -->
+  <div class="overflow-y-auto h-full pb-0 flex-1 pl-3" id="scrollable-list">
+    @if (isSearchingLayerList) {
+      <div
+        class="w-full h-full flex justify-content-center align-items-center"
+        style="min-height: 200px">
+        <app-personalized-spinner />
+      </div>
+    } @else {
+      <div class="w-full">
+        @for (layer of layerList; track $index) {
+          <app-layer-tree-item
+            [layerToRender]="layer"
+            [isLayerParentTitleCenter]="isCenteredLayerParentTitle"
+            [textColor]="textColor"
+            [requiredDivider]="requiredDivider"
+            [requireIndentation]="requireIdentation">
+          </app-layer-tree-item>
+        }
+      </div>
+    }
+  </div>
+</div>

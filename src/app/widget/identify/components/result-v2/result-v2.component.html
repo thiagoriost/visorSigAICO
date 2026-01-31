@@ -1,0 +1,65 @@
+@if (resultArray) {
+  <div class="flex flex-column gap-1">
+    <p-table [value]="resultArray">
+      <ng-template #body let-item>
+        <tr>
+          <td
+            class="font-bold m-0 p-0 text-left"
+            [ngClass]="textColorClassForTitles">
+            {{ item.key }}
+          </td>
+          <td>
+            @switch (item.type) {
+              @case ('text') {
+                <p
+                  class="content_table__layer_title m-0"
+                  [ngClass]="textColorClassForRows">
+                  {{ item.value }}
+                </p>
+              }
+              @case ('number') {
+                <p class="m-0" [ngClass]="textColorClassForRows">
+                  {{ item.value }}
+                </p>
+              }
+              @case ('url') {
+                <a
+                  [href]="item.value"
+                  target="_blank"
+                  class="m-0"
+                  [ngClass]="textColorClassForRows">
+                  {{ item.value }}
+                </a>
+              }
+              @case ('href') {
+                <div
+                  class="m-0"
+                  [innerHTML]="item.value"
+                  [ngClass]="textColorClassForRows"></div>
+              }
+              @case ('innerHTML') {
+                <div
+                  class="m-0"
+                  [innerHTML]="item.value"
+                  [ngClass]="textColorClassForRows"></div>
+              }
+              @default {
+                <p
+                  class="content_table__layer_title m-0"
+                  [ngClass]="textColorClassForRows">
+                  {{ item.value }}
+                </p>
+              }
+            }
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <div>
+      <app-image-list-renderer
+        [urlImageList]="resultImages"
+        [textColorClass]="textColorImageRendererText"
+        [emptyListMessage]="emptyListMessageImageRenderer" />
+    </div>
+  </div>
+}

@@ -1,0 +1,98 @@
+<div class="medir-container p-2 w-full max-w-screen-md mx-auto">
+
+  <!-- Contenedor centrado de botones principales -->
+  <div class="flex justify-center flex-wrap gap-3 mb-3">
+
+    <!-- Botón Área -->
+    <button
+      type="button"
+      (click)="selectArea()"
+      pButton
+      icon="pi pi-expand"
+      [rounded]="true"
+      [raised]="modoActivo !== 'area'"
+      [ngClass]="{
+        'text-sm': true,
+        'bg-primary-100': modoActivo === 'area'
+      }"
+      class="p-mx-2"
+      pTooltip="Medir área"
+      tooltipPosition="top"
+      tooltipStyleClass="text-sm">
+    </button>
+
+    <!-- Botón Longitud -->
+    <button
+      type="button"
+      (click)="selectLongitud()"
+      pButton
+      icon="pi pi-minus"
+      [rounded]="true"
+      [raised]="modoActivo !== 'longitud'"
+      [ngClass]="{
+        'text-sm': true,
+        'bg-primary-100': modoActivo === 'longitud'
+      }"
+      class="p-mx-2"
+      pTooltip="Medir longitud"
+      tooltipPosition="top"
+      tooltipStyleClass="text-sm">
+    </button>
+  </div>
+
+  <!-- Select botón Área -->
+  @if (modoActivo === 'area') {
+    <div class="select-container p-mb-3">
+      <div class="flex justify-center">
+        <div class="card p-d-flex p-jc-center p-ai-center w-full max-w-xs">
+          <p-select
+            [options]="medicionArea"
+            [(ngModel)]="selectedArea"
+            optionLabel="name"
+            placeholder="Seleccionar medida"
+            class="p-fluid"
+            [ngStyle]="{ 'border-radius': '8px' }"
+            (onChange)="recalcularResultado()">
+          </p-select>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Select botón Longitud -->
+  @if (modoActivo === 'longitud') {
+    <div class="select-container p-mb-3">
+      <div class="flex justify-center">
+        <div class="card p-d-flex p-jc-center p-ai-center w-full max-w-xs">
+          <p-select
+            [options]="medicionLongitud"
+            [(ngModel)]="selectedLongitud"
+            optionLabel="name"
+            placeholder="Seleccionar medida"
+            class="p-fluid"
+            [ngStyle]="{ 'border-radius': '8px' }"
+            (onChange)="recalcularResultado()">
+          </p-select>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Etiqueta Resultado -->
+  <div class="result-container p-d-flex p-gap-3 p-ai-center justify-center mt-4">
+    <label for="resultado" class="font-bold">Resultado: </label>
+    <span id="resultado">{{ resultado }}</span>
+  </div>
+
+  <!-- Contenedor centrado de botón limpieza -->
+  <div class="flex justify-center flex-wrap gap-3 mt-4">
+    <p-button
+      label="Limpiar"
+      severity="secondary"
+      [rounded]="true"
+      [raised]="true"
+      (click)="limpiezaGeometria()">
+    </p-button>
+  </div>
+
+</div>

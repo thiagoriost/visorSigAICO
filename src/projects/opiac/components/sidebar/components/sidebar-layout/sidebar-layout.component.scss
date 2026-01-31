@@ -1,0 +1,12 @@
+.sidebar_layout {
+  &__top {
+    min-height: 5rem;
+  }
+  &__center {
+    min-height: 28rem;
+    max-height: 30rem;
+  }
+  &__bottom {
+    min-height: 15rem;
+  }
+}

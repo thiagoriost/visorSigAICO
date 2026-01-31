@@ -1,0 +1,56 @@
+<div
+  class="botonera-vertical flex flex-column align-items-center gap-2 border-round-3xl p-2 max-w-3rem"
+  [ngClass]="appliedClass"
+  [ngStyle]="appliedStyle"
+>
+  @for (boton of botones; track boton?.id ?? boton) {
+    <div>
+      @if (boton.opciones) {
+        <!-- Botón principal -->
+        <p-button
+          pTooltip="{{ boton.texto }}"
+          tooltipPosition="left"
+          [rounded]="isRounded"
+          [raised]="true"
+          [size]="buttonSize"
+          (click)="overlay.toggle($event)"
+        >
+          <i [class]="boton.icono" styleClass="text-left"></i>
+        </p-button>
+
+        <!-- Menú desplegable -->
+        <p-popover
+          #overlay
+          [dismissable]="true"
+          position="left"
+          styleClass="p-popover-custom surface-500 border-round-sm border-round-md"
+        >
+          <div class="flex flex-column gap-2">
+            @for (opcion of boton.opciones; track opcion?.id ?? opcion?.texto ?? opcion) {
+              <button
+                type="button"
+                pRipple
+                class="border-round-3xl text-primary-500 surface-700 py-1 px-3 text-left hover:text-white hover:bg-primary-300 cursor-pointer border-none text-base"
+                (click)="onSeleccion(boton.id, opcion); overlay.hide()"
+              >
+                <i [class]="opcion.icono"></i>
+                <span class="ml-2">{{ opcion.texto }}</span>
+              </button>
+            }
+          </div>
+        </p-popover>
+      } @else {
+        <p-button
+          pTooltip="{{ boton.texto }}"
+          tooltipPosition="left"
+          [rounded]="isRounded"
+          [raised]="true"
+          [size]="buttonSize"
+          (click)="onSeleccion(boton.id, boton)"
+        >
+          <i [class]="boton.icono"></i>
+        </p-button>
+      }
+    </div>
+  }
+</div>

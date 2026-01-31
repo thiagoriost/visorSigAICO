@@ -1,0 +1,58 @@
+<!-- accordion-gobiernomayor.component.html -->
+<div class="flex h-full">
+  <!-- COLUMNA PRINCIPAL (reserva el espacio del rail) -->
+  <div class="h-full pr-2 flex justify-content-center">
+    <!-- Contenedor más reducido -->
+    <div class="w-8/12 h-full min-h-0"> <!-- min-h-0 permite que el hijo maneje su propio scroll -->
+      <p-accordion value="0" class="w-full h-full">
+        <p-accordion-panel value="0">
+          <!-- HEADER -->
+          <p-accordion-header
+            class="surface-100 border-round-2xl px-3 py-3 flex justify-content-center mt-3"
+          >
+            <span class="text-900 font-bold text-sm">TABLA DE CONTENIDO</span>
+          </p-accordion-header>
+
+          <p-accordion-content>
+            <div class="h-full min-h-0" [style.width.px]="340">
+              <app-content-table-v4></app-content-table-v4>
+            </div>
+          </p-accordion-content>
+        </p-accordion-panel>
+      </p-accordion>
+    </div>
+  </div>
+
+  <!-- RAIL DERECHO (56px fijo) -->
+  <div
+    class="pl-2 flex flex-column align-items-center"
+    style="width:56px; border-left:1px solid var(--surface-200);"
+  >
+    <button
+      class="w-4rem h-4rem surface-0 border-1 border-200 shadow-1
+             text-xs line-height-2 text-center mt-2"
+      (click)="logoClick.emit()"
+      title="Logo"
+    >
+      Logo
+    </button>
+
+    <div class="my-2 w-8 h-0" style="border-top:1px solid var(--surface-200);"></div>
+
+    <button
+      [attr.aria-label]="'Ayuda'"
+      pButton type="button" class="mb-2"
+      pTooltip="Ayuda" tooltipPosition="left"
+      icon="pi pi-question-circle" [rounded]="true" [text]="true"
+      (click)="helpClick.emit()"
+    ></button>
+
+    <button
+      [attr.aria-label]="'Capas base'"
+      pButton type="button"
+      pTooltip="Capas base" tooltipPosition="left"
+      icon="pi pi-layer-group" [rounded]="true" [text]="true"
+      (click)="baseLayersClick.emit()"
+    ></button>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<p-toast></p-toast>
+<app-layout-x [isMobile]="isSmallScreen">
+  <!--MAPA-->
+  <div slot-map class="h-full w-full">
+    <app-map></app-map>
+  </div>
+
+  <div slot-attribute-table>
+    <app-window-tabla-atributos></app-window-tabla-atributos>
+  </div>
+
+  <!--HEADER SUPERIOR IZQUIERDO-->
+  <app-linea-negra-header-linea-negra-store slot-header />
+  <!--HEADER SUPERIOR DERECHO-->
+  <app-autenticacion-linea-negra [isMobile]="isSmallScreen" slot-user />
+  <!--CONTROLES DEL MAPA -->
+  <app-linea-negra-map-nav-buttons slot-map-controls />
+  <!--BOTONERA FLOTATE-->
+  <app-menu-flotante-linea-negra slot-sidebar-buttons />
+  <!--BARRA DE ESCALA Y COORDENADAS-->
+  <app-coordinates-scale-linea-negra
+    [isMobile]="isSmallScreen"
+    slot-map-scaleline-coordinates />
+  <!--IMAGEN PARTE INFERIOR IZQUIERDA-->
+  <app-linea-negra-left-bottom-image
+    [isMobile]="isSmallScreen"
+    slot-bottom-left />
+
+  <!--IMAGEN PARTE INFERIOR DERECHA-->
+  <app-linea-negra-right-bottom-image
+    [isMobile]="isSmallScreen"
+    slot-bottom-right />
+  <app-mapa-localizacion-linea-negra slot-minimap />
+  <!--VENTANA ESTATICA-->
+  <app-ln-window-single-componente-render
+    [isMobile]="isSmallScreen"
+    [configFloatingWindow]="
+      isSmallScreen ? configMobileFloatingWindow : configFloatingWindow
+    "
+    slot-static-window
+    class="h-auto w-auto" />
+</app-layout-x>

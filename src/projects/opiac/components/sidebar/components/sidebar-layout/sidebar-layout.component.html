@@ -1,0 +1,14 @@
+<div class="sidebar_layout flex flex-column h-full overflow-y-auto surface-500">
+  <div class="sidebar_layout__top h-5rem">
+    <!--Componente superior-->
+    <ng-content select="[slot-top]"></ng-content>
+  </div>
+  <div class="sidebar_layout__center">
+    <!--Componente central-->
+    <ng-content select="[slot-center]"></ng-content>
+  </div>
+  <div class="sidebar_layout__bottom flex-auto">
+    <!--Componente inferior-->
+    <ng-content select="[slot-bottom]"></ng-content>
+  </div>
+</div>

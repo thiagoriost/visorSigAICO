@@ -1,0 +1,54 @@
+<!--BOTONES DE PRENDER Y APAGAR TODO-->
+<div class="grid h-full">
+  <div
+    class="col-12 flex align-items-center gap-3"
+    id="header"
+    [ngClass]="
+      isCenteredButtons ? 'justify-content-center' : 'justify-content-end'
+    ">
+    <p-button
+      pTooltip="Prender todas las capas"
+      [rounded]="isRoundedButton"
+      [text]="isTextButton"
+      [icon]="turnOnAllLayersIcon"
+      [disabled]="isEmptyWorkAreaLayerList"
+      (click)="turnOnOrOffAllLayers(true)"></p-button>
+    <p-button
+      pTooltip="Apagar todas las capas"
+      [rounded]="isRoundedButton"
+      [text]="isTextButton"
+      [icon]="turnOffAllLayersIcon"
+      [disabled]="isEmptyWorkAreaLayerList"
+      (click)="turnOnOrOffAllLayers(false)"></p-button>
+  </div>
+  <!--Lista de capas-->
+  <div class="col-12 overflow-y-auto" id="scrollable-list">
+    <div #sortableLayers>
+      @if (layerStoreList.length !== 0) {
+        @for (item of layerStoreList; track item.layerDefinition.id) {
+          <div class="sortable-item mt-2 pt-2">
+            <app-layer-item-with-legend
+              [layer]="item"
+              [isLegendVisible]="isLegendVisible"
+              [ocultLayerIcon]="ocultLayerIcon"
+              [showLayerIcon]="showLayerIcon"
+              [setTransparencyIcon]="setTransparencyIcon"
+              [showMetadataIcon]="showMetadataIcon"
+              [showLegendIcon]="showLegendIcon"
+              [deleteLayerIcon]="deleteLayerIcon"
+              [textColor]="textColor"
+              [isTextButton]="isTextButton"
+              [isRoundedButton]="isRoundedButton"
+              class="drag-handle" />
+          </div>
+        }
+      } @else {
+        <div class="ml-3">
+          <p class="text-center font-bold text-base">
+            Seleccione una capa para agregarla al área de trabajo
+          </p>
+        </div>
+      }
+    </div>
+  </div>
+</div>

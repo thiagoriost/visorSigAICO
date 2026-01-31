@@ -1,0 +1,224 @@
+<div class="p-1">
+  <form [formGroup]="sexagesimalForm" (ngSubmit)="onSubmit()">
+    <!--LATITUD-->
+    <div class="grid py-1">
+      <div class="col col-12 font-bold px-1 py-1">
+        <p class="mx-1 my-1 text-left">Latitud</p>
+      </div>
+      <div class="col-12 p-0">
+        <!-- Hemisferio Grados Minutos Segundos-->
+        <div class="grid">
+          <div class="col-3">
+            <label for="latitudeHemisphere" class="col-fixed">Hem.</label>
+            <p-select
+              class="input-number"
+              [ngClass]="{
+                'ng-invalid ng-dirty': getErrorCampo('latitudeHemisphere'),
+              }"
+              [options]="latitudeHemisphereList"
+              optionLabel="name"
+              optionValue="value"
+              formControlName="latitudeHemisphere"
+              [readonly]="
+                openProfile === openingProfiles.DESTINATION_TRANSFORM
+              "></p-select>
+            <small
+              *ngIf="getErrorCampo('latitudeHemisphere') || isErrorOnForm"
+              class="text-red-500 block mt-1 font-bold">
+              {{ getErrorCampo('latitudeHemisphere') }}
+            </small>
+          </div>
+          <div class="col-3">
+            <label for="latitudeDegrees" class="col-fixed">Grad.</label>
+            <p-inputNumber
+              class="input-number"
+              [ngClass]="{
+                'ng-invalid ng-dirty': getErrorCampo('latitudeDegrees'),
+              }"
+              formControlName="latitudeDegrees"
+              [min]="0"
+              [max]="90"
+              [showButtons]="true"
+              placeholder="3"
+              [readonly]="
+                openProfile === openingProfiles.DESTINATION_TRANSFORM
+              " />
+            <small
+              *ngIf="getErrorCampo('latitudeDegrees') || isErrorOnForm"
+              class="text-red-500 block mt-1 font-bold">
+              {{ getErrorCampo('latitudeDegrees') }}
+            </small>
+          </div>
+          <div class="col-3">
+            <label for="latitudeMinutes" class="col-fixed">Min.</label>
+            <p-inputNumber
+              class="input-number"
+              [ngClass]="{
+                'ng-invalid ng-dirty': getErrorCampo('latitudeMinutes'),
+              }"
+              formControlName="latitudeMinutes"
+              [min]="0"
+              [max]="59"
+              [showButtons]="true"
+              placeholder="9"
+              required="true"
+              [readonly]="
+                openProfile === openingProfiles.DESTINATION_TRANSFORM
+              " />
+            <small
+              *ngIf="getErrorCampo('latitudeMinutes') || isErrorOnForm"
+              class="text-red-500 block mt-1 font-bold">
+              {{ getErrorCampo('latitudeMinutes') }}
+            </small>
+          </div>
+          <div class="col-3">
+            <label for="latitudeSeconds" class="col-fixed">Seg.</label>
+            <p-inputNumber
+              class="input-number"
+              [ngClass]="{
+                'ng-invalid ng-dirty': getErrorCampo('latitudeSeconds'),
+              }"
+              formControlName="latitudeSeconds"
+              mode="decimal"
+              [min]="0"
+              [max]="59"
+              [minFractionDigits]="1"
+              [maxFractionDigits]="5"
+              [showButtons]="true"
+              placeholder="4,6"
+              required="true"
+              [readonly]="
+                openProfile === openingProfiles.DESTINATION_TRANSFORM
+              " />
+            <small
+              *ngIf="getErrorCampo('latitudeSeconds') || isErrorOnForm"
+              class="text-red-500 block mt-1 font-bold">
+              {{ getErrorCampo('latitudeSeconds') }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid p-0">
+      <div class="col-12 font-bold px-2 py-0">
+        <p class="text-left">Longitud</p>
+      </div>
+
+      <div class="col-12 p-0">
+        <!-- Hemisferio Grados Minutos Segundos-->
+        <div class="grid">
+          <div class="col-3">
+            <label for="longitudeHemisphere" class="col-fixed">Hem.</label>
+            <p-select
+              class="input-number"
+              [ngClass]="{
+                'ng-invalid ng-dirty': getErrorCampo('longitudeHemisphere'),
+              }"
+              [options]="longitudeHemisphereList"
+              optionLabel="name"
+              optionValue="value"
+              formControlName="longitudeHemisphere"
+              [readonly]="
+                openProfile === openingProfiles.DESTINATION_TRANSFORM
+              "></p-select>
+            <small
+              *ngIf="getErrorCampo('longitudeHemisphere') || isErrorOnForm"
+              class="text-red-500 block mt-1 font-bold">
+              {{ getErrorCampo('longitudeHemisphere') }}
+            </small>
+          </div>
+          <div class="col-3">
+            <label for="longitudeDegrees" class="col-fixed">Grad.</label>
+            <p-inputNumber
+              class="input-number"
+              [ngClass]="{
+                'ng-invalid ng-dirty': getErrorCampo('longitudeDegrees'),
+              }"
+              formControlName="longitudeDegrees"
+              [min]="0"
+              [max]="180"
+              [showButtons]="true"
+              placeholder="84"
+              [readonly]="
+                openProfile === openingProfiles.DESTINATION_TRANSFORM
+              " />
+            <small
+              *ngIf="getErrorCampo('longitudeDegrees') || isErrorOnForm"
+              class="text-red-500 block mt-1 font-bold">
+              {{ getErrorCampo('longitudeDegrees') }}
+            </small>
+          </div>
+          <div class="col-3">
+            <label for="longitudeMinutes" class="col-fixed">Min.</label>
+            <p-inputNumber
+              class="input-number"
+              [ngClass]="{
+                'ng-invalid ng-dirty': getErrorCampo('longitudeMinutes'),
+              }"
+              formControlName="longitudeMinutes"
+              [min]="0"
+              [max]="59"
+              [showButtons]="true"
+              placeholder="54"
+              required="true"
+              [readonly]="
+                openProfile === openingProfiles.DESTINATION_TRANSFORM
+              " />
+            <small
+              *ngIf="getErrorCampo('longitudeMinutes') || isErrorOnForm"
+              class="text-red-500 block mt-1 font-bold">
+              {{ getErrorCampo('longitudeMinutes') }}
+            </small>
+          </div>
+          <div class="col-3">
+            <label for="longitudeSeconds" class="col-fixed">Seg.</label>
+            <p-inputNumber
+              class="input-number"
+              [ngClass]="{
+                'ng-invalid ng-dirty': getErrorCampo('longitudeSeconds'),
+              }"
+              formControlName="longitudeSeconds"
+              mode="decimal"
+              [min]="0"
+              [max]="59"
+              [minFractionDigits]="1"
+              [maxFractionDigits]="5"
+              [showButtons]="true"
+              placeholder="43,23"
+              required="true"
+              [readonly]="
+                openProfile === openingProfiles.DESTINATION_TRANSFORM
+              " />
+            <small
+              *ngIf="getErrorCampo('longitudeSeconds') || isErrorOnForm"
+              class="text-red-500 block mt-1 font-bold">
+              {{ getErrorCampo('longitudeSeconds') }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Botones de acción -->
+    @if (openProfile === openingProfiles.LOCATING) {
+      <div class="flex justify-content-end align-items-center p-0">
+        <p-button
+          type="submit"
+          [rounded]="true"
+          [raised]="true"
+          severity="primary"
+          styleClass="m-2"
+          label="UBICAR"></p-button>
+      </div>
+    } @else if (openProfile === openingProfiles.ORIGIN_TRANSFORM) {
+      <div class="flex justify-content-end align-items-center p-0">
+        <p-button
+          type="submit"
+          [rounded]="true"
+          [raised]="true"
+          severity="primary"
+          styleClass="m-2"
+          label="TRANSFORMAR"></p-button>
+      </div>
+    }
+  </form>
+</div>

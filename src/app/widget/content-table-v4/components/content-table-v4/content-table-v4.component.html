@@ -1,0 +1,49 @@
+<div class="h-full">
+  <p-toast></p-toast>
+  <div class="col-12 w-full">
+    <div class="grid">
+      <div class="col-12 w-full min-w-full" id="tour-content-table-search">
+        <app-search-layer-input
+          [placeHolder]="placeHolderSearchInput"
+          [iconClass]="iconSearchInputClass"
+          [iconPosition]="iconSearchInputPosition"
+          [iconInputVisible]="iconSearchInputVisible"
+          (textEmitter)="onSearchInput($event)" />
+      </div>
+      <div class="col-12">
+        <app-actions-top-bar
+          [buttonIconsColor]="iconTextColor"
+          [sizeButton]="sizeButton"></app-actions-top-bar>
+      </div>
+      <div class="col-12 m-0 p-0">
+        <p-divider
+          type="solid"
+          class="mt-1 border-top-1 border-primary"></p-divider>
+      </div>
+    </div>
+  </div>
+  <!-- Contenedor de la lista con scroll -->
+  <div class="col-12 overflow-y-auto" id="scrollable-list">
+    @if (isSearchingLayerList) {
+      <div
+        class="w-full h-full flex justify-content-center align-items-center"
+        style="min-height: 200px">
+        <app-personalized-spinner />
+      </div>
+    } @else {
+      <div class="w-full">
+        @for (layer of layerList; track $index) {
+          <div>
+            <app-layer-tree-item-v4
+              [layerToRender]="layer"
+              [textColor]="textColor"
+              [fontSizeLeafLayer]="fontSizeLeafLayer"
+              [fontSizeParentLayer]="fontSizeParentLayer"
+              [fontSizeTransparencyText]="fontSizeTransparencyText"
+              [severityButton]="severityButton" />
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

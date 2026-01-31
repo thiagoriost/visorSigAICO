@@ -1,0 +1,29 @@
+<!-- TEMPLATE PRINCIPAL PARA CARD USER PROFILE -->
+<ng-template #mainTpl >
+
+
+    <div class="flex align-content-center align-items-center m-2">
+    <img
+      [src]="urlLogo"
+      class="border-circle w-3rem h-3rem m-2"
+      alt="Avatar del usuario" />
+    <span class="text-color-secondary" >
+      <ng-container *ngIf="user$ | async as user">
+                Comunidad {{obtenerNombreComunidad(user)}}
+              </ng-container>
+    </span>
+    </div>
+    
+</ng-template>
+
+<!-- TEMPLATE FOOTER PARA CARD USER PROFILE -->
+<ng-template #footerTpl  >
+      <app-linea-negra-logos-comunidades [fondo]="true" ></app-linea-negra-logos-comunidades>
+</ng-template>
+
+
+<div
+  class="w-auto h-auto flex flex-row justify-content-end align-content-center align-items-center"
+  data-tour="auth">
+  <app-auth-container [config]="config" [isDemoVersion]="false" [isMobileVersion]="isMobile" />
+</div>

@@ -1,0 +1,37 @@
+<div 
+  class="floating-window surface-500 border-round-2xl shadow-7 absolute flex flex-column" 
+  [hidden]="!widgetFloatingWindowConfig || state.isMinimized"
+  [style.left.px]="state.x"
+  [style.top.px]="state.y"
+  [style.width.px]="state.width"
+  [style.height]="state.isMinimized ? tamanoCabecera + 'px' : state.height + 'px'"
+  [style.z-index]="zIndex"
+  (mousedown)="bringToFront()"
+>
+  <!-- Contenido header -->
+  <div>
+    <app-floating-window-header
+          [widgetFloatingWindowConfig]="widgetFloatingWindowConfig"
+          [widgetFloatingWindowState]="state"
+          (closeWindowEvent)="closeWindow()"
+          [titulo]="titulo"
+          [tamanoCabecera]="tamanoCabecera"
+        >
+      </app-floating-window-header>
+  </div>  
+  <!-- Contenedor body -->
+  <div class = "{{widgetFloatingWindowConfig.bodyClass ?? 'flex-auto overflow-auto bg-floating-window p-3'}}" [ngClass]="{'hidden' : state.isMinimized}">
+    <div class = "{{widgetFloatingWindowConfig.bodyClass === undefined ? 'w-full flex flex-column p-2 contenedor-floating-window':''}}">
+        <ng-content></ng-content>
+    </div>  
+    <!-- Área de redimensionamiento en la esquina inferior derecha -->
+    <div>
+      <app-floating-window-resize
+            [widgetFloatingWindowConfig]="widgetFloatingWindowConfig"
+            [widgetFloatingWindowState]="state"               
+          >    
+          </app-floating-window-resize>
+    </div>
+  </div>
+  <!-- Contenido dinámico, visible solo si no está minimizado -->
+</div>

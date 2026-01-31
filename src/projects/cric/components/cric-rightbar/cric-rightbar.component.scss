@@ -1,0 +1,27 @@
+.floating-menu{
+  top: 20px;  
+}
+/* Ajustar la posición del menú desplegable segun diseño*/
+::ng-deep{
+
+ .p-popover-custom{
+    transform: translate(-45px, -29px) !important;
+  }
+
+/* Ajustar el tamaño de los iconos */
+  app-map-nav-buttons p-button .p-button .pi {
+    font-size: 26.4px;
+  }
+
+  app-botonera-vertical p-button .p-button .pi {
+    font-size: 26.4px;
+  }
+
+  :not(.p-field) .p-button.p-button-rounded:not(.p-button-icon-only):has(i.pi):not(:has(.p-button-label)) {
+      padding: 0.14rem ;
+      width: 2.5rem;
+      height: 2.5rem;
+      min-width: 2.5rem;
+      min-height: 2.5rem;  
+  }  
+}

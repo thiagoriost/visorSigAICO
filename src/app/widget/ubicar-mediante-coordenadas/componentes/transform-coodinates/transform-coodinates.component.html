@@ -1,0 +1,75 @@
+<div class="grid overflow-y-auto p-1">
+  <ng-container *ngIf="ordenNormal; else ordenInverso">
+    <div class="w-full pl-1 pr-1 pt-0 pb-0 text-center col-12 m-0">
+      <!--SISTEMA DE REFERENCIA ORIGEN-->
+
+      <div class="border-round border-1 border-primary p-1">
+        <p class="font-bold text-lg m-0">ORIGEN Geográficas (EPSG:4686)</p>
+        <app-ubicar-mediante-coordenada-geografica
+          [openProfile]="openProfileOrigin"
+          (coordinateEmitter)="
+            onLocateGeographicCoordinate($event)
+          "></app-ubicar-mediante-coordenada-geografica>
+      </div>
+    </div>
+    <!---->
+    <div class="col-12 flex justify-content-center align-items-center">
+      <p-button
+        [rounded]="true"
+        severity="primary"
+        icon="pi pi-sync"
+        (onClick)="intercambiar()"
+        pTooltip="Intercambiar sistema de coordenadas"></p-button>
+    </div>
+    <div
+      class="w-full pl-1 pr-1 text-center col-12 border-round border-1 border-primary">
+      <!--SISTEMA DE REFERENCIA DESTINO-->
+      <p class="font-bold text-lg m-0">DESTINO Planas (EPSG:9377)</p>
+      <app-ubicar-mediante-coordenada-plana
+        [openProfile]="openProfileDestiny"
+        [coordenada]="
+          flatCoordinateTransformed
+        "></app-ubicar-mediante-coordenada-plana>
+    </div>
+  </ng-container>
+</div>
+
+<!--BOTON-->
+<div class="mt-2 flex justify-content-end align-items-center col-12">
+  <p-button
+    label="UBICAR TRANSFORMADA"
+    [rounded]="true"
+    severity="primary"
+    [disabled]="!coordinatedTransform"
+    (onClick)="locateTransformedCoordinate()"></p-button>
+
+  <ng-template #ordenInverso>
+    <div
+      class="w-full pl-1 pr-1 pt-0 pb-0 text-center col-12 border-round border-1 border-primary m-0">
+      <!--SISTEMA DE REFERENCIA ORIGEN-->
+      <p class="font-bold text-lg m-0">ORIGEN Planas (EPSG:9377)</p>
+      <app-ubicar-mediante-coordenada-plana
+        [openProfile]="openProfileOrigin"
+        (coordinateEmitter)="
+          onLocateFlatCoordinate($event)
+        "></app-ubicar-mediante-coordenada-plana>
+    </div>
+    <div class="col-12 flex justify-content-center align-items-center">
+      <p-button
+        [rounded]="true"
+        severity="primary"
+        icon="pi pi-sync"
+        (onClick)="intercambiar()"></p-button>
+    </div>
+    <div
+      class="w-full pl-1 pr-1 text-center col-12 border-round border-1 border-primary">
+      <!--SISTEMA DE REFERENCIA DESTINO-->
+      <p class="font-bold text-lg m-0">DESTINO Geográficas (EPSG:4686)</p>
+      <app-ubicar-mediante-coordenada-geografica
+        [openProfile]="openProfileDestiny"
+        [coordenada]="
+          geographicCoordinateTransformed
+        "></app-ubicar-mediante-coordenada-geografica>
+    </div>
+  </ng-template>
+</div>

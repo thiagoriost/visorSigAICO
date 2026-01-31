@@ -1,0 +1,25 @@
+<div class="w-3rem h3-rem flex justify-content-center align-items-center relative">
+  <!-- Botón -->
+  <p-button
+    type="button"
+    (click)="toggleMiniMap()"
+    [icon]="buttonIconValue"
+    [rounded]="buttonRoundedValue"
+    [size]="buttonSize"
+    [raised]="!isMiniMapVisible"
+    [styleClass]="appliedClass"
+    pTooltip="{{ isMiniMapVisible ? 'Ocultar Mapa Localización' : 'Mostrar Mapa Localización' }}"
+    tooltipPosition="top"
+    tooltipStyleClass="text-sm">
+  </p-button>
+
+  <!-- Mini-mapa -->
+  <div
+    *ngIf="isMiniMapVisible"
+    class="absolute shadow-2 z-1"
+    [ngClass]="combinedMapClasses">
+    <div id="mini-map" [ngStyle]="{ width: width, height: height }">
+      <app-mini-map-ppal></app-mini-map-ppal>
+    </div>
+  </div>
+</div>

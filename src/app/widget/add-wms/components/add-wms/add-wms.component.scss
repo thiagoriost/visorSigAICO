@@ -1,0 +1,5 @@
+.field {
+    white-space: normal; /* Permite saltos de línea */
+    word-wrap: break-word; /* Rompe palabras largas si es necesario */
+    overflow-wrap: break-word; /* Compatibilidad con navegadores */
+  }

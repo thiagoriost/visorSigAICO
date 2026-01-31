@@ -1,0 +1,53 @@
+<div class="relative">
+  <app-loading-data-mask-with-overlay
+    *ngIf="isLoadingData"
+    [isContained]="true"
+    title="Consultando las geometrías seleccionadas...">
+  </app-loading-data-mask-with-overlay>
+
+  <p-toast></p-toast>
+  <div class="grid mt-2 ml-2">
+    <div class="col-2">
+      <div class="flex justify-content-start align-items-center gap-2 h-5">
+        <p-button
+          [rounded]="true"
+          [raised]="true"
+          severity="primary"
+          icon="pi pi-expand"
+          (click)="onselectButton()"
+          [disabled]="isDisabledButtons"
+          pTooltip="Iniciar la selección"></p-button>
+      </div>
+    </div>
+  </div>
+  <!--Formulario-->
+  <div class="flex flex-column w-full">
+    <form [formGroup]="seleccionEspacialForm">
+      <app-workarea-dropdown-select
+        class="border-round"
+        [checkmark]="true"
+        [dataKey]="'id'"
+        [placeholder]="'Seleccione una capa'"
+        [optionLabel]="'titulo'"
+        [emptyMessage]="
+          'No se encontraron capas compatibles con los requisitos de esta herramienta.'
+        "
+        formControlName="layerSelected"
+        appendTo="body"
+        [filtroServicio]="filtroServicio"></app-workarea-dropdown-select>
+    </form>
+  </div>
+  <!--Fin del formulario-->
+  <div class="grid mt-2 ml-2">
+    <div class="col">
+      <div class="flex justify-content-end align-items-center gap-2 h-5">
+        <p-button
+          label="LIMPIAR"
+          [pTooltip]="'Limpiar las geometrías seleccionadas'"
+          [rounded]="true"
+          [raised]="true"
+          (click)="cleanSelection()"></p-button>
+      </div>
+    </div>
+  </div>
+</div>

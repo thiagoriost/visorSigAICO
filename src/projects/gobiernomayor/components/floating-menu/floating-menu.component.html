@@ -1,0 +1,19 @@
+<div
+  id="tour-floating-controls"
+  class="gm-rail-container absolute right-0 z-2 mr-2 flex flex-column align-stretch"
+  role="button"
+  tabindex="0"
+  aria-label="Controles flotantes"
+  (pointerdown)="swallow($event)"
+  (pointerup)="swallow($event)"
+  (click)="swallow($event)"
+  (keydown)="onKeydownSwallow($event)"
+>
+  <app-botonera-vertical
+    background="transparent"
+    shape="square"
+    [botones]="menuOpciones"
+    (seleccion)="onSeleccion($event)">
+  </app-botonera-vertical>
+</div>
+

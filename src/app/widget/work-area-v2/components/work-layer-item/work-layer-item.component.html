@@ -1,0 +1,93 @@
+@if (layer) {
+  <div class="grid shadow-4 bg-bluegray-50">
+    <div class="col-12">
+      <div class="grid flex justify-content-center align-items-center">
+        <div class="col-1 cursor-move flex justify-content-center align-items-center">
+          <i class="pi pi-ellipsis-v"></i>
+        </div>
+        <div class="col-11 pt-0 pl-1 pr-0 pb-0">
+          <div>
+            <p class="text-xs m-0 font-bold break-word">
+              {{ layer.layerDefinition.origin === 'external' ? '(E)' : '' }}
+              {{ layer.layerDefinition.titulo }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 m-0">
+      <div class="flex justify-content-end flex-wrap gap-1">
+        <!--PRENDER/APAGAR CAPA-->
+        <p-button
+         icon="{{
+            layer.isVisible
+              ? 'ICON-VISOR-OPIAC_CAPA-CERRADA'
+              : 'ICON-VISOR-OPIAC_CAPA-ABIERTA'
+          }}"
+          rounded="true"
+          raised="true"                   
+          severity="primary"
+          [pTooltip]="layer.isVisible ? 'Apagar capa' : 'Prender capa'"
+          tooltipPosition="top"
+          (onClick)="
+            onActionLayer(
+              layer.isVisible ? layerActions.HIDE : layerActions.SHOW
+            )
+          " />
+
+        <!--AJUSTES-->
+        <p-button
+          icon="pi pi-sliders-h"
+          rounded="true"
+          raised="true"
+          [pTooltip]="'Generar transparencia'"
+          tooltipPosition="top"
+          severity="primary"
+          [disabled]="!layer.isVisible"
+          (onClick)="op.toggle($event)">
+          <p-popover #op class="p-0">
+            <div>
+              <div class="text-center">
+                <p class="m-0"><b>Transparencia</b></p>
+                <p class="m-0">{{ formGroup.get('transparency')?.value }}</p>
+              </div>
+
+              <form [formGroup]="formGroup">
+                <p-slider
+                  formControlName="transparency"
+                  styleClass="w-14rem"
+                  [step]="10"
+                  [min]="0"
+                  [max]="90" />
+              </form>
+            </div>
+          </p-popover>
+        </p-button>
+
+        <!--VISUALIZAR METADATOS-->
+        <p-button
+          icon="ICON-VISOR-OPIAC_INFO"
+          rounded="true"
+          raised="true"
+          severity="primary"
+          [pTooltip]="'Visualizar metadatos'"
+          tooltipPosition="top"
+          disabled="{{ layer.layerDefinition.urlMetadato ? 'false' : 'true' }}"
+          (onClick)="onActionLayer(layerActions.METADATA)">
+        </p-button>
+        <!--CERRAR CAPA-->
+        <p-button
+          icon="{{
+            isLoading ? 'pi pi-spin pi-spinner' : 'ICON-VISOR-OPIAC_CERRAR'
+          }}"
+          severity="primary"
+          rounded="true"
+          raised="true"
+          [pTooltip]="'Eliminar la capa'"
+          tooltipPosition="top"
+          [disabled]="isLoading"
+          (onClick)="onActionLayer(layerActions.DELETE)" />
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,746 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "visor-geografico-estandar-2024": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/visor-geografico-estandar-2024",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": "/"
+              },
+              {
+                "glob": "**/README.md",
+                "input": "src/app/widget",
+                "output": "/assets/widgets"
+              },
+              {
+                "glob": "**/*.{md,png,jpg,jpeg,gif,webp,svg}",
+                "input": "src/app/widget",
+                "output": "/assets/widgets"
+              }
+            ],
+            "styles": [
+              "src/styles.scss",
+              "node_modules/ol/ol.css",
+              "node_modules/ngx-guided-tour/scss/guided-tour-base-theme.scss",
+              "node_modules/@sjmc11/tourguidejs/dist/css/tour.min.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "2MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "5kB",
+                  "maximumError": "10kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "host": "0.0.0.0"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "visor-geografico-estandar-2024:build:production"
+            },
+            "development": {
+              "buildTarget": "visor-geografico-estandar-2024:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/projects/aiso/assets",
+                "output": "assets/opiac"
+              },
+              {
+                "glob": "**/README.md",
+                "input": "src/app/widget",
+                "output": "/assets/widgets"
+              },
+              {
+                "glob": "**/*.{md,png,jpg,jpeg,gif,webp,svg}",
+                "input": "src/app/widget",
+                "output": "/assets/widgets"
+              }
+            ],
+            "styles": ["src/styles.scss", "node_modules/ol/ol.css"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
+        }
+      }
+    },
+    "opiac": {
+      "projectType": "application",
+      "root": "src/projects/opiac",
+      "sourceRoot": "src",
+      "prefix": "opiac",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/opiac",
+            "index": "src/projects/opiac/index.html",
+            "browser": "src/projects/opiac/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.opiac.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/projects/opiac/assets",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/projects/opiac/public",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "src/projects/opiac/styles.scss",
+              "node_modules/ol/ol.css",
+              "node_modules/ngx-guided-tour/scss/guided-tour-base-theme.scss",
+              "node_modules/@sjmc11/tourguidejs/dist/css/tour.min.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/projects/opiac/environments/environment.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/projects/opiac/environments/environment.development.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "host": "0.0.0.0"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "opiac:build:production"
+            },
+            "development": {
+              "buildTarget": "opiac:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/projects/opiac/assets",
+                "output": "assets/opiac"
+              }
+            ],
+            "styles": ["src/styles.scss", "node_modules/ol/ol.css"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
+        }
+      }
+    },
+    "aiso": {
+      "projectType": "application",
+      "root": "src/projects/aiso",
+      "sourceRoot": "src",
+      "prefix": "aiso",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/aiso",
+            "index": "src/projects/aiso/index.html",
+            "browser": "src/projects/aiso/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.aiso.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/projects/aiso/assets",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/projects/aiso/public",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "src/projects/aiso/styles.scss",
+              "node_modules/ol/ol.css",
+              "node_modules/ngx-guided-tour/scss/guided-tour-base-theme.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/projects/aiso/environments/environment.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/projects/aiso/environments/environment.development.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "host": "0.0.0.0"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "aiso:build:production"
+            },
+            "development": {
+              "buildTarget": "aiso:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/projects/aiso/assets",
+                "output": "assets/aiso"
+              }
+            ],
+            "styles": ["src/styles.scss", "node_modules/ol/ol.css"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
+        }
+      }
+    },
+    "gobiernomayor": {
+      "projectType": "application",
+      "root": "src/projects/gobiernomayor",
+      "sourceRoot": "src",
+      "prefix": "gm",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/gobiernomayor",
+            "index": "src/projects/gobiernomayor/index.html",
+            "browser": "src/projects/gobiernomayor/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.gobiernomayor.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "src/projects/gobiernomayor/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/projects/gobiernomayor/assets/gm-branding",
+                "output": "assets/gm-branding"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/projects/gobiernomayor/public",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets/base"
+              }
+            ],
+            "styles": [
+              "src/projects/gobiernomayor/styles.scss",
+              "node_modules/ol/ol.css",
+              "node_modules/ngx-guided-tour/scss/guided-tour-base-theme.scss",
+              "src/projects/gobiernomayor/assets/styles.scss",
+              "src/projects/gobiernomayor/assets/icons/style.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/projects/gobiernomayor/environments/environment.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/projects/gobiernomayor/environments/environment.development.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": { "host": "0.0.0.0" },
+          "configurations": {
+            "production": { "buildTarget": "gobiernomayor:build:production" },
+            "development": { "buildTarget": "gobiernomayor:build:development" }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "src/projects/gobiernomayor/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/projects/gobiernomayor/assets/gm-branding",
+                "output": "assets/gm-branding"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/projects/gobiernomayor/public",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets/base"
+              }
+            ],
+            "styles": ["src/styles.scss", "node_modules/ol/ol.css"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": { "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"] }
+        }
+      }
+    },
+    "cric": {
+      "projectType": "application",
+      "root": "src/projects/cric",
+      "sourceRoot": "src",
+      "prefix": "cric",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/cric",
+            "index": "src/projects/cric/index.html",
+            "browser": "src/projects/cric/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.cric.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "src/projects/cric/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/projects/cric/public/cric-branding",
+                "output": "public/cric-branding"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/projects/cric/public",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets/base"
+              }
+            ],
+            "styles": [
+              "src/projects/cric/styles.scss",
+              "node_modules/ol/ol.css",
+              "src/projects/cric/assets/styles.scss",
+              "src/projects/cric/assets/fonts/iconos-cric-v1.0-2/style.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/projects/cric/environments/environment.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/projects/cric/environments/environment.development.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": { "host": "0.0.0.0" },
+          "configurations": {
+            "production": { "buildTarget": "cric:build:production" },
+            "development": { "buildTarget": "cric:build:development" }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "src/projects/cric/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/projects/cric/public/cric-branding",
+                "output": "public/cric-branding"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/projects/cric/public",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets/base"
+              }
+            ],
+            "styles": ["src/styles.scss", "node_modules/ol/ol.css"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": { "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"] }
+        }
+      }
+    },
+    "linea-negra": {
+      "projectType": "application",
+      "root": "src/projects/linea-negra",
+      "sourceRoot": "src",
+      "prefix": "linea-negra",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/linea-negra",
+            "index": "src/projects/linea-negra/index.html",
+            "browser": "src/projects/linea-negra/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.linea-negra.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "src/projects/linea-negra/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/projects/linea-negra/public/linea-negra-branding",
+                "output": "public/linea-negra-branding"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/projects/linea-negra/public",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
+              }
+            ],
+            "styles": [
+              "src/projects/linea-negra/styles.scss",
+              "node_modules/ol/ol.css",
+              "node_modules/@sjmc11/tourguidejs/dist/css/tour.min.css",
+              "src/projects/linea-negra/assets/styles.scss",
+              "src/projects/linea-negra/assets/fonts/linea-negra-icons-v1.0/style.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/projects/linea-negra/environments/environment.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/projects/linea-negra/environments/environment.development.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "host": "0.0.0.0"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "linea-negra:build:production"
+            },
+            "development": {
+              "buildTarget": "linea-negra:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+
+              {
+                "glob": "**/*",
+                "input": "src/projects/linea-negra/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/projects/linea-negra/public/linea-negra-branding",
+                "output": "public/linea-negra-branding"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/projects/linea-negra/public",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets/base"
+              }
+            ],
+            "styles": ["src/styles.scss", "node_modules/ol/ol.css"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "schematicCollections": ["@angular-eslint/schematics"],
+    "analytics": false
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
+  }
+}

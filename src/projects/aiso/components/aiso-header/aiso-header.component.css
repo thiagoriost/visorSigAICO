@@ -1,0 +1,17 @@
+/* Franja de colores */
+.aiso-header-stripe {
+  height: 4rem; /* alto de la franja */
+  background: linear-gradient(
+    to bottom,
+    #223771 25%,   /* Azul */
+    #ffffff 25% 50%,  /* Blanco */
+    #f7e829 50% 75%,  /* Amarillo */
+    #030303 75% 100%  /* Negro */
+  );
+}
+
+/* Contenedor negro con logo y texto */
+.aiso-header-main {
+  background-color: #1a1a1a; /* negro sólido */
+  height: 4rem;
+}

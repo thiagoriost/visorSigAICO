@@ -1,0 +1,19 @@
+<div class="w-full">
+  <div class="text-center mt-1 flex justify-content-center align-items-center">
+    <p-iconField [iconPosition]="iconPosition">
+      @if (iconInputVisible && iconPosition === 'left') {
+        <p-inputIcon [styleClass]="iconClass" />
+      }
+      <input
+        class="w-full max-w-20rem"
+        type="text"
+        pInputText
+        [(ngModel)]="text"
+        [placeholder]="placeHolder"
+        (ngModelChange)="onInputChange()" />
+      @if (iconInputVisible && iconPosition === 'right') {
+        <p-inputIcon [styleClass]="iconClass" />
+      }
+    </p-iconField>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="p-2">
+  <app-descarga-manual />
+  <div class="p-2">
+    <p class="text-base font-bold">
+      Para iniciar el tour, haga clic en el botón:
+    </p>
+    <p-button
+      rounded="true"
+      severity="secondary"
+      label="Iniciar Tour"
+      (onClick)="onStartTour()"
+      id="pruebaaaaaaa"></p-button>
+    <ngx-guided-tour
+      [skipText]="'Omitir'"
+      [nextText]="'Siguiente'"
+      [backText]="'Anterior'"
+      [doneText]="'Finalizar'"></ngx-guided-tour>
+  </div>
+</div>

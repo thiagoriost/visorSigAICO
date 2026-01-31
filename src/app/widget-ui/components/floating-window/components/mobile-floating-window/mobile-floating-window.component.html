@@ -1,0 +1,46 @@
+<div
+    class="absolute surface-500 bottom-0 left-0 w-full h-50vh z-5 shadow-4 border-round-top-2xl flex flex-column h-full"
+    [hidden]="!widgetFloatingWindowConfig">
+    <!-- Contenido header --> 
+    <div [class]="widgetFloatingWindowConfig.headerClass || 
+               'bg-primary-100 border-round-2xl flex flex-row-reverse align-items-center h-3rem'">
+        <p-button
+            icon="pi pi-times"
+            iconPos="bottom"
+            (click)="closeWindow()"                         
+            [ngClass]="widgetFloatingWindowConfig.textHeaderClass??'mr-2 text-primary-100'"
+            [severity]="widgetFloatingWindowConfig.buttomSeverity?? 'primary'"
+            [size]="widgetFloatingWindowConfig.buttomSize ?? 'small'"
+            [rounded]="widgetFloatingWindowConfig.buttomRounded ?? 'true'"            
+            [text]="widgetFloatingWindowConfig.buttomText ?? 'false'"
+        >          
+        </p-button>                                
+    </div>
+   
+    <!-- Contenido Tabs dinámicos -->
+    <div class="flex-1 overflow-auto ">
+        <p-tabs [(value)]="activeTab">
+            <p-tablist>
+                <p-tab value="0">{{ titulo }}</p-tab>
+                
+                @if (showAttributeTable) {
+                    <p-tab value="1">Tabla resultados</p-tab>
+                } @else {
+                    <p-tab value="1" [disabled]="true"></p-tab>
+                }
+            </p-tablist>
+
+            <p-tabpanels>
+                <p-tabpanel value="0">
+                    <ng-content></ng-content>
+                </p-tabpanel>
+
+                <p-tabpanel value="1">
+                    @if (showAttributeTable) {
+                        <app-attribute-table />
+                    }
+                </p-tabpanel>
+            </p-tabpanels>
+        </p-tabs>
+    </div>
+</div>

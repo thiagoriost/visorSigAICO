@@ -1,0 +1,55 @@
+<!-- Campo para mostrar y editar la expresión -->
+<form [formGroup]="formCalculadora">
+  <div class="p-fluid p-mb-3">
+    <p-floatLabel class="block" style="margin-top: 2rem">
+      <textarea
+        id="expression"
+        rows="5"
+        cols="30"
+        pTextarea
+        formControlName="expresion"
+        pTooltip="Ejemplo: departamento = 'Antioquia' AND municipio = 'Medellín'. Combine atributos y valores usando AND, OR"
+        tooltipPosition="top"
+        #textareaRef
+        style="resize: none; width: 100%"
+        [ngClass]="{
+          'ng-invalid ng-dirty':
+            formCalculadora.get('expresion')?.invalid &&
+            formCalculadora.get('expresion')?.touched,
+        }"></textarea>
+      <label
+        [ngStyle]="
+          formCalculadora.get('expresion')?.invalid &&
+          formCalculadora.get('expresion')?.touched
+            ? { 'font-weight': '500' }
+            : {}
+        "
+        for="expression">
+        Expresión:
+      </label>
+    </p-floatLabel>
+  </div>
+  <small
+    *ngIf="
+      formCalculadora.get('expresion')?.hasError('required') &&
+      formCalculadora.get('expresion')?.touched
+    "
+    class="text-red-500 block mt-1">
+    La expresión es obligatoria
+  </small>
+</form>
+
+<!-- Teclado de operadores con grid -->
+<div class="grid mt-1">
+  <div class="col-3" *ngFor="let op of operators">
+    <button
+      pButton
+      type="button"
+      class="w-full"
+      [rounded]="isRoundedButton"
+      [raised]="isRaisedButton"
+      (click)="insertText(op, textareaRef)">
+      {{ op }}
+    </button>
+  </div>
+</div>

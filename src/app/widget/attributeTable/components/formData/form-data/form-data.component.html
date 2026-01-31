@@ -1,0 +1,47 @@
+<form [formGroup]="formGroup">
+  <!-- Campo Título -->
+  <div class="grid">
+    <div class="col-fixed" style="width:100px">
+      <div class="text-center p-3">
+        <label for="titulo">Título</label>
+      </div>
+    </div>
+    <div class="col">
+      <textarea id="titulo" placeholder="Ingrese Título" formControlName="titulo"></textarea>
+
+      @if (formGroup.get('titulo')?.invalid && formGroup.get('titulo')?.touched) {
+      <div class="text-danger">
+        El título es obligatorio.
+      </div>
+      }
+    </div>
+  </div>
+  <!-- Campo GeoJSON -->
+  <div class="grid">
+    <div class="col-fixed" style="width:100px">
+      <div class="text-center p-3">
+        <label for="geojson">Geometrías</label>
+      </div>
+    </div>
+    <div class="col">
+      <textarea id="geojson" placeholder="Ingrese las Geometrías en formato GeoJSON"
+        formControlName="geojson"></textarea>
+      @if (formGroup.get('geojson')?.invalid && formGroup.get('geojson')?.touched) {
+      <div class="text-danger">
+        El campo GeoJSON es obligatorio.
+      </div>
+      }
+    </div>
+  </div>
+
+  <!-- Checkbox de visibilidad -->
+  <div class="p-field-checkbox">
+    <label for="checkbox1">Activar capa</label>
+    <p-checkbox inputId="checkbox1" formControlName="visible" [binary]="true"></p-checkbox>
+  </div>
+
+  <!-- Botón para enviar los datos -->
+  <p-button (onClick)="sendDataStore()" label="Enviar" type="submit" [disabled]="formGroup.invalid"></p-button>
+
+
+</form>

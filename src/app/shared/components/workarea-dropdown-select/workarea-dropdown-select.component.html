@@ -1,0 +1,32 @@
+<div class="identify_container pl-1 pr-1 pb-1">
+  @if (title) {
+    <div class="text-center">
+      <p class="font-bold">
+        {{ title }}
+      </p>
+    </div>
+  }
+  <div class="card flex justify-content-center min-w-full">
+    @if (layerList && layerList.length > 0) {
+      <p-select
+        name="layer-workarea-generic"
+        class="w-full"
+        contentStyleClass="white-space-normal overflow-wrap-break-word"
+        panelStyleClass="white-space-normal overflow-wrap-break-word"
+        [dataKey]="dataKey"
+        [checkmark]="checkmark"
+        variant="filled"
+        [options]="layerList"
+        [optionLabel]="optionLabel"
+        [placeholder]="placeholder"
+        [loading]="loading"
+        (onChange)="onSelectObject($event)"
+        [(ngModel)]="value"
+        (onBlur)="onTouched()"
+        appendTo="body"
+        [styleClass]="control?.invalid && (control?.touched || control?.dirty) ? 'ng-invalid ng-dirty p-invalid' : ''"></p-select>
+    } @else {
+      <p class="text-center">{{ emptyMessage }}</p>
+    }
+  </div>
+</div>

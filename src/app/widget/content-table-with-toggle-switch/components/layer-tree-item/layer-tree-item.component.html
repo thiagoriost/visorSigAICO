@@ -1,0 +1,27 @@
+@if (layerToRender) {
+  <div
+    class="w-full"
+    [style]="{
+      'flex justify-content-center': layerToRender.leaf,
+    }"
+    class="w-full">
+    <app-layer-item
+      [layer]="layerToRender"
+      [isCenterTitleText]="isLayerParentTitleCenter"
+      [textColor]="textColor" />
+  </div>
+  @if (!layerToRender.leaf && layerToRender.Result?.length) {
+    @for (child of layerToRender.Result; track $index) {
+      <div [ngClass]="[requireIndentation ? 'pl-2' : 'pl-0']">
+        <app-layer-tree-item
+          [layerToRender]="child"
+          [isLayerParentTitleCenter]="isLayerParentTitleCenter"
+          [textColor]="textColor">
+        </app-layer-tree-item>
+        @if (child.leaf && requiredDivider) {
+          <p-divider type="solid" class="mt-1 border-top-1 border-primary" />
+        }
+      </div>
+    }
+  }
+}

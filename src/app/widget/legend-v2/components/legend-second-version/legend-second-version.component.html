@@ -1,0 +1,14 @@
+<div
+  class="flex flex-column w-full"
+  cdkDropList
+  [cdkDropListData]="layerList"
+  (cdkDropListDropped)="drop($event)">
+  @for (item of layerList; track $index) {
+    <div class="flex flex-column gap-4 border-b border-gray-200 py-3">
+      <app-legend-item-second-version
+        [layer]="item"
+        [isCollapsedLegend]="isCollapsedLegend"
+        cdkDrag />
+    </div>
+  }
+</div>

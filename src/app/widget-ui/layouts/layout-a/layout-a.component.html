@@ -1,0 +1,43 @@
+<div class="flex flex-column h-screen w-screen layout-a">
+  <!-- Componente superior -->
+  <div id="header-content" class="md:h-6rem h-4rem">
+    <!-- slot para encabezado -->
+    <ng-content select="[slot-header]"></ng-content>
+  </div>
+  <!-- Componente Central -->
+  <div class="flex flex-auto overflow-hidden">
+    <!-- Componente Barra lateral -->
+    @if (!isSmallScreen) {
+    <div class="relative" [style.width]="getSidebarWidthPx()"> <!-- Contenedor padre con el ancho total -->
+      <div #sidebarContent id="sidebar-content" class="surface-ground overflow-auto h-full relative"
+        [style.width]="getSidebarContentWidthPx()" [style.transition]="!isResizing ? 'width 0.1s ease-out' : 'none'">
+        <!-- componente para barra lateral -->
+        <ng-container *ngTemplateOutlet="sidebarTemplate"></ng-container>
+      </div>
+      <!-- Handle para redimensionar -->
+      <div (mousedown)="startResize($event)" (mouseenter)="isHovering = true" (mouseleave)="isHovering = false"
+       [class]="isResizing ? 'bg-primary-500' : 'surface-700'"
+        style=" right: -6px; width: 6px; cursor: col-resize;  transition: background-color 0.15s ease;"
+        class="absolute top-0 h-full z-5 flex align-items-center justify-content-center bg-gray-400">
+        <!-- Icono pi-ellipsis-v centrado -->
+        <i class="pi pi-ellipsis-v text-white text-xs opacity-90 "></i>
+      </div>
+    </div>
+    } @else {
+    <p-drawer [closable]="false" [(visible)]="showDrawerWithSidebar">
+      <!-- componente para barra lateral -->
+      <ng-container *ngTemplateOutlet="sidebarTemplate"></ng-container>
+    </p-drawer>
+    }
+    <div class="flex-auto relative">
+      @if (isSmallScreen) {
+      <p-button [rounded]="true" [raised]="true" icon="pi pi-bars" class="absolute top-2 left-2 z-2 ml-3 mt-1"
+        (click)="toggleDrawerWidSidebar()" />
+      }
+      <div id="main-content" class="w-full h-full">
+        <!-- Este es el slot principal (contenido por defecto)  se espera objeto mapa-->
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

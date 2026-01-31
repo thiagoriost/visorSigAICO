@@ -1,0 +1,99 @@
+/* === Panel dinámico === */
+.panel {
+  position: relative;
+  left: 50px;
+  width: 350px;
+
+  transition: width 0.3s ease, left 0.3s ease;
+  /*  sombra solo a la derecha */
+  box-shadow: 10px 0 20px -8px rgba(0, 0, 0, 0.25),
+    inset -10px 0 20px -20px rgba(0, 0, 0, 0);
+
+}
+
+/* === Panel en pantallas pequeñas (móvil) === */
+@media (max-width: 768px) {
+  .panel {
+    left: 50px;
+    /* ancho del menú lateral */
+    width: calc(100vw - 50px);
+    /* ocupa todo el espacio restante */
+    height: 100vh;
+  }
+
+  /* Ajuste de imagen de fondo dentro del panel */
+  .panel .p-image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Ajuste del contenido del widget */
+  .panel .p-2 {
+    height: calc(100vh - 120px);
+    /* deja espacio para título y margen */
+    overflow-y: auto;
+  }
+}
+
+
+
+/* === Botón base === */
+:host ::ng-deep .menu-btn .p-button {
+  width: 50px;
+  height: 50px;
+  color: var(--surface-0) !important;
+  /* icono blanco */
+  border: none !important;
+  transition: all 0.3s ease;
+}
+
+
+/* === Botón seleccionado === */
+:host ::ng-deep .menu-btn-active .p-button {
+  background: #ffffff !important;
+  /* fondo blanco */
+  color: #1c1c1c !important;
+  /* icono negro */
+  border: none !important;
+}
+
+/* === Ícono del botón seleccionado === */
+:host ::ng-deep .menu-btn-active .p-button span.p-button-icon,
+:host ::ng-deep .menu-btn-active .p-button .pi {
+  color: #1c1c1c !important;
+  /* negro */
+  fill: #1c1c1c !important;
+  /* por si el ícono es SVG */
+}
+
+/* Ícono normal */
+:host ::ng-deep .menu-btn .p-button .p-button-icon {
+  font-size: 30px;
+  color: #ffffff !important;
+  /* blanco */
+}
+
+/* ==== Barra de búsqueda fija ==== */
+.buscar-direccion-desktop {
+  position: fixed;
+  top: 70px;
+  left: 430px;
+  ;
+  /* menú (80px) + panel (350px) + margen */
+  z-index: 2;
+  transition: left 0.3s ease;
+}
+
+/* ==== Barra de búsqueda fija ==== */
+.buscar-direccion-mobile {
+  position: fixed;
+  top: 90px;
+  left: 80px;
+  ;
+  /* menú (80px) + margen */
+  z-index: 2;
+  transition: left 0.3s ease;
+}
+::ng-deep app-mobile-floating-window > div.absolute.surface-500.bottom-0.left-0.w-full.h-50vh.z-5.shadow-4.border-round-top-2xl.flex.flex-column.h-full{
+background-color: var(--p-surface-0) !important  ;
+}

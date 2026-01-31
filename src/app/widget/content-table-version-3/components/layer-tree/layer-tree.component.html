@@ -1,0 +1,92 @@
+@if (layer) {
+  <div>
+    @if (isFilteringResult && layer.Result?.length === 0) {
+      @if (isFilteringResult) {
+        <p class="font-bold m-0" [ngClass]="titleColor">
+          Resultados para: {{ layer.titulo.toUpperCase() }}
+        </p>
+
+        <p class="text-center font-bold" [ngClass]="titleColor">
+          No se encontraron coincidencias
+        </p>
+      }
+    }
+    @if (layer.Result && layer.Result.length > 0) {
+      @if (isFilteringResult) {
+        <p class="font-bold m-0" [ngClass]="titleColor">
+          Resultados para: {{ layer.titulo.toUpperCase() }}
+        </p>
+      } @else {
+        <div
+          class="flex align-items-center justify-content-start gap-2 border-3 border-transparent border-noround p-1 shadow-2 mr-0 ml-2 mt-1"
+          [ngStyle]="appliedStyle"
+          [ngClass]="appliedClass">
+          @if (isExpanded) {
+            <i
+              class="pi pi-chevron-up cursor-pointer"
+              [ngClass]="dynamicClass"
+              (click)="onToggle()"
+              role="button"
+              tabindex="0"
+              (keydown.enter)="onToggle()"
+              (keydown.space)="onToggle()"></i>
+          } @else {
+            <i
+              class="pi pi-chevron-down cursor-pointer"
+              [ngClass]="dynamicClass"
+              (click)="onToggle()"
+              role="button"
+              tabindex="0"
+              (keydown.enter)="onToggle()"
+              (keydown.space)="onToggle()"></i>
+          }
+          <p
+            class="font-bold whitespace-nowrap m-0 cursor-pointer"
+            [ngClass]="titleColor"
+            (click)="onToggle()"
+            role="button"
+            tabindex="0"
+            (keydown.enter)="onToggle()"
+            (keydown.space)="onToggle()">
+            {{ layer.titulo }}
+          </p>
+        </div>
+      }
+    }
+
+    <div *ngIf="isExpanded">
+      @if (layer && layer.leaf) {
+        <div class="p-0 m-0 pl-2 pr-0">
+          <app-layer-item-v3
+            [layer]="layer"
+            [iconsColor]="layerItemIconsColor"
+            [titleColor]="titleColor"
+            [showMetadataIcon]="showMetadataIcon"
+            [turnOffLayerIcon]="turnOffLayerIcon"
+            [turnOnLayerIcon]="turnOnLayerIcon"
+            [moreOptionsIcon]="moreOptionsIcon"
+            [severityButtonList]="severityButtonList"></app-layer-item-v3>
+        </div>
+      } @else if (layer.Result) {
+        @for (layer of layer.Result; track $index) {
+          <div
+            [ngClass]="layer?.leaf ? 'ml-0 pt-1 pl-2 pr-0 pb-1 mt-1' : 'ml-2'">
+            <app-layer-tree
+              [layer]="layer"
+              [iconsColor]="iconsColor"
+              [background]="background"
+              [isExpanded]="isExpanded"
+              [iconsColor]="iconsColor"
+              [layerItemIconsColor]="layerItemIconsColor"
+              [titleColor]="titleColor"
+              [showMetadataIcon]="showMetadataIcon"
+              [turnOffLayerIcon]="turnOffLayerIcon"
+              [turnOnLayerIcon]="turnOnLayerIcon"
+              [moreOptionsIcon]="moreOptionsIcon"
+              [severityButtonList]="severityButtonList"></app-layer-tree>
+          </div>
+        }
+      }
+    </div>
+  </div>
+}

@@ -1,0 +1,13 @@
+<div class="map-container">
+  <div class="image-wrapper" [ngClass]="{ selected: selected === mapa }">
+    <img src="{{ mapa.thumbnail }}" alt="Imagen de {{ mapa.titulo }}" />
+
+    @if (selected === mapa) {
+    <div class="selection-icon">
+      <i class="{{ icon }}"></i>
+    </div>
+    }
+  </div>
+
+  <h5>{{ mapa.titulo }}</h5>
+</div>

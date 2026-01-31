@@ -1,0 +1,18 @@
+# Usa una imagen oficial de Node.js
+FROM node:22-alpine
+
+# Establece el directorio de trabajo
+WORKDIR /app
+
+# Copia los archivos de dependencias e instálalas
+COPY package*.json ./
+RUN npm install
+
+# Copia el código fuente
+COPY . .
+
+# Expone el puerto necesario (opcional si se usa en local)
+EXPOSE 4200
+
+# Comando por defecto (solo para desarrollo, GitLab CI lo sobreescribirá)
+CMD ["npm", "start"]

@@ -1,0 +1,57 @@
+<!-- Encabezado con botones -->
+<div class="grid">
+  <div class="col">
+    <!-- Botón para limpiar selección -->
+    <p-button icon="pi pi-eraser" [rounded]="true" severity="primary" (click)="limpiarSeleccion()"
+      pTooltip="Limpiar la selección" class="p-1"></p-button>
+
+    <!-- Botón para exportar selección -->
+    <p-button icon="pi pi-file-export" [rounded]="true" severity="primary" (click)="exportarDatos()"
+      pTooltip="Exportar datos"></p-button>
+  </div>
+
+  <!-- Título del conjunto de datos -->
+  <div class="col">
+    <h3 class="text-right">{{ attributeTableData.titulo }}</h3>
+  </div>
+</div>
+
+<!-- Tabla de datos con selección múltiple -->
+<div class="col">
+  <p-table #dt [value]="dataSource" [(selection)]="selectedRow" dataKey="id" [paginator]="true" [rows]="5"
+    selectionMode="multiple" (onRowSelect)="seleccionarfila($event)"
+    (onRowUnselect)="deseleccionarFila($event)">
+
+    <!-- Encabezados -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3em"></th>
+        <th *ngFor="let column of displayedColumns">{{ column }}</th>
+      </tr>
+    </ng-template>
+
+    <!-- Filas -->
+    <ng-template pTemplate="body" let-rowData>
+      <tr [pSelectableRow]="rowData" [ngClass]="{ 'selected-row': dt.isSelected(rowData) }">
+        <td> 
+          <i class="pi pi-check" [ngStyle]="{
+            color: dt.isSelected(rowData) ? 'var(--primary-color)' : 'var(--text-color-secondary)',
+            opacity: dt.isSelected(rowData) ? 1 : 0.3,
+            cursor: 'pointer',
+            transition: 'color 0.3s ease, opacity 0.3s ease'
+          }">
+          </i>
+        </td>
+        <td *ngFor="let column of displayedColumns">
+          {{ rowData[column] }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- Diálogo para exportación de datos -->
+<p-dialog header="Exportar datos" [(visible)]="visible" [modal]="true" [style]="{ width: '25rem' }">
+  <app-export-data [data]="geometriasExportacion" [titulo]="tituloGeometriasSeleccionadas">
+  </app-export-data>
+</p-dialog>

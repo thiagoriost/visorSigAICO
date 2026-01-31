@@ -1,0 +1,14 @@
+<div class="flex flex-column justify-content-center align-items-center pr-3 z-2 pt-{{isMobile?8:4}}">
+    <app-botonera-vertical        
+        background="transparent"
+        [botones]="menuOpciones"
+        (seleccion)="onSeleccion($event)">
+    </app-botonera-vertical>
+                 
+    <app-map-nav-buttons     
+        background="transparent"            
+        class="pt-{{isMobile?0:2}}">           
+    </app-map-nav-buttons>
+</div>
+
+     

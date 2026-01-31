@@ -1,0 +1,46 @@
+<div class="h-full w-full m-0 flex flex-column">
+  <div class="flex flex-row flex-wrap justify-content-around">
+    <div class="justify-content-center align-content-center">
+      <p class="vertical-align-middle text-center font-bold m-0">
+        {{ titleheader }}
+      </p>
+    </div>
+    <div class="flex flex-row flex-wrap gap-2">
+      <p-button
+        icon="pi pi-eye"
+        [rounded]="true"
+        [text]="true"
+        pTooltip="Prender las capas"
+        (onClick)="onTurnOnLayers()"
+        [disabled]="layerList.length === 0" />
+      <p-button
+        icon="pi pi-eye-slash"
+        [rounded]="true"
+        [text]="true"
+        pTooltip="Apagar las capas"
+        (onClick)="onTurnOffLayers()"
+        [disabled]="layerList.length === 0" />
+    </div>
+  </div>
+  <!--Lista de capas-->
+  <div class="p-1 overflow-y-auto flex-1 h-full" id="scrollable_list">
+    @if (layerList.length !== 0) {
+      @for (item of layerList; track $index) {
+        <div class="pt-1 pb-1">
+          <app-layer
+            [layer]="item"
+            pDraggable
+            pDroppable
+            (onDragStart)="dragStart(item)"
+            (onDragEnd)="dragEnd()"
+            (onDrop)="onDrop($index)"
+            [eventEmitter]="eventBusService" />
+        </div>
+      }
+    } @else {
+      <div class="ml-3">
+        <p>{{ emptyListMessage }}</p>
+      </div>
+    }
+  </div>
+</div>

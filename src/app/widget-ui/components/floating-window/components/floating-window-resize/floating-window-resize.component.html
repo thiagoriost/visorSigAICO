@@ -1,0 +1,10 @@
+ <div
+    *ngIf="widgetFloatingWindowConfig &&
+            widgetFloatingWindowState &&
+            widgetFloatingWindowConfig.enableResize && 
+            !widgetFloatingWindowState.isMinimized"
+    class="resize-handle bg-primary-100 absolute bottom-0 right-0 flex justify-content-center align-items-center z-1"
+    (mousedown)="startResize($event)"
+  >
+  <i class="pi pi-arrow-down-right text-xs"></i>
+</div>

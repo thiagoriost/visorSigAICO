@@ -1,0 +1,53 @@
+<!-- Barra superior con color primario, título y controles --> 
+<div
+  *ngIf="widgetFloatingWindowConfig && widgetFloatingWindowState"
+  [class]=" widgetFloatingWindowConfig.headerClass ?? 'fwh bg-primary-100 border-round-2xl flex flex-wrap justify-content-between align-items-center cursor-move p-2'"
+  (mousedown)="startDrag($event)"
+>  
+    
+    <div class="fwh__title flex-auto flex-order-1 text-overflow-ellipsis overflow-hidden pl-1 {{widgetFloatingWindowConfig.textHeaderClass?? 'text-primary-500 text-xl font-bold pl-2' }}">
+      {{ titulo }}
+    </div>
+    
+    <!-- Boton de minimizar sí la ventana no está minimizada y si está habilitado el botón minimizar -->
+    <p-button 
+      *ngIf="widgetFloatingWindowConfig.enableMinimize &&  !widgetFloatingWindowState.isMinimized"
+      [class]="iconMinPosition"
+      [ngClass]="widgetFloatingWindowConfig.textHeaderClass??'text-primary-100'"
+      [severity]="widgetFloatingWindowConfig.buttomSeverity?? 'primary'"
+      [size]="widgetFloatingWindowConfig.buttomSize ?? 'small'"
+      [rounded]="widgetFloatingWindowConfig.buttomRounded ?? 'true'"
+      [icon]="widgetFloatingWindowConfig.iconMinimize ?? 'pi pi-minus'"
+      iconPos=  "bottom"
+      [text]="widgetFloatingWindowConfig.buttomText ?? 'false'"
+      (click)="toggleMinimize()">          
+    </p-button>     
+    <!-- Boton de restaurar sí la ventana está minimizada y si está habilitado el botón minimizar -->
+    <p-button 
+      *ngIf="widgetFloatingWindowConfig.enableMinimize && widgetFloatingWindowState.isMinimized"
+      [class]="iconMinPosition"
+      [ngClass]="widgetFloatingWindowConfig.textHeaderClass??'text-primary-100'"
+      [severity]="widgetFloatingWindowConfig.buttomSeverity?? 'primary'"
+      [size]="widgetFloatingWindowConfig.buttomSize ?? 'small'"
+      [rounded]="widgetFloatingWindowConfig.buttomRounded ?? 'true'"
+      [icon]="widgetFloatingWindowConfig.iconMaximize ?? 'pi pi-window-maximize'"    
+      [text]="widgetFloatingWindowConfig.buttomText ?? 'false'"            
+      iconPos="bottom"
+      (click)="toggleMaximize()">        
+    </p-button>
+    <!-- Boton de cerrar sí está habilitado -->
+    <p-button 
+      *ngIf="widgetFloatingWindowConfig.enableClose"
+      [class]="iconClosePosition"
+      [ngClass]="widgetFloatingWindowConfig.textHeaderClass??'text-primary-100'"
+      [severity]="widgetFloatingWindowConfig.buttomSeverity?? 'primary'"
+      [size]="widgetFloatingWindowConfig.buttomSize ?? 'small'"
+      [rounded]="widgetFloatingWindowConfig.buttomRounded ?? 'true'"
+      [icon]="widgetFloatingWindowConfig.iconClose?? 'pi pi pi-times'"        
+      [text]="widgetFloatingWindowConfig.buttomText ?? 'false'"           
+      iconPos="bottom"
+      (click)="closeContentWindow()"
+    >          
+    </p-button> 
+    
+  </div>
